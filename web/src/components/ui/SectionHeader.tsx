@@ -1,3 +1,5 @@
+'use client'
+
 import { Container } from '@/components/ui/Container'
 import { Eyebrow, Heading, Text } from '@/components/ui/Typography'
 import { cn } from '@/lib/cn'

@@ -1,4 +1,6 @@
-import { Outlet } from 'react-router-dom'
+'use client'
+
+import { Outlet } from '@/lib/navigation'
 import { Footer } from '@/components/layout/Footer'
 import { Navbar } from '@/components/layout/Navbar'
 import { WhatsAppDock } from '@/components/layout/WhatsAppDock'

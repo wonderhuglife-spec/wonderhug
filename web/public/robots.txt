@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://wonderhug.life/sitemap.xml

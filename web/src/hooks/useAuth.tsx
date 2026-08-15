@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import type { User } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
@@ -49,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user])
 
   const sendPhoneOtp = async (phone: string) => {
-    if (!supabase) return 'Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to enable OTP.'
+    if (!supabase) return 'Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to enable OTP.'
     track('signup_started', { method: 'phone' })
     const { error } = await supabase.auth.signInWithOtp({ phone })
     return error?.message ?? null

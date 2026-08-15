@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom'
+'use client'
+
+import { Link } from '@/lib/navigation'
 import { useTranslation } from 'react-i18next'
 import { Logo } from '@/components/brand/Logo'
 import { MEDICAL_DISCLAIMER, MEDICAL_DISCLAIMER_TE } from '@/lib/constants'

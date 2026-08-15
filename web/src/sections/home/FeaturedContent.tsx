@@ -1,10 +1,13 @@
+'use client'
+
 import { BLOG_POSTS } from '@/data/blog'
 import { Container } from '@/components/ui/Container'
 import { Heading } from '@/components/ui/Typography'
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/navigation'
 import { Badge } from '@/components/ui/Badge'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
+import { Media } from '@/components/media/Media'
 
 export function FeaturedContent() {
   const locale = currentLocale()
@@ -25,7 +28,7 @@ export function FeaturedContent() {
         <div className="mt-10 grid gap-10 lg:grid-cols-12">
           <article className="lg:col-span-7">
             <Link to={`/blog/${lead.slug}`} className="group block">
-              <img src={lead.featuredImage} alt={lead.featuredImageAlt} className="aspect-[16/10] w-full rounded-2xl bg-canvas object-cover" loading="lazy" />
+              <Media src={lead.featuredImage} alt={lead.featuredImageAlt} className="aspect-[16/10] w-full rounded-2xl bg-canvas object-cover" />
               <Badge className="mt-5">{lead.category}</Badge>
               <h3 className="mt-3 font-serif text-3xl text-ink group-hover:text-teal-dark">{pick(lead.title, locale)}</h3>
               <p className="mt-3 max-w-xl text-slate">{pick(lead.excerpt, locale)}</p>

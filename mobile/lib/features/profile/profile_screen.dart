@@ -71,7 +71,7 @@ class ProfileScreen extends ConsumerWidget {
             },
           ),
           const Text(
-            'Push delivery uses Firebase Cloud Messaging once google-services files are supplied. Preferences are stored offline now.',
+          'Push delivery uses Firebase Cloud Messaging once google-services files are supplied. Preferences are stored offline now. Topics: daily_practice, program_milestones, order_updates.',
             style: TextStyle(color: WonderHugColors.slate, height: 1.45),
           ),
           TextButton(

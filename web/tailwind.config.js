@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -23,8 +23,8 @@ export default {
         canvas: '#F8FAFA',
       },
       fontFamily: {
-        serif: ['"Newsreader"', 'Georgia', 'serif'],
-        sans: ['"Figtree"', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         page: '72rem',

@@ -1,7 +1,7 @@
 # WonderHug.Life — Architecture (v1)
 
 Runtime content lives in `web/src/data/` and is mirrored in Supabase seed/migrations.
-When `VITE_SUPABASE_URL` is set, services read published rows; otherwise the same
+When `NEXT_PUBLIC_SUPABASE_URL` is set, services read published rows; otherwise the same
 catalogue is used locally. English and Telugu are first-class locales.
 
 Owner-supplied items (logo, verified expert bios, counsel legal copy, production
@@ -18,9 +18,9 @@ WonderHug.Life is two clients sharing one backend:
 
 ```text
 ┌─────────────────┐     ┌──────────────────┐
-│  web/ (Vite)    │     │  mobile/ (Flutter)│
+│  web/ (Next.js)  │     │  mobile/ (Flutter)│
 │  Public site +  │     │  Daily companion  │
-│  content + SEO  │     │  Home / Journey   │
+│  App Router SSR │     │  Home / Journey   │
 └────────┬────────┘     └─────────┬────────┘
          │  anon key only         │
          ▼                        ▼
@@ -40,7 +40,7 @@ Layering (both clients):
 UI (pages, sections, widgets)
     → hooks / providers (Riverpod on mobile)
         → services (personalization, content, analytics)
-            → Supabase (or local fallback when CONFIG_REQUIRED)
+            → Supabase (or local catalogue when unconfigured)
 ```
 
 Visual components must not call Supabase directly and must not embed personalization or analytics side effects except through those layers.
@@ -92,7 +92,7 @@ Visual components must not call Supabase directly and must not embed personaliza
   .env.example              root pointer
 ```
 
-Website technology: React 18, TypeScript, Vite, Tailwind CSS, Framer Motion, React Router, Lucide (sparse), `@supabase/supabase-js`, `react-helmet-async`.
+Website technology: Next.js App Router, React 19, TypeScript, Tailwind CSS, Framer Motion, Lucide (sparse), `@supabase/supabase-js`, `react-i18next`.
 
 Mobile: Flutter, Material 3, Riverpod, GoRouter, `supabase_flutter`.
 
@@ -196,9 +196,9 @@ App onboarding asks only: “What describes your journey?” (birth-prep can map
 ## 6. Supabase strategy
 
 - Migrations in `supabase/migrations`; never “click-ops” as source of truth.
-- Public anon key in `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` only.
+- Public anon key in `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` only.
 - Service role: server/CI only — **never** in `web/` or `mobile/`.
-- If env is empty, services return typed fallback data and `configStatus: 'CONFIG_REQUIRED'`.
+- If env is empty, services return typed catalogue data.
 - RLS: anonymous `SELECT` only for `is_published` (or equivalent) rows. Writes require auth + role.
 - Roles: `user`, `moderator`, `expert`, `admin` (via `profiles.role`).
 - IDs: UUID primary keys; `created_at` / `updated_at` everywhere; indexes on slugs, FKs, published flags.
@@ -214,7 +214,7 @@ Seed data is **development-only** and labelled so it cannot be mistaken for real
 ## 7. Content, experts, community
 
 - **Blog:** editorial featured layout; categories as specified; related expert/tools via IDs not hardcoded in the article body component.
-- **Experts:** directory filters by speciality; profiles never invent credentials. Placeholders: `REQUIRES_VERIFIED_DATA`.
+- **Experts:** directory filters by speciality; profiles never invent credentials. Faculty seats book via WhatsApp until named bios arrive.
 - **Community:** groups by journey; posts + comments + report; expert answers flagged. Tone: safe, calm, useful — not a noisy social product.
 - **Medical:** article chrome shows author, reviewer, qualification, last reviewed, references, and an education-not-diagnosis disclaimer.
 
@@ -265,9 +265,12 @@ Performance: route-level code splitting (`React.lazy`), lazy images, no autoplay
 Website `web/.env.example`:
 
 ```text
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-VITE_SITE_URL=https://wonderhug.life
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SITE_URL=https://wonderhug.life
+NEXT_PUBLIC_RAZORPAY_KEY_ID=
+NEXT_PUBLIC_AISENSY_WHATSAPP_URL=https://wa.me/
+NEXT_PUBLIC_AISENSY_API_KEY=
 ```
 
 Never commit `.env` files with secrets.
@@ -280,7 +283,7 @@ Never commit `.env` files with secrets.
 | --- | --- |
 | Monorepo vs polyrepo | Monorepo (`web`, `mobile`, `supabase`) |
 | Website location | `web/` (keeps Flutter and SQL uncluttered) |
-| Router | React Router v6 (Vite SPA) + Helmet for SEO; prerender/SSR can come later without changing page modules |
+| Router | Next.js App Router (file-based). Server Components + generateMetadata for SEO. Client Components for cart, tools, journey, auth, CMS |
 | State | React context for journey + React Query-style async in services (lightweight custom status objects first) |
 | Logo | SVG lockup in `web/src/components/brand/Logo.tsx` + `public/logo.svg`, replaceable when official art arrives |
 | Fake social proof | Forbidden. Empty/placeholder states instead |

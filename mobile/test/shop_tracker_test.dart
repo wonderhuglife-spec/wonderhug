@@ -18,10 +18,11 @@ Future<Widget> wrap(Widget child) async {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('shop lists catalogue prices', (tester) async {
+  testWidgets('shop PDP shows description and add', (tester) async {
     await tester.pumpWidget(await wrap(const ShopScreen()));
-    expect(find.text('Garbh Sanskar daily pack'), findsOneWidget);
-    expect(find.textContaining('₹'), findsWidgets);
+    await tester.tap(find.text('Garbh Sanskar daily pack'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('28-day'), findsOneWidget);
   });
 
   testWidgets('kick counter increments', (tester) async {

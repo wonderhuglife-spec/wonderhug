@@ -1,5 +1,7 @@
+'use client'
+
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from '@/lib/navigation'
 import { Menu, ShoppingBag } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Logo } from '@/components/brand/Logo'

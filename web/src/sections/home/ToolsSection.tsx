@@ -1,7 +1,9 @@
+'use client'
+
 import { TOOLS } from '@/data/tools'
 import { Container } from '@/components/ui/Container'
 import { Heading } from '@/components/ui/Typography'
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/navigation'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 

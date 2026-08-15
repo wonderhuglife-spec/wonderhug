@@ -1,6 +1,8 @@
+'use client'
+
 import { MEDICAL_DISCLAIMER } from '@/lib/constants'
 import { Container } from '@/components/ui/Container'
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/navigation'
 
 export function MedicalNote() {
   return (

@@ -1,3 +1,5 @@
+'use client'
+
 import { Container } from '@/components/ui/Container'
 import { Heading, Text } from '@/components/ui/Typography'
 

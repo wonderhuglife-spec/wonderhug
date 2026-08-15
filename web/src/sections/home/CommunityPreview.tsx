@@ -1,7 +1,9 @@
+'use client'
+
 import { COMMUNITY_GROUPS } from '@/data/community'
 import { Container } from '@/components/ui/Container'
 import { Heading, Text } from '@/components/ui/Typography'
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/navigation'
 import { useTranslation } from 'react-i18next'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'

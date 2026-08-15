@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom'
+'use client'
+
+import { Link } from '@/lib/navigation'
 import { cn } from '@/lib/cn'
 
 export function Logo({ className, compact = false }: { className?: string; compact?: boolean }) {

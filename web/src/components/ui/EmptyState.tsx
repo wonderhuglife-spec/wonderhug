@@ -1,3 +1,5 @@
+'use client'
+
 import { Heading, Text } from '@/components/ui/Typography'
 import type { ReactNode } from 'react'
 

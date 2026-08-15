@@ -1,3 +1,5 @@
+'use client'
+
 import { describe, expect, it } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import { JourneySelector } from '@/sections/home/JourneySelector'

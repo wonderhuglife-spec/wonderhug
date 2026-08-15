@@ -1,3 +1,5 @@
+'use client'
+
 import { JOURNEY_OPTIONS } from '@/data/journeys'
 import { useJourney } from '@/hooks/useJourney'
 import { Container } from '@/components/ui/Container'

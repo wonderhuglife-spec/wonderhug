@@ -1,5 +1,6 @@
 node_modules
 web/dist
+web/.next
 web/node_modules
 .env
 .env.local
@@ -7,3 +8,4 @@ web/node_modules
 .DS_Store
 mobile/.dart_tool
 mobile/build
+*.tsbuildinfo

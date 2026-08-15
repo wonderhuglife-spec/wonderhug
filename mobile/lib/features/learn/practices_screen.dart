@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wonderhug/core/l10n.dart';
 import 'package:wonderhug/core/locale_controller.dart';
 import 'package:wonderhug/core/theme.dart';
+import 'package:wonderhug/features/cart/cart_controller.dart';
 
 class PracticesScreen extends ConsumerWidget {
   const PracticesScreen({super.key});
@@ -10,6 +11,7 @@ class PracticesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeProvider);
+    final cached = ref.watch(offlineStoreProvider).cachedPractices;
     final items = locale == 'te'
         ? const [
             ('ఉదయం నిశ్శబ్దం', '10 నిమిషాలు'),
@@ -34,6 +36,7 @@ class PracticesScreen extends ConsumerWidget {
               style: TextStyle(color: WonderHugColors.slate),
             ),
           ),
+          Text('Cached: ${cached.join(', ')}'),
         ],
       ),
     );

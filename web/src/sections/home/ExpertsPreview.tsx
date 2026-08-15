@@ -1,7 +1,9 @@
+'use client'
+
 import { EXPERTS } from '@/data/experts'
 import { Container } from '@/components/ui/Container'
 import { Heading, Text } from '@/components/ui/Typography'
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/navigation'
 import { Badge } from '@/components/ui/Badge'
 
 export function ExpertsPreview() {

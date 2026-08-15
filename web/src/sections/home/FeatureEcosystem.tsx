@@ -1,9 +1,11 @@
+'use client'
+
 import { PROGRAMS } from '@/data/programs'
 import { PRODUCTS } from '@/data/products'
 import { FEATURE_ECOSYSTEM } from '@/data/features'
 import { Container } from '@/components/ui/Container'
 import { Heading, Text } from '@/components/ui/Typography'
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/navigation'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { formatInr } from '@/lib/constants'

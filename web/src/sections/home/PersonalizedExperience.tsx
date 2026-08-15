@@ -1,3 +1,5 @@
+'use client'
+
 import { useJourney } from '@/hooks/useJourney'
 import { ButtonLink } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'

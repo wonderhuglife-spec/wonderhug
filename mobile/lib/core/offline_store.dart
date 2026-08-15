@@ -31,6 +31,10 @@ class OfflineStore {
   Future<void> setOrderUpdates(bool value) => _prefs.setBool('wonderhug.notify.orders', value);
   Future<void> setMilestones(bool value) => _prefs.setBool('wonderhug.notify.milestones', value);
 
+  List<String> get cachedPractices => _prefs.getStringList('wonderhug.practices') ?? const ['morning-quiet', 'evening-nada', 'story-to-the-womb'];
+
+  Future<void> cachePractices(List<String> slugs) => _prefs.setStringList('wonderhug.practices', slugs);
+
   List<Map<String, dynamic>> get cart {
     final raw = _prefs.getString('wonderhug.cart');
     if (raw == null) return [];

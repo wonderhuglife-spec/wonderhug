@@ -1,9 +1,11 @@
+'use client'
+
 import { describe, expect, it } from 'vitest'
 import type { ReactNode } from 'react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from '@/lib/navigation'
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { AppProviders } from '@/app/providers'
+import { AppProviders } from '@/providers'
 import { Navbar } from '@/components/layout/Navbar'
 
 function wrap(ui: ReactNode) {

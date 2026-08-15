@@ -1,3 +1,5 @@
+'use client'
+
 import { motion, useReducedMotion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { ButtonLink } from '@/components/ui/Button'
@@ -5,6 +7,7 @@ import { Container } from '@/components/ui/Container'
 import { Eyebrow } from '@/components/ui/Typography'
 import { track } from '@/services/analytics'
 import { whatsappUrl } from '@/services/whatsapp'
+import { Media } from '@/components/media/Media'
 
 export function HeroSection() {
   const reduce = useReducedMotion()
@@ -37,13 +40,13 @@ export function HeroSection() {
         <div className="lg:col-span-5">
           <figure>
             <div className="aspect-[4/5] overflow-hidden rounded-[2rem] bg-teal-soft">
-              <img
+              <Media
                 src="/images/hero-family.svg"
                 alt={t('common.pendingPhoto')}
                 className="h-full w-full object-cover"
                 width={720}
                 height={900}
-                loading="eager"
+                priority
               />
             </div>
             <figcaption className="mt-3 text-xs text-slate-muted">{t('common.pendingPhoto')}</figcaption>

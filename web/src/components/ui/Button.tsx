@@ -1,5 +1,7 @@
+'use client'
+
 import { cn } from '@/lib/cn'
-import { Link } from 'react-router-dom'
+import { Link } from '@/lib/navigation'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'teal'

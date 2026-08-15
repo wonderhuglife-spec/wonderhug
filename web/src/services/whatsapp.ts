@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabase'
 import { track } from '@/services/analytics'
 
 export function whatsappUrl(text?: string) {
-  const base = import.meta.env.VITE_AISENSY_WHATSAPP_URL || 'https://wa.me/'
+  const base = process.env.NEXT_PUBLIC_AISENSY_WHATSAPP_URL || 'https://wa.me/'
   if (!text) return base
   const joiner = base.includes('?') ? '&' : '?'
   return `${base}${joiner}text=${encodeURIComponent(text)}`
@@ -13,7 +13,7 @@ export async function captureWhatsappLead(phone: string, source: string, locale:
   if (supabase) {
     await supabase.from('whatsapp_leads').insert({ phone, source, locale })
   }
-  const api = import.meta.env.VITE_AISENSY_API_KEY
+  const api = process.env.NEXT_PUBLIC_AISENSY_API_KEY
   if (api) {
     await fetch('/api/aisensy-optin', {
       method: 'POST',

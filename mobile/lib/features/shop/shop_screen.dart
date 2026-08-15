@@ -21,6 +21,9 @@ class ShopScreen extends ConsumerWidget {
             ListTile(
               title: Text(locale == 'te' ? product.nameTe : product.name),
               subtitle: Text('₹${product.pricePaise / 100}'),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => ProductDetailScreen(product: product)),
+              ),
               trailing: IconButton(
                 icon: const Icon(Icons.add_shopping_cart),
                 tooltip: tr(locale, 'shop.add'),
@@ -47,6 +50,36 @@ class ShopScreen extends ConsumerWidget {
               ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+class ProductDetailScreen extends ConsumerWidget {
+  const ProductDetailScreen({super.key, required this.product});
+
+  final CatalogProduct product;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider);
+    return Scaffold(
+      appBar: AppBar(title: Text(locale == 'te' ? product.nameTe : product.name)),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(locale == 'te' ? product.descriptionTe : product.description, style: const TextStyle(height: 1.45)),
+            const SizedBox(height: 16),
+            Text('₹${product.pricePaise / 100}', style: Theme.of(context).textTheme.headlineSmall),
+            const SizedBox(height: 16),
+            FilledButton(
+              onPressed: () => ref.read(cartProvider.notifier).add(product),
+              child: Text(tr(locale, 'shop.add')),
+            ),
+          ],
+        ),
       ),
     );
   }

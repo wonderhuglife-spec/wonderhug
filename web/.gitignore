@@ -8,11 +8,15 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.next
+*.tsbuildinfo
 dist
 dist-ssr
 *.local
 .env
 .env.local
+.DS_Store
+
 
 .vscode/*
 !.vscode/extensions.json

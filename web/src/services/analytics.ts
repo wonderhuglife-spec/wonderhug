@@ -27,7 +27,7 @@ export function track(event: AnalyticsEventName, payload?: AnalyticsPayload) {
   for (const sink of sinks) {
     sink(event, payload)
   }
-  if (import.meta.env.DEV) {
+  if (process.env.NODE_ENV !== 'production') {
     console.info('[analytics]', event, payload ?? {})
   }
 }

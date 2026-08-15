@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslation } from 'react-i18next'
 import { captureWhatsappLead, whatsappUrl } from '@/services/whatsapp'
 import { currentLocale } from '@/i18n'

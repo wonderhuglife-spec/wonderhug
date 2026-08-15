@@ -1,24 +1,27 @@
 # Deployment
 
-## Web (Vercel or Netlify)
+## Web (Vercel)
 
 1. Set the project root to `web/`.
-2. Build command: `npm ci && npm run build`
-3. Output: `dist`
-4. Environment variables (anon/public only):
+2. Framework preset: **Next.js**.
+3. Build command: `npm ci && npm run build`
+4. Output: Next.js (`.next`) — not a static `dist` folder.
+5. Environment variables (anon/public only):
 
 ```
-VITE_SUPABASE_URL
-VITE_SUPABASE_ANON_KEY
-VITE_SITE_URL
-VITE_RAZORPAY_KEY_ID
-VITE_AISENSY_WHATSAPP_URL
-VITE_AISENSY_API_KEY
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+NEXT_PUBLIC_SITE_URL
+NEXT_PUBLIC_RAZORPAY_KEY_ID
+NEXT_PUBLIC_AISENSY_WHATSAPP_URL
+NEXT_PUBLIC_AISENSY_API_KEY
 ```
 
-Never put Razorpay secret or Supabase service role in Vite env.
+Never put Razorpay secret or Supabase service role in `NEXT_PUBLIC_*`.
 
-Razorpay order creation in production should go through `supabase/functions/create-razorpay-order` (secret key as a Supabase secret). Until that function is deployed, the site uses **demo checkout** when `VITE_RAZORPAY_KEY_ID` is empty.
+Razorpay order creation in production goes through `supabase/functions/create-razorpay-order`. Until that function is deployed and `NEXT_PUBLIC_RAZORPAY_KEY_ID` is set, checkout records a **demo order**.
+
+ISR: blog, expert, product, hub and week pages use `generateStaticParams`. Re-deploy or on-demand revalidate after CMS publishes.
 
 ## Supabase
 
@@ -33,10 +36,10 @@ Apply `supabase/migrations` in order. Create an auth user and set `profiles.role
 
 ```
 cd mobile
-flutter create .   # once, to generate android/ios folders
+flutter create . --project-name wonderhug --org life.wonderhug
 flutter run --dart-define=SUPABASE_URL=... --dart-define=SUPABASE_ANON_KEY=... --dart-define=RAZORPAY_KEY_ID=...
 ```
 
-FCM: add Firebase configs (`google-services.json`, `GoogleService-Info.plist`) when you have a Firebase project. Push topics: `daily_practice`, `program_milestones`, `order_updates`.
+FCM: add Firebase configs (`google-services.json`, `GoogleService-Info.plist`) when you have a Firebase project. Topics: `daily_practice`, `program_milestones`, `order_updates`. Preferences are stored offline now.
 
-TestFlight / Play internal: use listing assets from WonderHug (icons, screenshots, privacy URLs).
+TestFlight / Play internal: listing assets come from WonderHug (icons, screenshots, privacy URLs).

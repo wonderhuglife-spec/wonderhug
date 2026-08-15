@@ -30,7 +30,7 @@ export function programAccessFromOrders(): string[] {
 export async function placeOrder(items: CartItem[], email?: string, phone?: string): Promise<Order> {
   if (items.length === 0) throw new Error('Cart is empty')
   const amountPaise = cartTotal(items)
-  const key = import.meta.env.VITE_RAZORPAY_KEY_ID || ''
+  const key = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || ''
   const mode = key ? 'razorpay' : 'demo'
 
   if (mode === 'razorpay' && typeof window !== 'undefined') {
@@ -73,8 +73,8 @@ function persist(order: Order) {
 }
 
 async function createServerOrder(amountPaise: number): Promise<string | undefined> {
-  const url = import.meta.env.VITE_SUPABASE_URL
-  const anon = import.meta.env.VITE_SUPABASE_ANON_KEY
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   if (!url || !anon) return undefined
   try {
     const res = await fetch(`${url}/functions/v1/create-razorpay-order`, {

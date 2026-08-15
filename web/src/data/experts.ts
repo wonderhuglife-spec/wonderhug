@@ -1,7 +1,7 @@
 import { loc } from '@/lib/locale'
 import type { Expert } from '@/types/domain'
 
-const WHATSAPP = import.meta.env.VITE_AISENSY_WHATSAPP_URL || 'https://wa.me/'
+const WHATSAPP = process.env.NEXT_PUBLIC_AISENSY_WHATSAPP_URL || 'https://wa.me/'
 
 export const EXPERTS: Expert[] = [
   {
