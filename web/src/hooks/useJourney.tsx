@@ -1,13 +1,17 @@
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { DEFAULT_JOURNEY } from '@/data/journeys'
 import { defaultProfile, narrativeFor, recommend } from '@/services/personalization'
-import { readStoredJourney, writeStoredJourney } from '@/services/journeyStorage'
+import { readStoredJourney, readStoredProfile, writeStoredJourney, writeStoredProfile } from '@/services/journeyStorage'
 import { track } from '@/services/analytics'
-import type { JourneyStage, PersonalizationProfile, RecommendedItem } from '@/types/domain'
+import { currentLocale } from '@/i18n'
+import type { Goal, JourneyStage, PersonalizationProfile, RecommendedItem } from '@/types/domain'
 
 interface JourneyContextValue {
   profile: PersonalizationProfile
   setJourneyStage: (stage: JourneyStage) => void
+  setGoals: (goals: Goal[]) => void
+  setPregnancyWeek: (week: number | null) => void
   recommendations: RecommendedItem[]
   narrative: { title: string; body: string }
 }
@@ -22,22 +26,50 @@ function initialStage(): JourneyStage {
 }
 
 export function JourneyProvider({ children }: { children: ReactNode }) {
-  const [profile, setProfile] = useState<PersonalizationProfile>(() => defaultProfile(initialStage()))
+  const { i18n } = useTranslation()
+  const locale = i18n.language?.startsWith('te') ? 'te' : currentLocale()
+  const [profile, setProfile] = useState<PersonalizationProfile>(() => {
+    const stored = typeof window === 'undefined' ? null : readStoredProfile<PersonalizationProfile>()
+    return stored ? { ...defaultProfile(stored.journeyStage ?? initialStage()), ...stored } : defaultProfile(initialStage())
+  })
 
   const setJourneyStage = useCallback((stage: JourneyStage) => {
-    setProfile((current) => ({ ...current, journeyStage: stage }))
+    setProfile((current) => {
+      const next = { ...current, journeyStage: stage }
+      writeStoredProfile(next)
+      return next
+    })
     writeStoredJourney(stage)
     track('journey_selected', { stage })
   }, [])
 
+  const setGoals = useCallback((goals: Goal[]) => {
+    setProfile((current) => {
+      const next = { ...current, goals: goals.slice(0, 2) }
+      writeStoredProfile(next)
+      return next
+    })
+  }, [])
+
+  const setPregnancyWeek = useCallback((week: number | null) => {
+    setProfile((current) => {
+      const next = { ...current, pregnancyWeek: week }
+      writeStoredProfile(next)
+      return next
+    })
+  }, [])
+
   const value = useMemo<JourneyContextValue>(() => {
+    const next = { ...profile, language: locale }
     return {
-      profile,
+      profile: next,
       setJourneyStage,
-      recommendations: recommend(profile),
-      narrative: narrativeFor(profile.journeyStage),
+      setGoals,
+      setPregnancyWeek,
+      recommendations: recommend(next, locale),
+      narrative: narrativeFor(next.journeyStage, locale),
     }
-  }, [profile, setJourneyStage])
+  }, [profile, setJourneyStage, setGoals, setPregnancyWeek, locale])
 
   return <JourneyContext.Provider value={value}>{children}</JourneyContext.Provider>
 }

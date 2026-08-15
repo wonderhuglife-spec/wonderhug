@@ -1,3 +1,5 @@
+import type { Locale } from '@/types/domain'
+
 export const SITE_NAME = 'WonderHug.Life'
 export const SITE_TAGLINE =
   'A trusted daily companion for the journey from preparing for pregnancy to raising a child.'
@@ -15,20 +17,64 @@ export const BRAND = {
   softBg: '#F8FAFA',
 } as const
 
-export const NAV_ITEMS = [
-  { to: '/', label: 'Home' },
-  { to: '/pregnancy', label: 'Pregnancy' },
-  { to: '/pregnancy-planning', label: 'Pregnancy Planning' },
-  { to: '/parenting', label: 'Parenting' },
-  { to: '/experts', label: 'Experts' },
-  { to: '/community', label: 'Community' },
-  { to: '/tools', label: 'Tools' },
-  { to: '/blog', label: 'Blogs' },
-  { to: '/about', label: 'About' },
+export const NAV_GROUPS = [
+  {
+    id: 'journey',
+    items: [
+      { to: '/pregnancy-planning', key: 'nav.planning' },
+      { to: '/pregnancy', key: 'nav.pregnancy' },
+      { to: '/garbh-sanskar', key: 'nav.garbh' },
+      { to: '/pregnancy/birth-preparation', key: 'nav.birth' },
+      { to: '/parenting', key: 'nav.parenting' },
+    ],
+  },
 ] as const
 
-export const PRIMARY_CTA = { to: '/start', label: 'Start Your Journey' } as const
-export const SECONDARY_CTA = { to: '/download', label: 'Download App' } as const
+export const NAV_ITEMS = [
+  { to: '/', key: 'nav.home' },
+  { to: '/programs', key: 'nav.programs' },
+  { to: '/shop', key: 'nav.shop' },
+  { to: '/experts', key: 'nav.experts' },
+  { to: '/community', key: 'nav.community' },
+  { to: '/tools', key: 'nav.tools' },
+  { to: '/blog', key: 'nav.blog' },
+  { to: '/about', key: 'nav.about' },
+] as const
+
+export const PRIMARY_CTA = { to: '/start', key: 'cta.start' } as const
+export const SECONDARY_CTA = { to: '/download', key: 'cta.download' } as const
 
 export const MEDICAL_DISCLAIMER =
   'WonderHug.Life shares educational information. It is not a substitute for personal medical advice, diagnosis, or treatment. Please speak with a qualified clinician for decisions about your health, fertility, pregnancy, or your child.'
+
+export const MEDICAL_DISCLAIMER_TE =
+  'WonderHug.Life విద్యా సమాచారం పంచుకుంటుంది. ఇది వ్యక్తిగత వైద్య సలహా, నిర్ధారణ లేదా చికిత్సకు ప్రత్యామ్నాయం కాదు. మీ ఆరోగ్యం, ఫర్టిలిటీ, గర్భం లేదా మీ బిడ్డ గురించి నిర్ణయాల కోసం అర్హత కలిగిన వైద్యునితో మాట్లాడండి.'
+
+export const LOCALES: { id: Locale; label: string; native: string }[] = [
+  { id: 'en', label: 'English', native: 'English' },
+  { id: 'te', label: 'Telugu', native: 'తెలుగు' },
+]
+
+export const GOALS = [
+  { id: 'reduce_anxiety', key: 'goals.anxiety' },
+  { id: 'prepare_birth', key: 'goals.birth' },
+  { id: 'postpartum_recovery', key: 'goals.postpartum' },
+  { id: 'garbh_sanskar', key: 'goals.garbh' },
+  { id: 'nutrition', key: 'goals.nutrition' },
+  { id: 'couple', key: 'goals.couple' },
+] as const
+
+export function formatInr(paise: number, locale: Locale = 'en') {
+  const amount = paise / 100
+  return new Intl.NumberFormat(locale === 'te' ? 'te-IN' : 'en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(amount)
+}
+
+export function formatDate(iso: string, locale: Locale = 'en') {
+  return new Intl.DateTimeFormat(locale === 'te' ? 'te-IN' : 'en-IN', {
+    dateStyle: 'medium',
+  }).format(new Date(iso))
+}

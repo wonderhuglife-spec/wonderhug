@@ -1,0 +1,108 @@
+{
+  "nav": {
+    "home": "Home",
+    "journey": "Journey",
+    "planning": "Pregnancy planning",
+    "pregnancy": "Pregnancy",
+    "garbh": "Garbh Sanskar",
+    "birth": "Birth preparation",
+    "parenting": "Parenting",
+    "programs": "Programs",
+    "shop": "Shop",
+    "experts": "Experts",
+    "community": "Community",
+    "tools": "Tools",
+    "blog": "Journal",
+    "about": "About",
+    "account": "Account",
+    "cart": "Cart",
+    "menu": "Menu",
+    "language": "Language"
+  },
+  "cta": {
+    "start": "Start Your Journey",
+    "download": "Download App",
+    "whatsapp": "Join WhatsApp community",
+    "shop": "Shop",
+    "enroll": "Enrol",
+    "checkout": "Checkout",
+    "save": "Save",
+    "retry": "Try again",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
+  },
+  "hero": {
+    "kicker": "Pregnancy · Parenting · Telangana & Andhra Pradesh",
+    "title": "Prepare for pregnancy. Nurture every stage. Raise with confidence.",
+    "body": "WonderHug.Life brings Garbh Sanskar practice, modern wellness education and a WhatsApp community of 50,000+ mothers together — from planning a pregnancy to conscious parenting."
+  },
+  "goals": {
+    "anxiety": "Reduce anxiety",
+    "birth": "Prepare for birth",
+    "postpartum": "Postpartum recovery",
+    "garbh": "Daily Garbh Sanskar",
+    "nutrition": "Kitchen & nutrition",
+    "couple": "Couple readiness"
+  },
+  "journey": {
+    "heading": "Where are you right now?",
+    "help": "Choose a stage and up to two goals. Recommendations follow you — and a signed-in account can keep them."
+  },
+  "shop": {
+    "title": "Shop",
+    "intro": "Digital practice packs and print-ready journals priced in Indian rupees. These are wellness products, not medicines.",
+    "add": "Add to cart",
+    "added": "Added"
+  },
+  "programs": {
+    "title": "Wellness programs",
+    "intro": "Structured programmes for Beej Sanskar, pregnancy (Womb Care) and the fourth trimester. Education and practice — not a clinic."
+  },
+  "auth": {
+    "title": "Your WonderHug account",
+    "phone": "Mobile number",
+    "otp": "One-time password",
+    "sendOtp": "Send OTP",
+    "verify": "Verify",
+    "email": "Email",
+    "magic": "Email me a sign-in link",
+    "phoneHelp": "Indian mobile numbers work best. OTP is sent by Supabase when keys are configured."
+  },
+  "account": {
+    "title": "Account",
+    "orders": "Orders",
+    "programs": "Program access",
+    "timeline": "Pregnancy & child timeline",
+    "saved": "Saved articles"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "total": "Total",
+    "demo": "Razorpay keys are not in this environment. Checkout will record a demo order so you can complete the flow."
+  },
+  "tools": {
+    "due": "Due date calculator",
+    "kicks": "Kick counter",
+    "contractions": "Contraction timer"
+  },
+  "community": {
+    "whatsappTitle": "WhatsApp is our living community",
+    "whatsappBody": "Over 50,000 mothers are already in WonderHug rooms on WhatsApp (AiSensy). The website rooms are for quieter, moderated threads. The daily conversation lives on WhatsApp."
+  },
+  "admin": {
+    "title": "WonderHug CMS",
+    "help": "Signed-in staff can edit posts, products, programs and pages here. Connect Supabase and set your profile role to admin."
+  },
+  "footer": {
+    "legal": "Legal",
+    "explore": "Explore"
+  },
+  "common": {
+    "loading": "Loading",
+    "error": "Something did not load",
+    "empty": "Nothing here yet",
+    "education": "Education, not diagnosis",
+    "pendingPhoto": "Official photography will replace this illustration when WonderHug supplies it."
+  }
+}

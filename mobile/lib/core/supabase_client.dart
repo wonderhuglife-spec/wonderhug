@@ -9,7 +9,7 @@ class WonderHugSupabase {
       initialized = false;
       return;
     }
-    await Supabase.initialize(url: env.supabaseUrl, anonKey: env.supabaseAnonKey);
+    await Supabase.initialize(url: env.supabaseUrl, publishableKey: env.supabaseAnonKey);
     initialized = true;
   }
 }

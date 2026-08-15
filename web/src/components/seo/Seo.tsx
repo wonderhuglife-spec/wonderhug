@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { SITE_NAME } from '@/lib/constants'
+import { currentLocale } from '@/i18n'
 
 const SITE = import.meta.env.VITE_SITE_URL || 'https://wonderhug.life'
 
@@ -21,10 +22,11 @@ export function Seo({
   const url = canonical || `${SITE}${path}`
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
   const imageUrl = image.startsWith('http') ? image : `${SITE}${image}`
+  const lang = currentLocale() === 'te' ? 'te-IN' : 'en-IN'
 
   return (
     <Helmet>
-      <html lang="en-IN" />
+      <html lang={lang} />
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />

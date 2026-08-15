@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,9 +44,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Home'), findsWidgets);
-    expect(find.text('Journey'), findsOneWidget);
+    expect(find.text('Journey'), findsWidgets);
     expect(find.text('Learn'), findsOneWidget);
-    expect(find.text('Community'), findsOneWidget);
+    expect(find.text('Community'), findsWidgets);
     expect(find.text('Profile'), findsOneWidget);
 
     await tester.tap(find.text('Journey'));

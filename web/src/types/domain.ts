@@ -1,3 +1,12 @@
+export type Locale = 'en' | 'te'
+export type Goal =
+  | 'reduce_anxiety'
+  | 'prepare_birth'
+  | 'postpartum_recovery'
+  | 'garbh_sanskar'
+  | 'nutrition'
+  | 'couple'
+
 export type JourneyStage =
   | 'planning'
   | 'ttc'
@@ -7,7 +16,6 @@ export type JourneyStage =
   | 'parenting'
 
 export type ReviewStatus = 'draft' | 'in_review' | 'reviewed' | 'needs_update'
-
 export type UserRole = 'user' | 'moderator' | 'expert' | 'admin'
 
 export type BlogCategory =
@@ -21,6 +29,7 @@ export type BlogCategory =
   | 'Expert Advice'
   | 'Emotional Wellbeing'
   | 'Indian Traditions'
+  | 'Garbh Sanskar'
 
 export type ExpertSpeciality =
   | 'Gynecologists'
@@ -32,15 +41,17 @@ export type ExpertSpeciality =
   | 'Lactation Experts'
   | 'Parenting Specialists'
   | 'Counsellors'
+  | 'Garbh Sanskar Guides'
 
-export type ContentKind = 'article' | 'tool' | 'group' | 'activity' | 'expert'
+export type ContentKind = 'article' | 'tool' | 'group' | 'activity' | 'expert' | 'product' | 'program' | 'practice'
 
 export interface PersonalizationProfile {
   journeyStage: JourneyStage
   pregnancyWeek: number | null
   babyAgeMonths: number | null
-  language: string
+  language: Locale
   interests: string[]
+  goals: Goal[]
   savedContentIds: string[]
   completedActivityIds: string[]
 }
@@ -52,18 +63,27 @@ export interface RecommendedItem {
   description: string
   href: string
   stageFit: JourneyStage[]
+  goals?: Goal[]
+  weekMin?: number
+  weekMax?: number
+}
+
+export interface LocalizedText {
+  en: string
+  te: string
 }
 
 export interface BlogPost {
   id: string
   slug: string
-  title: string
-  excerpt: string
-  content: string
+  title: LocalizedText
+  excerpt: LocalizedText
+  content: LocalizedText
   featuredImage: string
   featuredImageAlt: string
   videoUrl: string | null
   category: BlogCategory
+  tags: string[]
   authorId: string
   authorName: string
   expertReviewerId: string | null
@@ -77,14 +97,13 @@ export interface BlogPost {
   readingTime: number
   isFeatured: boolean
   isPublished: boolean
-  seoTitle: string
-  seoDescription: string
+  seoTitle: LocalizedText
+  seoDescription: LocalizedText
   canonicalUrl: string | null
   relatedSlugs: string[]
   relatedExpertSlug: string | null
   relatedToolSlugs: string[]
   references: { label: string; href?: string }[]
-  dataStatus: 'verified' | 'CONTENT_PLACEHOLDER'
 }
 
 export interface Expert {
@@ -94,63 +113,120 @@ export interface Expert {
   photo: string
   speciality: ExpertSpeciality
   qualification: string
-  bio: string
+  bio: LocalizedText
   languages: string[]
   reviewStatus: ReviewStatus
   availability: string
-  dataStatus: 'REQUIRES_VERIFIED_DATA'
+  bookingUrl: string
+  isFacultySeat: boolean
+  specialties: string[]
+  isListed: boolean
 }
 
 export interface CommunityGroup {
   id: string
   slug: string
-  name: string
-  description: string
+  name: LocalizedText
+  description: LocalizedText
   journeyStages: JourneyStage[]
 }
 
 export interface CommunityPost {
   id: string
   groupSlug: string
-  title: string
-  body: string
+  title: LocalizedText
+  body: LocalizedText
   authorLabel: string
   isExpertAnswer: boolean
   createdAt: string
-  dataStatus: 'CONTENT_PLACEHOLDER'
 }
 
-export interface Tool {
+export interface Product {
   id: string
   slug: string
-  name: string
-  description: string
-  href: string
-  stageFit: JourneyStage[]
+  name: LocalizedText
+  description: LocalizedText
+  pricePaise: number
+  currency: 'INR'
+  image: string
+  category: string
+  journeyStages: JourneyStage[]
+  goals: Goal[]
+  isDigital: boolean
+  isPublished: boolean
 }
 
-export interface TeamMember {
+export interface Program {
   id: string
-  name: string
-  role: string
-  description: string
-  portrait: string
-  dataStatus: 'REQUIRES_VERIFIED_DATA'
+  slug: string
+  name: LocalizedText
+  summary: LocalizedText
+  description: LocalizedText
+  pricePaise: number
+  durationWeeks: number
+  journeyStages: JourneyStage[]
+  goals: Goal[]
+  modules: { title: LocalizedText; body: LocalizedText }[]
+  isPublished: boolean
+}
+
+export interface Practice {
+  id: string
+  slug: string
+  title: LocalizedText
+  description: LocalizedText
+  durationMinutes: number
+  mediaType: 'audio' | 'video' | 'guide'
+  trimester: '1' | '2' | '3' | 'any'
 }
 
 export interface HubPageContent {
   path: string
+  title: LocalizedText
+  seoTitle: LocalizedText
+  seoDescription: LocalizedText
+  kicker: LocalizedText
+  intro: LocalizedText
+  sections: { heading: LocalizedText; body: LocalizedText }[]
+  related: { label: LocalizedText; href: string }[]
+}
+
+export interface CartItem {
+  kind: 'product' | 'program'
+  id: string
+  slug: string
   title: string
-  seoTitle: string
-  seoDescription: string
-  kicker: string
-  intro: string
-  sections: { heading: string; body: string }[]
-  related: { label: string; href: string }[]
+  unitPaise: number
+  quantity: number
+}
+
+export interface Order {
+  id: string
+  status: string
+  amountPaise: number
+  items: CartItem[]
+  createdAt: string
+  checkoutMode: 'razorpay' | 'demo'
 }
 
 export interface AsyncState<T> {
   status: 'loading' | 'success' | 'empty' | 'error'
   data: T | null
   error: string | null
+}
+
+export interface WeekGuide {
+  week: number
+  title: LocalizedText
+  body: LocalizedText
+  garbhFocus: LocalizedText
+}
+
+export interface ToolDef {
+  id: string
+  slug: string
+  name: LocalizedText
+  description: LocalizedText
+  href: string
+  stageFit: JourneyStage[]
 }

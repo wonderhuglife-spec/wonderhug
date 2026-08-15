@@ -12,8 +12,8 @@ export function AppPromotion() {
           WonderHug on your phone is for today — not a website squeezed into a WebView.
         </Heading>
         <Text muted className="mt-4 max-w-xl text-lg">
-          Home, Journey, Learn, Community and Profile. Greeting, today’s guidance, saved tools. Store links are
-          CONFIG_REQUIRED until WonderHug publishes them.
+          Home, Journey, Learn, Community and Profile — native screens with offline trackers. App Store and Play
+          listing URLs wait on WonderHug store assets; until then, run the Flutter app from `mobile/`.
         </Text>
         <div className="mt-8">
           <ButtonLink to="/download" variant="teal" onClick={() => track('app_download_clicked', { placement: 'home' })}>

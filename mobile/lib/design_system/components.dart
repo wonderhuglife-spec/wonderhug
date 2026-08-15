@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wonderhug/core/l10n.dart';
+import 'package:wonderhug/core/locale_controller.dart';
 import 'package:wonderhug/core/theme.dart';
 
 class WhPrimaryButton extends StatelessWidget {
@@ -65,43 +68,44 @@ class ErrorMessage extends StatelessWidget {
   }
 }
 
-class ShellScaffold extends StatelessWidget {
+class ShellScaffold extends ConsumerWidget {
   const ShellScaffold({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider);
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: navigationShell.goBranch,
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: tr(locale, 'nav.home'),
           ),
           NavigationDestination(
-            icon: Icon(Icons.route_outlined),
-            selectedIcon: Icon(Icons.route),
-            label: 'Journey',
+            icon: const Icon(Icons.route_outlined),
+            selectedIcon: const Icon(Icons.route),
+            label: tr(locale, 'nav.journey'),
           ),
           NavigationDestination(
-            icon: Icon(Icons.menu_book_outlined),
-            selectedIcon: Icon(Icons.menu_book),
-            label: 'Learn',
+            icon: const Icon(Icons.menu_book_outlined),
+            selectedIcon: const Icon(Icons.menu_book),
+            label: tr(locale, 'nav.learn'),
           ),
           NavigationDestination(
-            icon: Icon(Icons.groups_outlined),
-            selectedIcon: Icon(Icons.groups),
-            label: 'Community',
+            icon: const Icon(Icons.groups_outlined),
+            selectedIcon: const Icon(Icons.groups),
+            label: tr(locale, 'nav.community'),
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Profile',
+            icon: const Icon(Icons.person_outline),
+            selectedIcon: const Icon(Icons.person),
+            label: tr(locale, 'nav.profile'),
           ),
         ],
       ),

@@ -17,6 +17,6 @@ describe('contentService fallback', () => {
   it('loads a known article', async () => {
     const result = await getPostBySlug('garbh-sanskar-as-practice-not-promise')
     expect(result.status).toBe('success')
-    expect(result.data?.title).toMatch(/Garbh Sanskar/i)
+    expect(result.data?.title.en).toMatch(/Garbh Sanskar/i)
   })
 })

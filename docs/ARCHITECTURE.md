@@ -1,8 +1,14 @@
-# WonderHug.Life — Architecture (Phase 1)
+# WonderHug.Life — Architecture (v1)
 
-**Status:** Binding for implementation. Product facts that are not in-repo remain placeholders.
+Runtime content lives in `web/src/data/` and is mirrored in Supabase seed/migrations.
+When `VITE_SUPABASE_URL` is set, services read published rows; otherwise the same
+catalogue is used locally. English and Telugu are first-class locales.
 
-Related: [`PROJECT_AUDIT.md`](./PROJECT_AUDIT.md)
+Owner-supplied items (logo, verified expert bios, counsel legal copy, production
+keys, store listing assets) stay labelled in `docs/NEED_FROM_YOU.md` — they do not
+block checkout, programmes, trackers, or CMS schema.
+
+Related: [`PROJECT_AUDIT.md`](./PROJECT_AUDIT.md) · [`DEPLOY.md`](./DEPLOY.md)
 
 ---
 

@@ -1,14 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import { HelmetProvider } from 'react-helmet-async'
+import { render } from '@testing-library/react'
 import type { ReactNode } from 'react'
-import { JourneyProvider } from '@/hooks/useJourney'
+import { AppProviders } from '@/app/providers'
 
 export function renderWithProviders(ui: ReactNode) {
-  return render(
-    <HelmetProvider>
-      <JourneyProvider>{ui}</JourneyProvider>
-    </HelmetProvider>,
-  )
+  return render(<AppProviders>{ui}</AppProviders>)
 }
 
-export { screen }
+export { screen } from '@testing-library/react'

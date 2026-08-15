@@ -11,37 +11,37 @@ import { ErrorState } from '@/components/ui/ErrorState'
 import { Heading, Text } from '@/components/ui/Typography'
 import { Loading } from '@/components/ui/Loading'
 import { Tabs } from '@/components/ui/Tabs'
+import { Input } from '@/components/ui/Input'
+import { pick } from '@/lib/locale'
+import { currentLocale } from '@/i18n'
 import type { BlogCategory } from '@/types/domain'
 
 type Filter = BlogCategory | 'all'
 
 export function BlogIndexPage() {
   const [filter, setFilter] = useState<Filter>('all')
+  const [q, setQ] = useState('')
+  const locale = currentLocale()
   const { status, data, error, retry } = useAsyncResource(() => contentService.listPublishedPosts(), 'blog-index')
   const posts = useMemo(() => {
     const list = data ?? []
-    return filter === 'all' ? list : list.filter((post) => post.category === filter)
-  }, [data, filter])
+    const byCat = filter === 'all' ? list : list.filter((post) => post.category === filter)
+    if (!q) return byCat
+    return byCat.filter((p) => `${p.title.en} ${p.title.te} ${p.tags.join(' ')}`.toLowerCase().includes(q.toLowerCase()))
+  }, [data, filter, q])
   const lead = posts[0]
   const rest = posts.slice(1)
 
   return (
     <>
-      <Seo
-        title="Journal"
-        description="Editorial writing on pregnancy, fertility, parenting and Indian traditions — education, not diagnosis."
-        path="/blog"
-      />
+      <Seo title="Journal" description="Editorial writing on pregnancy, Garbh Sanskar and parenting." path="/blog" />
       <header className="border-b border-line py-16">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-dark">Journal</p>
-          <Heading as="h1" className="mt-3">
-            Slow reading for a long journey.
-          </Heading>
+          <Heading as="h1">Journal</Heading>
           <Text muted className="mt-4 max-w-2xl text-lg">
-            Featured pieces lead. Categories help you browse. Every article should show its author, review status and
-            reading time.
+            Search and categories. Every article names an author and review status.
           </Text>
+          <Input className="mt-6 max-w-md" placeholder="Search" value={q} onChange={(e) => setQ(e.target.value)} />
         </Container>
       </header>
       <Container className="py-12">
@@ -55,7 +55,7 @@ export function BlogIndexPage() {
         {status === 'error' ? <ErrorState message={error ?? 'Could not load articles'} onRetry={retry} /> : null}
         {status === 'empty' || (status === 'success' && posts.length === 0) ? (
           <div className="mt-10">
-            <EmptyState title="No articles in this category yet" description="Editorial pieces will appear as they are reviewed." />
+            <EmptyState title="No articles in this filter" description="Try another category." />
           </div>
         ) : null}
         {status === 'success' && lead ? (
@@ -64,22 +64,16 @@ export function BlogIndexPage() {
               <Link to={`/blog/${lead.slug}`} className="group">
                 <img src={lead.featuredImage} alt={lead.featuredImageAlt} className="aspect-[16/10] w-full rounded-2xl bg-canvas object-cover" />
                 <Badge className="mt-5">{lead.category}</Badge>
-                <h2 className="mt-3 font-serif text-4xl group-hover:text-teal-dark">{lead.title}</h2>
-                <p className="mt-4 text-lg text-slate">{lead.excerpt}</p>
+                <h2 className="mt-3 font-serif text-4xl group-hover:text-teal-dark">{pick(lead.title, locale)}</h2>
+                <p className="mt-4 text-lg text-slate">{pick(lead.excerpt, locale)}</p>
               </Link>
             </article>
             <div className="lg:col-span-5">
               {rest.map((post) => (
                 <article key={post.id} className="border-t border-line py-6">
-                  <p className="text-xs text-slate-muted">
-                    {post.category} · {post.readingTime} min
-                  </p>
-                  <h2 className="mt-2 font-serif text-2xl">
-                    <Link to={`/blog/${post.slug}`} className="hover:text-teal-dark">
-                      {post.title}
-                    </Link>
+                  <h2 className="font-serif text-2xl">
+                    <Link to={`/blog/${post.slug}`}>{pick(post.title, locale)}</Link>
                   </h2>
-                  <p className="mt-2 text-sm text-slate">{post.excerpt}</p>
                 </article>
               ))}
             </div>

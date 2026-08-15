@@ -1,46 +1,44 @@
-import type { JourneyStage } from '@/types/domain'
+import { loc } from '@/lib/locale'
+import type { JourneyStage, LocalizedText } from '@/types/domain'
 
 export interface JourneyOption {
   id: JourneyStage
-  label: string
-  prompt: string
+  label: LocalizedText
+  prompt: LocalizedText
 }
 
 export const JOURNEY_OPTIONS: JourneyOption[] = [
   {
     id: 'planning',
-    label: 'Planning Pregnancy',
-    prompt: 'Build shared rhythms, nutrition habits and calm before you try to conceive.',
+    label: loc('Planning pregnancy', 'గర్భ యోజన'),
+    prompt: loc('Build shared rhythms before you try to conceive.', 'ప్రయత్నానికి ముందు ఉమ్మడి లయ.'),
   },
   {
     id: 'ttc',
-    label: 'Trying to Conceive',
-    prompt: 'Steady, practical support while you wait, hope and look after yourselves.',
+    label: loc('Trying to conceive', 'గర్భం కోసం ప్రయత్నం'),
+    prompt: loc('Steady support while you wait — without a score.', 'వేచి ఉన్నప్పుడు నిలకడైన సాంగత్యం.'),
   },
   {
     id: 'pregnant',
-    label: 'Pregnant',
-    prompt: 'Week-aware guidance, Garbh Sanskar practices and expert-reviewed education.',
+    label: loc('Pregnant', 'గర్భం'),
+    prompt: loc('Week-aware guidance and Garbh Sanskar as practice.', 'వారపు మార్గదర్శకం, సాధనగా గర్భ సంస్కారం.'),
   },
   {
     id: 'birth_prep',
-    label: 'Preparing for Birth',
-    prompt: 'Birth preferences, body preparation and emotional readiness — without fear-based language.',
+    label: loc('Preparing for birth', 'ప్రసవ సిద్ధత'),
+    prompt: loc('Preferences and logistics without scare stories.', 'భయం లేని ప్రాధాన్యతలు మరియు లాజిస్టిక్స్.'),
   },
   {
     id: 'new_parent',
-    label: 'New Parent',
-    prompt: 'Postpartum recovery, feeding support and the first months with your baby.',
+    label: loc('New parent', 'కొత్త తల్లిదండ్రులు'),
+    prompt: loc('Fourth trimester: rest, feeding pointers, visitors.', 'నాలుగవ త్రైమాసికం: విశ్రాంతి, పాలు, అతిథులు.'),
   },
   {
     id: 'parenting',
-    label: 'Parenting',
-    prompt: 'Conscious parenting tools for everyday moments as your child grows.',
+    label: loc('Parenting', 'పెంపకం'),
+    prompt: loc('Everyday conscious parenting in joint families.', 'ఉమ్మడి కుటుంబాల్లో రోజువారీ పెంపకం.'),
   },
 ]
 
-export const ONBOARDING_JOURNEYS: JourneyOption[] = JOURNEY_OPTIONS.filter(
-  (item) => item.id !== 'birth_prep',
-)
-
+export const ONBOARDING_JOURNEYS = JOURNEY_OPTIONS.filter((item) => item.id !== 'birth_prep')
 export const DEFAULT_JOURNEY: JourneyStage = 'planning'

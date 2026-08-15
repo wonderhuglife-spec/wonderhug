@@ -11,7 +11,7 @@ class ExpertsScreen extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(20),
         child: Text(
-          'Named experts are REQUIRES_VERIFIED_DATA. This screen will not invent hospitals or degrees.',
+          'Faculty seats book via WhatsApp. Named clinician bios, hospitals and degrees wait on WonderHug-verified copy — this app will not invent them.',
           style: TextStyle(color: WonderHugColors.slate, height: 1.45),
         ),
       ),

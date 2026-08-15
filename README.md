@@ -1,55 +1,40 @@
 # WonderHug.Life
 
-Pregnancy and parenting companion: **planning → fertility support education → pregnancy → birth preparation → postpartum → baby care → conscious parenting**.
+Pregnancy + maternity wellness: **Garbh Sanskar practice beside modern education**, a WhatsApp community of **50,000+ mothers (AiSensy)**, programmes, and INR checkout.
 
-This repository is a greenfield rewrite. The numbered product-knowledge files were not in git; architecture is documented in [`docs/`](docs/).
+Primary audience: Telugu-speaking families in Telangana and Andhra Pradesh. Secondary: pan-India English.
 
-## What’s here
-
-| Path | What |
-| --- | --- |
-| `web/` | React + TypeScript + Vite website |
-| `mobile/` | Flutter app (Home / Journey / Learn / Community / Profile) |
-| `supabase/` | Postgres migrations + RLS + seed |
-| `docs/` | Audit and architecture |
-
-## Website
+## Run locally (web)
 
 ```bash
 cd web
-cp .env.example .env.local   # optional; the UI works with local fallback content
+cp .env.example .env.local   # optional
 npm install
 npm run dev
 npm test
 npm run typecheck
-npm run lint
 npm run build
+npx playwright install chromium && npm run test:e2e
 ```
 
-Environment (anon key only):
+Without Supabase/Razorpay keys the site uses the bilingual catalogue and **demo checkout**.
 
-```
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-VITE_SITE_URL=https://wonderhug.life
-```
-
-Never put a Supabase **service role** key in `web/` or `mobile/`.
-
-## Flutter
+## Run locally (mobile)
 
 ```bash
 cd mobile
-flutter create .    # generates android/ios folders once the SDK is installed
+flutter create .    # once
 flutter test
-flutter run --dart-define=SUPABASE_URL= --dart-define=SUPABASE_ANON_KEY=
+flutter run
 ```
 
-## Medical safety
+## Supabase
 
-Copy on this site is **education**, not diagnosis or treatment. Expert names, testimonials, and outcome claims are not invented. Placeholders are labelled `CONTENT_PLACEHOLDER` or `REQUIRES_VERIFIED_DATA`.
+Migrations in `supabase/migrations`. Seed in `supabase/seed`. Edge functions: Razorpay order + AiSensy opt-in.
 
-## Brand
+## Docs
 
-Primary: WonderHug Purple `#79409B`, Teal `#309292`, Dark Blue `#2F4275`.  
-The official logo file was not in the repository; `web/public/logo.svg` is a replaceable lockup.
+- `docs/PROJECT_AUDIT.md` — original empty-repo audit
+- `docs/ARCHITECTURE.md` — layering
+- `docs/DEPLOY.md` — Vercel/Netlify, TestFlight/Play
+- `docs/NEED_FROM_YOU.md` — logo, verified experts, legal, credentials, store assets

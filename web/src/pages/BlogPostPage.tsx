@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { contentService } from '@/services/content'
 import { useAsyncResource } from '@/hooks/useAsyncResource'
 import { JsonLd, Seo, breadcrumbJsonLd } from '@/components/seo/Seo'
@@ -9,18 +9,26 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { Loading } from '@/components/ui/Loading'
 import { Heading } from '@/components/ui/Typography'
+import { Button } from '@/components/ui/Button'
 import { MEDICAL_DISCLAIMER } from '@/lib/constants'
+import { isArticleSaved, toggleSavedArticle } from '@/services/saved'
 import { track } from '@/services/analytics'
 import { BLOG_POSTS } from '@/data/blog'
 import { EXPERTS } from '@/data/experts'
-import { TOOLS } from '@/data/tools'
+import { pick } from '@/lib/locale'
+import { currentLocale } from '@/i18n'
 
 export function BlogPostPage() {
   const { slug = '' } = useParams()
+  const locale = currentLocale()
   const { status, data, error, retry } = useAsyncResource(() => contentService.getPostBySlug(slug), slug)
+  const [saved, setSaved] = useState(false)
 
   useEffect(() => {
-    if (data) track('article_opened', { slug: data.slug })
+    if (data) {
+      track('article_opened', { slug: data.slug })
+      setSaved(isArticleSaved(data.id))
+    }
   }, [data])
 
   if (status === 'loading') {
@@ -40,35 +48,27 @@ export function BlogPostPage() {
   if (status === 'empty' || !data) {
     return (
       <Container className="py-20">
-        <EmptyState title="Article not found" description="This slug is not a published piece." />
+        <EmptyState title="Article not found" description="" />
       </Container>
     )
   }
 
   const related = BLOG_POSTS.filter((post) => data.relatedSlugs.includes(post.slug))
   const expert = EXPERTS.find((item) => item.slug === data.relatedExpertSlug)
-  const tools = TOOLS.filter((tool) => data.relatedToolSlugs.includes(tool.slug))
   const site = import.meta.env.VITE_SITE_URL || 'https://wonderhug.life'
 
   return (
     <>
-      <Seo
-        title={data.seoTitle}
-        description={data.seoDescription}
-        path={`/blog/${data.slug}`}
-        type="article"
-        canonical={data.canonicalUrl}
-      />
-      <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Journal', path: '/blog' }, { name: data.title, path: `/blog/${data.slug}` }])} />
+      <Seo title={pick(data.seoTitle, locale)} description={pick(data.seoDescription, locale)} path={`/blog/${data.slug}`} type="article" />
+      <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Journal', path: '/blog' }, { name: pick(data.title, locale), path: `/blog/${data.slug}` }])} />
       <JsonLd
         data={{
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: data.title,
-          description: data.excerpt,
+          headline: pick(data.title, locale),
+          description: pick(data.excerpt, locale),
           datePublished: data.publishedAt,
-          dateModified: data.updatedAt,
-          author: { '@type': 'Organization', name: data.authorName },
+          inLanguage: locale === 'te' ? 'te-IN' : 'en-IN',
           publisher: { '@type': 'Organization', name: 'WonderHug.Life', url: site },
         }}
       />
@@ -77,92 +77,48 @@ export function BlogPostPage() {
           <Container narrow>
             <Badge>{data.category}</Badge>
             <Heading as="h1" className="mt-5">
-              {data.title}
+              {pick(data.title, locale)}
             </Heading>
-            <p className="mt-5 text-lg text-slate">{data.excerpt}</p>
-            <dl className="mt-8 grid gap-3 text-sm text-slate sm:grid-cols-2">
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-slate-muted">Author</dt>
-                <dd>{data.authorName}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-slate-muted">Expert reviewer</dt>
-                <dd>{data.expertReviewerName ?? 'Not yet assigned'}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-slate-muted">Review status</dt>
-                <dd>{data.reviewStatus.replace('_', ' ')}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-slate-muted">Last reviewed</dt>
-                <dd>{data.lastReviewedAt ? new Date(data.lastReviewedAt).toLocaleDateString('en-IN') : 'Pending'}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-slate-muted">Published</dt>
-                <dd>{new Date(data.publishedAt).toLocaleDateString('en-IN')}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-slate-muted">Reading time</dt>
-                <dd>{data.readingTime} min</dd>
-              </div>
-            </dl>
+            <p className="mt-5 text-lg text-slate">{pick(data.excerpt, locale)}</p>
+            <p className="mt-6 text-sm text-slate">
+              {data.authorName} · {data.reviewStatus} · {data.readingTime} min
+              {data.expertReviewerName ? ` · Reviewer: ${data.expertReviewerName}` : ''}
+            </p>
+            <Button
+              className="mt-6"
+              variant="secondary"
+              onClick={() => setSaved(toggleSavedArticle(data.id).includes(data.id))}
+            >
+              {saved ? 'Saved' : 'Save article'}
+            </Button>
           </Container>
         </header>
         <Container narrow className="py-12">
-          <img src={data.featuredImage} alt={data.featuredImageAlt} className="mb-10 w-full rounded-2xl bg-canvas" />
-          {data.content.split('\n\n').map((para) => (
-            <p key={para.slice(0, 24)} className="mb-5 text-lg leading-relaxed text-ink">
-              {para}
+          {pick(data.content, locale)
+            .split('\n\n')
+            .map((para) => (
+              <p key={para.slice(0, 32)} className="mb-5 text-lg leading-relaxed">
+                {para}
+              </p>
+            ))}
+          <aside className="mt-12 rounded-2xl bg-canvas p-6 text-sm text-slate">{MEDICAL_DISCLAIMER}</aside>
+          {expert ? (
+            <p className="mt-8">
+              Related faculty:{' '}
+              <Link to={`/experts/${expert.slug}`} className="underline">
+                {expert.name}
+              </Link>
             </p>
-          ))}
-          <aside className="mt-12 rounded-2xl bg-canvas p-6 text-sm text-slate">
-            <p className="font-medium text-ink">Education, not diagnosis</p>
-            <p className="mt-2">{MEDICAL_DISCLAIMER}</p>
-          </aside>
-          {data.references.length > 0 ? (
-            <section className="mt-10">
-              <h2 className="font-serif text-2xl">References</h2>
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-slate">
-                {data.references.map((ref) => (
-                  <li key={ref.label}>{ref.href ? <Link to={ref.href}>{ref.label}</Link> : ref.label}</li>
-                ))}
-              </ul>
-            </section>
           ) : null}
-          <section className="mt-12 grid gap-8 border-t border-line pt-10">
-            {expert ? (
-              <p>
-                Related expert:{' '}
-                <Link to={`/experts/${expert.slug}`} className="text-navy underline-offset-4 hover:underline">
-                  {expert.speciality}
-                </Link>
-              </p>
-            ) : null}
-            {tools.length > 0 ? (
-              <p>
-                Related tools:{' '}
-                {tools.map((tool) => (
-                  <Link key={tool.id} to={tool.href} className="mr-3 text-navy underline-offset-4 hover:underline">
-                    {tool.name}
-                  </Link>
-                ))}
-              </p>
-            ) : null}
-            {related.length > 0 ? (
-              <div>
-                <h2 className="font-serif text-2xl">Related reading</h2>
-                <ul className="mt-4 space-y-2">
-                  {related.map((post) => (
-                    <li key={post.id}>
-                      <Link to={`/blog/${post.slug}`} className="hover:text-teal-dark">
-                        {post.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </section>
+          {related.length > 0 ? (
+            <ul className="mt-8">
+              {related.map((post) => (
+                <li key={post.id}>
+                  <Link to={`/blog/${post.slug}`}>{pick(post.title, locale)}</Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </Container>
       </article>
     </>

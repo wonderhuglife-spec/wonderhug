@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wonderhug/core/journey.dart';
+import 'package:wonderhug/core/l10n.dart';
+import 'package:wonderhug/core/locale_controller.dart';
 import 'package:wonderhug/core/theme.dart';
 import 'package:wonderhug/features/onboarding/journey_controller.dart';
 import 'package:wonderhug/shared/home_feed.dart';
@@ -11,6 +13,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final stage = ref.watch(journeyProvider) ?? JourneyStage.planning;
+    final locale = ref.watch(localeProvider);
     final feed = homeFeedFor(stage);
 
     return Scaffold(
@@ -22,12 +25,12 @@ class HomeScreen extends ConsumerWidget {
           const SizedBox(height: 8),
           Text('Journey: ${stage.label}', style: const TextStyle(color: WonderHugColors.slate)),
           const SizedBox(height: 20),
-          _Block(title: "Today's guidance", body: feed.today),
-          _Block(title: 'Recommended', body: feed.recommended),
-          _Block(title: 'Ask an expert', body: feed.expert),
-          _Block(title: 'Community', body: feed.community),
-          _Block(title: 'Featured learning', body: feed.learning),
-          _Block(title: 'Tools', body: feed.tools),
+          _Block(title: tr(locale, 'home.today'), body: feed.today),
+          _Block(title: tr(locale, 'home.recommended'), body: feed.recommended),
+          _Block(title: tr(locale, 'home.expert'), body: feed.expert),
+          _Block(title: tr(locale, 'home.community'), body: feed.community),
+          _Block(title: tr(locale, 'home.learning'), body: feed.learning),
+          _Block(title: tr(locale, 'home.tools'), body: feed.tools),
         ],
       ),
     );
