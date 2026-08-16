@@ -18,21 +18,20 @@ import { useAuth } from '@/hooks/useAuth'
 import { useCmsImage } from '@/hooks/useCmsImages'
 import { SignInToSaveNote, appendTracker, listTracker } from '@/services/trackers'
 import { useToast } from '@/components/ui/Toast'
+import { PageHero } from '@/components/editorial/PageHero'
 
 export function ToolsPage() {
   const locale = currentLocale()
   return (
     <>
       <Seo title="Tools" description="Due date, kicks, contractions, weight." path="/tools" />
-      <header className="relative overflow-hidden border-b border-line">
-        <Media src="/images/placeholder-ai-tool-due.png" alt="placeholder-ai- Tools atmosphere" className="absolute inset-0 h-full w-full object-cover opacity-35" />
-        <Container className="relative py-16">
-          <Heading as="h1">Tools</Heading>
-          <Text muted className="mt-4 max-w-2xl text-lg">
-            Due date, kick counts, contractions and weight — educational helpers, not a diagnosis.
-          </Text>
-        </Container>
-      </header>
+      <PageHero
+        kicker="Educational helpers"
+        title="Tools"
+        lede="Due date, kick counts, contractions and weight — notebooks for this week, not a diagnosis."
+        src="/images/placeholder-ai-tool-due.png"
+        alt="placeholder-ai- Tools atmosphere"
+      />
       <Container className="py-16">
         <ul className="grid gap-6 md:grid-cols-2">
           {TOOLS.filter((tool) => tool.href.startsWith('/tools/')).map((tool) => (

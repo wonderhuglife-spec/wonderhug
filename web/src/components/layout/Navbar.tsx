@@ -14,6 +14,8 @@ import { useAuth } from '@/hooks/useAuth'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { JOURNEY_OPTIONS } from '@/data/journeys'
+import { JOURNEY_ART, JOURNEY_HREF } from '@/data/journeyArt'
+import { HoverMedia } from '@/components/editorial/HoverMedia'
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
@@ -38,19 +40,10 @@ export function Navbar() {
   }, [])
 
   const journeyLinks = JOURNEY_OPTIONS.map((item) => ({
-    to:
-      item.id === 'planning'
-        ? '/pregnancy-planning'
-        : item.id === 'ttc'
-          ? '/pregnancy-planning'
-          : item.id === 'pregnant'
-            ? '/pregnancy'
-            : item.id === 'birth_prep'
-              ? '/pregnancy/birth-preparation'
-              : item.id === 'new_parent'
-                ? '/parenting/newborn'
-                : '/parenting',
+    to: JOURNEY_HREF[item.id],
     label: pick(item.label, locale),
+    src: JOURNEY_ART[item.id].src,
+    alt: JOURNEY_ART[item.id].alt,
   }))
 
   return (
@@ -58,8 +51,8 @@ export function Navbar() {
       className={cn(
         'sticky top-0 z-40 border-b transition-all duration-300',
         scrolled
-          ? 'border-purple/10 bg-white/95 py-0 shadow-[0_8px_30px_rgba(121,64,155,0.08)] backdrop-blur-md'
-          : 'border-white/60 bg-white/75 py-0.5 shadow-[0_1px_0_rgba(121,64,155,0.06)] backdrop-blur-md',
+          ? 'border-purple/10 bg-white/95 py-0 shadow-nav backdrop-blur-md'
+          : 'border-white/60 bg-white/80 py-0.5 shadow-[0_1px_0_rgba(121,64,155,0.06)] backdrop-blur-md',
       )}
     >
       <div className="mx-auto flex max-w-[80rem] items-center justify-between gap-3 px-5 py-2 sm:px-8">
@@ -72,18 +65,23 @@ export function Navbar() {
             <button type="button" className="min-h-11 rounded-full px-3 text-sm font-medium text-slate hover:text-purple">
               {t('nav.journey')}
             </button>
-            <div className="invisible absolute left-0 top-full z-20 min-w-60 rounded-2xl border border-line bg-white p-2 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-              {journeyLinks.map((item) => (
-                <NavLink key={item.to + item.label} to={item.to} className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
-                  {item.label}
+            <div className="invisible absolute left-0 top-full z-20 w-[min(36rem,calc(100vw-2.5rem))] rounded-2xl border border-line bg-white p-3 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              <div className="grid gap-1 sm:grid-cols-2">
+                {journeyLinks.map((item) => (
+                  <NavLink key={item.to + item.label} to={item.to} className="flex min-h-11 items-center gap-3 rounded-xl px-2 py-2 text-sm text-ink hover:bg-canvas">
+                    <HoverMedia src={item.src} alt="" className="h-12 w-12 shrink-0 rounded-lg" width={96} height={96} zoomOnHover={false} />
+                    {item.label}
+                  </NavLink>
+                ))}
+              </div>
+              <div className="mt-2 border-t border-line pt-2">
+                <NavLink to="/garbh-sanskar" className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
+                  {t('nav.garbh')}
                 </NavLink>
-              ))}
-              <NavLink to="/garbh-sanskar" className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
-                {t('nav.garbh')}
-              </NavLink>
-              <NavLink to="/tools" className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
-                {t('nav.tools')}
-              </NavLink>
+                <NavLink to="/tools" className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
+                  {t('nav.tools')}
+                </NavLink>
+              </div>
             </div>
           </div>
           {NAV_ITEMS.map((item) => (

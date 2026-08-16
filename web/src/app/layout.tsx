@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${figtree.variable} ${newsreader.variable}`}>
-      <body className="min-h-svh bg-white font-sans text-ink antialiased">
+      <body className="min-h-svh bg-paper font-sans text-ink antialiased">
         <AppProviders>
           <SiteChrome>{children}</SiteChrome>
         </AppProviders>

@@ -7,11 +7,11 @@ import { Seo } from '@/components/seo/Seo'
 import { Badge } from '@/components/ui/Badge'
 import { Container } from '@/components/ui/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { Heading, Text } from '@/components/ui/Typography'
 import { Tabs } from '@/components/ui/Tabs'
 import { track } from '@/services/analytics'
 import type { ExpertSpeciality } from '@/types/domain'
 import { Media } from '@/components/media/Media'
+import { PageHero } from '@/components/editorial/PageHero'
 
 const SPECIALITIES: ExpertSpeciality[] = [
   'Garbh Sanskar Guides',
@@ -34,15 +34,13 @@ export function ExpertsPage() {
   return (
     <>
       <Seo title="Experts" description="WonderHug faculty seats and booking via WhatsApp." path="/experts" />
-      <header className="relative overflow-hidden border-b border-line">
-        <Media src="/images/placeholder-ai-faculty-seat.png" alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait." className="absolute inset-0 h-full w-full object-cover opacity-35" />
-        <Container className="relative py-16">
-          <Heading as="h1">Faculty and booking</Heading>
-          <Text muted className="mt-4 max-w-2xl text-lg">
-            Named clinicians publish after WonderHug verifies credentials. Until then, each speciality is a faculty seat that books through the WhatsApp care desk (AiSensy). We do not invent hospitals or degrees.
-          </Text>
-        </Container>
-      </header>
+      <PageHero
+        kicker="Faculty seats"
+        title="Faculty and booking"
+        lede="Named clinicians publish after WonderHug verifies credentials. Until then, each speciality is a faculty seat that books through the WhatsApp care desk (AiSensy). We do not invent hospitals or degrees."
+        src="/images/placeholder-ai-faculty-seat.png"
+        alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait."
+      />
       <Container className="py-12">
         <Tabs
           label="Specialities"

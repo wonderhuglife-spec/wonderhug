@@ -27,7 +27,7 @@ const variants: Record<Variant, string> = {
 }
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full font-medium transition duration-200 hover:scale-[1.02] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none disabled:hover:scale-100'
+  'inline-flex items-center justify-center gap-2 rounded-full font-medium transition duration-300 ease-editorial hover:scale-[1.01] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none disabled:hover:scale-100'
 
 export function Button({ variant = 'primary', size = 'md', className, ...props }: ButtonProps) {
   return <button className={cn(base, sizes[size], variants[variant], className)} {...props} />

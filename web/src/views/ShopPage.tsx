@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { PRODUCTS } from '@/data/products'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
-import { Heading, Text } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
 import { useCart } from '@/hooks/useCart'
 import { useToast } from '@/components/ui/Toast'
@@ -13,7 +12,8 @@ import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { formatInr } from '@/lib/constants'
 import { JsonLd } from '@/components/seo/Seo'
-import { Media } from '@/components/media/Media'
+import { HoverMedia } from '@/components/editorial/HoverMedia'
+import { PageHero } from '@/components/editorial/PageHero'
 import { Reveal } from '@/components/motion/Reveal'
 
 export function ShopPage() {
@@ -31,21 +31,19 @@ export function ShopPage() {
           name: 'WonderHug shop',
         }}
       />
-      <header className="relative overflow-hidden border-b border-line">
-        <Media src="/images/placeholder-ai-shop-journal.png" alt="placeholder-ai- Shop atmosphere" className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <Container className="relative py-20">
-          <Heading as="h1">{t('shop.title')}</Heading>
-          <Text muted className="mt-4 max-w-2xl text-lg">
-            {t('shop.intro')}
-          </Text>
-        </Container>
-      </header>
+      <PageHero
+        kicker="Wellness products · not medicines"
+        title={t('shop.title')}
+        lede={t('shop.intro')}
+        src="/images/placeholder-ai-shop-journal.png"
+        alt="placeholder-ai- Shop atmosphere"
+      />
       <Container className="grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-3">
         {PRODUCTS.map((product, index) => (
           <Reveal key={product.id} delay={index * 0.04}>
             <article className="overflow-hidden rounded-3xl border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-lift">
               <Link to={`/shop/${product.slug}`} className="block">
-                <Media src={product.image} alt={`placeholder-ai- ${pick(product.name, locale)}`} className="aspect-[4/3] w-full object-cover" />
+                <HoverMedia src={product.image} alt={`placeholder-ai- ${pick(product.name, locale)}`} className="aspect-[4/3] w-full" />
               </Link>
               <div className="p-6">
                 <h2 className="font-serif text-2xl">

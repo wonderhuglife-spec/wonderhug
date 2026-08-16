@@ -9,7 +9,7 @@ import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { whatsappUrl } from '@/services/whatsapp'
 import { ButtonLink } from '@/components/ui/Button'
-import { Media } from '@/components/media/Media'
+import { HoverMedia } from '@/components/editorial/HoverMedia'
 
 export function CommunityPreview() {
   const locale = currentLocale()
@@ -19,7 +19,7 @@ export function CommunityPreview() {
       <Container>
         <div className="overflow-hidden rounded-[2rem] bg-navy text-white">
           <div className="grid lg:grid-cols-2">
-            <Media src="/images/placeholder-ai-community.png" alt="placeholder-ai- Community gathering atmosphere." className="min-h-[16rem] w-full object-cover lg:min-h-full" width={960} height={720} />
+            <HoverMedia src="/images/placeholder-ai-community.png" alt="placeholder-ai- Community gathering atmosphere." className="min-h-[16rem] w-full lg:min-h-full" width={960} height={720} />
             <div className="px-6 py-14 sm:px-12">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">AiSensy · WhatsApp</p>
               <Heading as="h2" className="mt-3 text-white">

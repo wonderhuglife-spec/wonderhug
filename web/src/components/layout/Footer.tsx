@@ -24,7 +24,7 @@ const legal = [
 export function Footer() {
   const { t } = useTranslation()
   return (
-    <footer className="mt-8 border-t border-line bg-[linear-gradient(180deg,#F8FAFA,white)]">
+    <footer className="mt-8 border-t border-line bg-gradient-to-b from-canvas to-paper">
       <div className="mx-auto grid max-w-page gap-12 px-5 py-16 sm:px-8 md:grid-cols-12">
         <div className="md:col-span-5">
           <Logo />

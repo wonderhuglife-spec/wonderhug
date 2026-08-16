@@ -8,14 +8,14 @@ import { Seo } from '@/components/seo/Seo'
 import { Badge } from '@/components/ui/Badge'
 import { Container } from '@/components/ui/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { Heading, Text } from '@/components/ui/Typography'
 import { Tabs } from '@/components/ui/Tabs'
 import { Input } from '@/components/ui/Input'
-import { Media } from '@/components/media/Media'
 import { Reveal } from '@/components/motion/Reveal'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import type { BlogCategory } from '@/types/domain'
+import { PageHero } from '@/components/editorial/PageHero'
+import { HoverMedia } from '@/components/editorial/HoverMedia'
 
 type Filter = BlogCategory | 'all'
 
@@ -35,15 +35,15 @@ export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
   return (
     <>
       <Seo title="Journal" description="Editorial writing on pregnancy, Garbh Sanskar and parenting." path="/blog" />
-      <header className="border-b border-line py-16">
-        <Container>
-          <Heading as="h1">Journal</Heading>
-          <Text muted className="mt-4 max-w-2xl text-lg">
-            Search and categories. Every article names an author and review status.
-          </Text>
-          <Input className="mt-6 max-w-md" placeholder="Search" value={q} onChange={(e) => setQ(e.target.value)} />
-        </Container>
-      </header>
+      <PageHero
+        kicker="Editorial"
+        title="Journal"
+        lede="Search and categories. Every article names an author and review status."
+        src="/images/placeholder-ai-journal-garbh.png"
+        alt="placeholder-ai- Journal atmosphere"
+      >
+        <Input className="max-w-md bg-white/95" placeholder="Search" value={q} onChange={(e) => setQ(e.target.value)} />
+      </PageHero>
       <Container className="py-12">
         <Tabs
           label="Article categories"
@@ -60,7 +60,7 @@ export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
           <div className="mt-12 grid gap-12 lg:grid-cols-12">
             <article className="lg:col-span-7">
               <Link to={`/blog/${lead.slug}`} className="group">
-                <Media src={lead.featuredImage} alt={lead.featuredImageAlt} className="aspect-[16/10] w-full rounded-2xl bg-canvas object-cover transition group-hover:shadow-lift" />
+                <HoverMedia src={lead.featuredImage} alt={lead.featuredImageAlt} className="aspect-[16/10] w-full rounded-2xl bg-canvas" />
                 <Badge className="mt-5">{lead.category}</Badge>
                 <h2 className="mt-3 font-serif text-4xl group-hover:text-teal-dark">{pick(lead.title, locale)}</h2>
                 <p className="mt-4 text-lg text-slate">{pick(lead.excerpt, locale)}</p>
@@ -70,7 +70,7 @@ export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
               {rest.map((post) => (
                 <Reveal key={post.id}>
                   <article className="border-t border-line py-6">
-                    <Media src={post.featuredImage} alt={post.featuredImageAlt} className="mb-4 aspect-[16/9] w-full rounded-xl object-cover" width={640} height={360} />
+                    <HoverMedia src={post.featuredImage} alt={post.featuredImageAlt} className="mb-4 aspect-[16/9] w-full rounded-xl" width={640} height={360} />
                     <h2 className="font-serif text-2xl">
                       <Link to={`/blog/${post.slug}`}>{pick(post.title, locale)}</Link>
                     </h2>

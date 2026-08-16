@@ -6,10 +6,10 @@ import { TEAM } from '@/data/team'
 import { Seo } from '@/components/seo/Seo'
 import { Avatar } from '@/components/ui/Avatar'
 import { Container } from '@/components/ui/Container'
-import { Heading, Text } from '@/components/ui/Typography'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { cn } from '@/lib/cn'
+import { PageHero } from '@/components/editorial/PageHero'
 
 export function AboutPage() {
   const [activeId, setActiveId] = useState(TEAM[0]?.id ?? '')
@@ -20,14 +20,13 @@ export function AboutPage() {
   return (
     <>
       <Seo title="About" description="WonderHug.Life — Garbh Sanskar and modern wellness for Telugu-speaking families." path="/about" />
-      <header className="py-16">
-        <Container>
-          <Heading as="h1">A daily companion from planning to parenting</Heading>
-          <Text muted className="mt-5 max-w-2xl text-lg">
-            Primary home is Telugu-speaking families in Telangana and Andhra Pradesh. Secondary is pan-India English. WhatsApp (AiSensy) already holds a community of 50,000+ mothers. Official logo and photography replace the lockup when supplied.
-          </Text>
-        </Container>
-      </header>
+      <PageHero
+        kicker="WonderHug.Life"
+        title="A daily companion from planning to parenting"
+        lede="Primary home is Telugu-speaking families in Telangana and Andhra Pradesh. Secondary is pan-India English. WhatsApp (AiSensy) already holds a community of 50,000+ mothers. Official logo and photography replace the lockup when supplied."
+        src="/images/placeholder-ai-hero-home.png"
+        alt="placeholder-ai- About atmosphere."
+      />
       {active ? (
         <div className="relative min-h-[28rem] bg-navy">
           <AnimatePresence mode="wait">

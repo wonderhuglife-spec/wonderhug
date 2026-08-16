@@ -17,25 +17,23 @@ export function HeroSection() {
   const y = useTransform(scrollY, [0, 500], [0, 80])
 
   return (
-    <section className="relative min-h-[min(92vh,52rem)] overflow-hidden">
+    <section className="relative min-h-[min(92vh,54rem)] overflow-hidden">
       <motion.div className="absolute inset-0 overflow-hidden" style={{ y: reduce ? 0 : y }}>
         <Image src={heroArt.src} alt={heroArt.alt} fill priority className="object-cover" sizes="100vw" />
       </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-r from-[#FBF7F2]/95 via-[#FBF7F2]/78 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#FBF7F2] via-transparent to-black/10" />
-      <Container className="relative grid min-h-[min(92vh,52rem)] items-end pb-16 pt-24 lg:items-center lg:py-24">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1A1220]/55 via-[#FBF7F2]/72 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-black/20" />
+      <Container className="relative grid min-h-[min(92vh,54rem)] items-end pb-20 pt-28 lg:items-center lg:py-28">
         <motion.div
           className="max-w-2xl"
-          initial={reduce ? false : { opacity: 0, y: 18 }}
+          initial={reduce ? false : { opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduce ? 0 : 0.55 }}
+          transition={{ duration: reduce ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-purple shadow-sm backdrop-blur">
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-purple shadow-sm backdrop-blur">
             {t('hero.kicker')}
           </p>
-          <h1 className="mt-6 font-serif text-[clamp(2.5rem,6vw,4.6rem)] font-medium leading-[1.06] tracking-[-0.03em] text-ink">
-            {t('hero.title')}
-          </h1>
+          <h1 className="mt-6 font-serif text-display font-medium text-ink">{t('hero.title')}</h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate">{t('hero.body')}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink to="/start" size="lg" onClick={() => track('hero_cta_click', { placement: 'hero_primary' })}>
@@ -48,7 +46,7 @@ export function HeroSection() {
               {t('cta.shop')}
             </ButtonLink>
           </div>
-          <dl className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-ink/10 pt-6">
+          <dl className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-ink/10 pt-6">
             <div>
               <dt className="text-xs uppercase tracking-[0.16em] text-slate-muted">{t('hero.statMothersLabel')}</dt>
               <dd className="mt-1 font-serif text-2xl text-purple">50,000+</dd>

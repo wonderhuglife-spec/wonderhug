@@ -4,11 +4,12 @@ import { Link, useLocation } from '@/lib/navigation'
 import { hubByPath } from '@/data/hubs'
 import { JsonLd, Seo, breadcrumbJsonLd } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
-import { Heading, Text } from '@/components/ui/Typography'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
-import { Media } from '@/components/media/Media'
+import { PageHero } from '@/components/editorial/PageHero'
+import { HoverMedia } from '@/components/editorial/HoverMedia'
+import { Reveal } from '@/components/motion/Reveal'
 
 function hubArt(path: string) {
   if (path.includes('garbh')) return '/images/placeholder-ai-journal-garbh.png'
@@ -46,31 +47,29 @@ export function HubPage({ path }: { path?: string }) {
       <Seo title={pick(hub.seoTitle, locale)} description={pick(hub.seoDescription, locale)} path={hub.path} />
       <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, ...crumbs])} />
       <article>
-        <header className="relative overflow-hidden border-b border-line">
-          <Media src={hubArt(resolved)} alt="placeholder-ai- Topic hub atmosphere." className="absolute inset-0 h-full w-full object-cover opacity-30" />
-          <Container narrow className="relative py-16">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-dark">{pick(hub.kicker, locale)}</p>
-            <Heading as="h1" className="mt-4">
-              {pick(hub.title, locale)}
-            </Heading>
-            <Text muted className="mt-5 text-lg">
-              {pick(hub.intro, locale)}
-            </Text>
-          </Container>
-        </header>
+        <PageHero
+          kicker={pick(hub.kicker, locale)}
+          title={pick(hub.title, locale)}
+          lede={pick(hub.intro, locale)}
+          src={hubArt(resolved)}
+          alt="placeholder-ai- Topic hub atmosphere."
+        />
         <Container narrow className="py-14">
           {hub.sections.map((section) => (
-            <section key={section.heading.en} className="mb-10">
-              <h2 className="font-serif text-2xl text-ink">{pick(section.heading, locale)}</h2>
-              <p className="mt-3 leading-relaxed text-slate">{pick(section.body, locale)}</p>
-            </section>
+            <Reveal key={section.heading.en}>
+              <section className="mb-10">
+                <h2 className="font-serif text-2xl text-ink">{pick(section.heading, locale)}</h2>
+                <p className="mt-3 leading-relaxed text-slate">{pick(section.body, locale)}</p>
+              </section>
+            </Reveal>
           ))}
           <nav aria-label="Related" className="border-t border-line pt-8">
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-6 grid gap-4 sm:grid-cols-2">
               {hub.related.map((item) => (
                 <li key={item.href}>
-                  <Link to={item.href} className="text-navy underline-offset-4 hover:underline">
-                    {pick(item.label, locale)}
+                  <Link to={item.href} className="group block overflow-hidden rounded-2xl border border-line bg-white">
+                    <HoverMedia src={hubArt(item.href)} alt="" className="aspect-[16/8] w-full" width={640} height={320} />
+                    <span className="block p-4 text-navy group-hover:text-teal-dark">{pick(item.label, locale)}</span>
                   </Link>
                 </li>
               ))}

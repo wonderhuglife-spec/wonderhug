@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
-import { Heading, Text } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
 import { Input, Label } from '@/components/ui/Input'
 import { useAuth } from '@/hooks/useAuth'
+import { PageHero } from '@/components/editorial/PageHero'
 
 export function SignInPage() {
   const { t } = useTranslation()
@@ -20,11 +20,15 @@ export function SignInPage() {
   return (
     <>
       <Seo title={t('auth.title')} description={t('auth.title')} path="/signin" />
+      <PageHero
+        kicker="Account"
+        title={t('auth.title')}
+        lede={t('auth.phoneHelp')}
+        src="/images/placeholder-ai-faculty-seat.png"
+        alt="placeholder-ai- Sign in atmosphere."
+        tone="light"
+      />
       <Container className="max-w-xl py-16">
-        <Heading as="h1">{t('auth.title')}</Heading>
-        <Text muted className="mt-4">
-          {t('auth.phoneHelp')}
-        </Text>
         <div className="mt-8">
           <Label htmlFor="phone">{t('auth.phone')}</Label>
           <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />

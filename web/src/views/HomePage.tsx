@@ -1,6 +1,7 @@
 'use client'
 
 import { HeroSection } from '@/sections/home/HeroSection'
+import { StoryChapters } from '@/sections/home/StoryChapters'
 import { JourneySelector } from '@/sections/home/JourneySelector'
 import { PersonalizedExperience } from '@/sections/home/PersonalizedExperience'
 import { FeatureEcosystem } from '@/sections/home/FeatureEcosystem'
@@ -18,6 +19,7 @@ export function HomePage() {
   return (
     <>
       <HeroSection />
+      <StoryChapters />
       <JourneySelector />
       <PersonalizedExperience />
       <FeatureEcosystem />
