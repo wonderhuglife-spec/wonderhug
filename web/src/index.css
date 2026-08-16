@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-[#FBFCFA] font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    background: #d8f3ef;
+    color: #2f4275;
+  }
+
+  :focus-visible {
+    outline: 2px solid #309292;
+    outline-offset: 3px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
