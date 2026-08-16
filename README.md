@@ -8,16 +8,16 @@ The website is a **Next.js App Router** app (`web/`). Content-heavy routes are s
 
 ## Run locally (web)
 
+The site is **Next.js**. It is no longer Vite. After `npm run dev`, open **http://localhost:5173** from a *new* `web/` process — if an old Vite window is still running, stop it first (Ctrl+C in that terminal), then start again from this repo/branch.
+
 ```bash
 cd web
-cp .env.example .env.local   # optional; site works without keys (demo checkout)
+cp .env.example .env.local   # optional
 npm install
-npm run dev
-npm test
-npm run typecheck
-npm run build
-npx playwright install chromium && npm run test:e2e
+npm run dev                  # Next.js on http://localhost:5173
 ```
+
+You should see the WonderHug hugging-arms logo in the header and a bilingual hero. `/admin` must load a CMS page, not “This page is not on the journey.” If you still see the old 404 header (no Shop / no language switcher), you are on a stale Vite process — kill anything bound to 5173 and rerun `npm run dev` in `web/`.
 
 Without Supabase/Razorpay keys the site uses the bilingual catalogue and **demo checkout**.
 
