@@ -58,9 +58,11 @@ test('capture verification screenshots', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   await page.screenshot({ path: resolve(dir, 'shop-pdp.png'), fullPage: true })
 
-  await page.getByRole('button', { name: 'Add to cart' }).click()
+  await page.getByRole('button', { name: /add to cart/i }).click()
+  await expect(page.getByRole('status').filter({ hasText: /added to cart/i })).toBeVisible()
   await page.goto('/cart')
-  await expect(page.getByRole('heading', { name: 'Cart' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Cart', exact: true })).toBeVisible()
+  await expect(page.getByText(/garbh sanskar daily practice pack/i).first()).toBeVisible()
   await page.screenshot({ path: resolve(dir, 'cart.png'), fullPage: true })
 
   await page.goto('/checkout')
@@ -73,7 +75,7 @@ test('capture verification screenshots', async ({ page }) => {
   await page.screenshot({ path: resolve(dir, 'community-compose.png'), fullPage: true })
 
   await page.goto('/admin')
-  await expect(page.getByRole('heading', { name: /cms/i })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'WonderHug CMS' })).toBeVisible()
   await page.screenshot({ path: resolve(dir, 'admin.png'), fullPage: true })
 
   await page.goto('/')

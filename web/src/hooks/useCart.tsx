@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { CartItem } from '@/types/domain'
 
 const KEY = 'wonderhug.cart'
@@ -26,7 +26,11 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | null>(null)
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>(() => (typeof window === 'undefined' ? [] : readCart()))
+  const [items, setItems] = useState<CartItem[]>([])
+
+  useEffect(() => {
+    setItems(readCart())
+  }, [])
 
   const persist = (next: CartItem[]) => {
     setItems(next)

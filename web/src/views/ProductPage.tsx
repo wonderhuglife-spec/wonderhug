@@ -9,6 +9,7 @@ import { Heading } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useCart } from '@/hooks/useCart'
+import { useToast } from '@/components/ui/Toast'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { formatInr } from '@/lib/constants'
@@ -23,6 +24,7 @@ export function ProductPage({ slug: slugProp, product: productProp }: { slug?: s
   const locale = currentLocale()
   const { add } = useCart()
   const { t } = useTranslation()
+  const toast = useToast()
 
   if (!product) {
     return (
@@ -56,9 +58,10 @@ export function ProductPage({ slug: slugProp, product: productProp }: { slug?: s
           <Button
             className="mt-6"
             size="lg"
-            onClick={() =>
+            onClick={() => {
               add({ kind: 'product', id: product.id, slug: product.slug, title: name, unitPaise: product.pricePaise })
-            }
+              toast('Added to cart')
+            }}
           >
             {t('shop.add')}
           </Button>
