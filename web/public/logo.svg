@@ -1,5 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="16" fill="#F0FDFA"/>
-  <path d="M16 36c0-10 7-16 16-16s16 6 16 16" stroke="#79409B" stroke-width="4" stroke-linecap="round"/>
-  <path d="M20 39c4 6 8 9 12 9s8-3 12-9" stroke="#309292" stroke-width="4" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" fill="none" role="img" aria-label="WonderHug.Life">
+  <defs>
+    <linearGradient id="wh-ring" x1="28" y1="188" x2="212" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#79409B"/>
+      <stop offset="1" stop-color="#309292"/>
+    </linearGradient>
+  </defs>
+  <circle cx="120" cy="108" r="92" fill="#FFFFFF" stroke="url(#wh-ring)" stroke-width="6"/>
+  <path fill="#79409B" d="M118 86c-18-22-48-18-58 8-8 20 2 42 22 54 8 5 16 8 26 10-18-8-30-24-28-44 2-18 18-28 38-28Z"/>
+  <path fill="#309292" d="M122 86c18-22 48-18 58 8 8 20-2 42-22 54-8 5-16 8-26 10 18-8 30-24 28-44-2-18-18-28-38-28Z"/>
+  <path fill="#FFFFFF" d="M120 104c-8 8-22 6-28-4-4-7 0-16 8-20 8-3 16 0 20 8 4-8 12-11 20-8 8 4 12 13 8 20-6 10-20 12-28 4Z"/>
+  <path fill="#79409B" d="M86 148c12 18 24 28 34 28 4 0 8-2 12-6-16-4-30-14-40-28 0 2-2 4-6 6Z"/>
+  <path fill="#309292" d="M154 148c-12 18-24 28-34 28-4 0-8-2-12-6 16-4 30-14 40-28 0 2 2 4 6 6Z"/>
+  <text x="120" y="232" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="28" font-weight="700" fill="#79409B">WonderHug</text>
+  <circle cx="186" cy="214" r="4.2" fill="#309292"/>
+  <text x="120" y="262" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="26" font-weight="700" fill="#309292">.Life</text>
 </svg>

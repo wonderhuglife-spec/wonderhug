@@ -8,7 +8,7 @@ import { track } from '@/services/analytics'
 export function AppPromotion() {
   return (
     <section className="py-20">
-      <Container className="overflow-hidden rounded-[2rem] bg-teal-soft px-8 py-14 sm:px-12">
+      <Container className="overflow-hidden rounded-[2rem] bg-gradient-to-r from-teal-soft via-white to-purple/5 px-8 py-14 sm:px-12">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-dark">The daily companion</p>
         <Heading as="h2" className="mt-4 max-w-xl">
           WonderHug on your phone is for today — not a website squeezed into a WebView.

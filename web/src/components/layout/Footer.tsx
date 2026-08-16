@@ -26,7 +26,7 @@ export function Footer() {
   const { t } = useTranslation()
   const locale = currentLocale()
   return (
-    <footer className="mt-24 border-t border-line bg-canvas">
+    <footer className="mt-8 border-t border-line bg-[linear-gradient(180deg,#F8FAFA,white)]">
       <div className="mx-auto grid max-w-page gap-12 px-5 py-16 sm:px-8 md:grid-cols-12">
         <div className="md:col-span-5">
           <Logo />

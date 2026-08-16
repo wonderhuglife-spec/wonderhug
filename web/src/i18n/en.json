@@ -32,9 +32,15 @@
     "signOut": "Sign out"
   },
   "hero": {
-    "kicker": "Pregnancy · Parenting · Telangana & Andhra Pradesh",
+    "kicker": "Telugu homes · Telangana & Andhra Pradesh",
     "title": "Prepare for pregnancy. Nurture every stage. Raise with confidence.",
-    "body": "WonderHug.Life brings Garbh Sanskar practice, modern wellness education and a WhatsApp community of 50,000+ mothers together — from planning a pregnancy to conscious parenting."
+    "body": "WonderHug.Life brings Garbh Sanskar practice, modern wellness education and a WhatsApp community of 50,000+ mothers together — from planning a pregnancy to conscious parenting.",
+    "logoCaption": "Two arms. One hug. A heart at the centre.",
+    "getStarted": "Get started — it’s free to begin",
+    "statMothersLabel": "Mothers on WhatsApp",
+    "statLangLabel": "First-class locales",
+    "statCareLabel": "This is",
+    "statCareValue": "Education"
   },
   "goals": {
     "anxiety": "Reduce anxiety",
@@ -46,7 +52,25 @@
   },
   "journey": {
     "heading": "Where are you right now?",
-    "help": "Choose a stage and up to two goals. Recommendations follow you — and a signed-in account can keep them."
+    "help": "Choose a stage and up to two goals. Recommendations follow you — and a signed-in account can keep them.",
+    "goals": "What would help this week?",
+    "week": "Pregnancy week",
+    "forYou": "Picked for you"
+  },
+  "home": {
+    "ecosystemKicker": "Practice · Programmes · Shop",
+    "ecosystemTitle": "Garbh Sanskar, programmes, and the shop",
+    "ecosystemBody": "Education and practice for Telugu-speaking families first, then pan-India English. Not a clinic.",
+    "weeks": "weeks",
+    "browseShop": "Browse the shop →",
+    "companionKicker": "Personalised later. Honest now.",
+    "companionTitle": "A companion that can learn your stage, week and language — without guessing medical facts.",
+    "companionBody": "Today we remember the journey you select on this device. A WonderHug profile can hold pregnancy week, baby age, saved articles and completed activities.",
+    "showingFor": "Currently showing for",
+    "nextStep": "Suggested next step:",
+    "beginTitle": "Begin where you are.",
+    "beginBody": "Tell us your journey. We will keep the next step small, kind and free of invented medical certainty.",
+    "readJournal": "Read the journal"
   },
   "shop": {
     "title": "Shop",

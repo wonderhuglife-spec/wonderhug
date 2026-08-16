@@ -8,7 +8,12 @@
   }
 
   body {
-    @apply m-0 bg-white font-sans text-ink antialiased;
+    @apply m-0 bg-[#FBFCFA] font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    background: #d8f3ef;
+    color: #2f4275;
   }
 
   :focus-visible {

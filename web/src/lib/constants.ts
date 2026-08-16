@@ -31,14 +31,11 @@ export const NAV_GROUPS = [
 ] as const
 
 export const NAV_ITEMS = [
-  { to: '/', key: 'nav.home' },
   { to: '/programs', key: 'nav.programs' },
   { to: '/shop', key: 'nav.shop' },
-  { to: '/experts', key: 'nav.experts' },
   { to: '/community', key: 'nav.community' },
-  { to: '/tools', key: 'nav.tools' },
   { to: '/blog', key: 'nav.blog' },
-  { to: '/about', key: 'nav.about' },
+  { to: '/experts', key: 'nav.experts' },
 ] as const
 
 export const PRIMARY_CTA = { to: '/start', key: 'cta.start' } as const

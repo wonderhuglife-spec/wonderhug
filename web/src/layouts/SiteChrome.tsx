@@ -8,7 +8,7 @@ import { SkipLink } from '@/components/layout/SkipLink'
 
 export function SiteChrome({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-svh flex-col bg-white text-ink">
+    <div className="flex min-h-svh flex-col bg-[#FBFCFA] text-ink">
       <SkipLink />
       <Navbar />
       <main id="main" className="flex-1">

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   description:
     'Garbh Sanskar practice, modern maternity education, programmes and a WhatsApp community of 50,000+ mothers. Telugu and English.',
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: '/favicon.svg', apple: '/logo.png' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

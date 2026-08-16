@@ -34,7 +34,7 @@ export default {
         lift: '0 18px 50px -28px rgba(47, 66, 117, 0.35)',
       },
       fontSize: {
-        display: ['clamp(2.25rem, 5vw, 3.75rem)', { lineHeight: '1.12', letterSpacing: '-0.03em' }],
+        display: ['clamp(2.5rem, 6vw, 4.35rem)', { lineHeight: '1.08', letterSpacing: '-0.03em' }],
       },
     },
   },
