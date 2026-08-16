@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Logo } from '@/components/brand/Logo'
 import { ButtonLink } from '@/components/ui/Button'
-import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { NAV_GROUPS, NAV_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/cn'
 import { useCart } from '@/hooks/useCart'
@@ -94,7 +93,6 @@ export function Navbar() {
           ))}
         </nav>
         <div className="hidden items-center gap-1.5 md:flex">
-          <LanguageSwitcher compact />
           <NavLink
             to="/cart"
             className="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line/80 bg-white/90 text-navy transition hover:border-teal hover:text-teal-dark"
@@ -143,9 +141,6 @@ export function Navbar() {
               <button type="button" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border" aria-label="Close menu" onClick={() => setOpen(false)}>
                 <X className="h-5 w-5" />
               </button>
-            </div>
-            <div className="px-5">
-              <LanguageSwitcher />
             </div>
             <nav className="mt-6 flex flex-col gap-1 px-5" aria-label="Mobile">
               <NavLink to="/" className="min-h-12 rounded-2xl px-3 py-3 font-medium" onClick={() => setOpen(false)}>

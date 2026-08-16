@@ -49,7 +49,6 @@ export const MEDICAL_DISCLAIMER_TE =
 
 export const LOCALES: { id: Locale; label: string; native: string }[] = [
   { id: 'en', label: 'English', native: 'English' },
-  { id: 'te', label: 'Telugu', native: 'తెలుగు' },
 ]
 
 export const GOALS = [

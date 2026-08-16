@@ -9,6 +9,7 @@ import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { whatsappUrl } from '@/services/whatsapp'
 import { ButtonLink } from '@/components/ui/Button'
+import { Media } from '@/components/media/Media'
 
 export function CommunityPreview() {
   const locale = currentLocale()
@@ -16,27 +17,32 @@ export function CommunityPreview() {
   return (
     <section className="py-8">
       <Container>
-        <div className="overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#128C7E] via-teal to-navy px-6 py-14 text-white sm:px-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">AiSensy · WhatsApp</p>
-          <Heading as="h2" className="mt-3 text-white">
-            {t('community.whatsappTitle')}
-          </Heading>
-          <Text className="mt-4 max-w-2xl text-lg text-white/85">{t('community.whatsappBody')}</Text>
-          <ButtonLink to={whatsappUrl()} className="mt-8 bg-white text-teal-dark hover:bg-teal-soft" size="lg">
-            {t('cta.whatsapp')}
-          </ButtonLink>
-          <ul className="mt-10 flex flex-wrap gap-2">
-            {COMMUNITY_GROUPS.map((group) => (
-              <li key={group.id}>
-                <Link
-                  to={`/community/${group.slug}`}
-                  className="inline-flex min-h-11 items-center rounded-full border border-white/25 bg-white/10 px-4 text-sm text-white hover:bg-white/20"
-                >
-                  {pick(group.name, locale)}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="overflow-hidden rounded-[2rem] bg-navy text-white">
+          <div className="grid lg:grid-cols-2">
+            <Media src="/images/placeholder-ai-community.png" alt="placeholder-ai- Community gathering atmosphere." className="min-h-[16rem] w-full object-cover lg:min-h-full" width={960} height={720} />
+            <div className="px-6 py-14 sm:px-12">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">AiSensy · WhatsApp</p>
+              <Heading as="h2" className="mt-3 text-white">
+                {t('community.whatsappTitle')}
+              </Heading>
+              <Text className="mt-4 max-w-2xl text-lg text-white/85">{t('community.whatsappBody')}</Text>
+              <ButtonLink to={whatsappUrl()} className="mt-8 bg-white text-teal-dark hover:bg-teal-soft" size="lg">
+                {t('cta.whatsapp')}
+              </ButtonLink>
+              <ul className="mt-10 flex flex-wrap gap-2">
+                {COMMUNITY_GROUPS.map((group) => (
+                  <li key={group.id}>
+                    <Link
+                      to={`/community/${group.slug}`}
+                      className="inline-flex min-h-11 items-center rounded-full border border-white/25 bg-white/10 px-4 text-sm text-white hover:bg-white/20"
+                    >
+                      {pick(group.name, locale)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </Container>
     </section>

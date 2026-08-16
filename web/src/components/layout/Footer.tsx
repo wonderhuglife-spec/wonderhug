@@ -3,8 +3,7 @@
 import { Link } from '@/lib/navigation'
 import { useTranslation } from 'react-i18next'
 import { Logo } from '@/components/brand/Logo'
-import { MEDICAL_DISCLAIMER, MEDICAL_DISCLAIMER_TE } from '@/lib/constants'
-import { currentLocale } from '@/i18n'
+import { MEDICAL_DISCLAIMER } from '@/lib/constants'
 import { whatsappUrl } from '@/services/whatsapp'
 
 const explore = [
@@ -24,15 +23,12 @@ const legal = [
 
 export function Footer() {
   const { t } = useTranslation()
-  const locale = currentLocale()
   return (
     <footer className="mt-8 border-t border-line bg-[linear-gradient(180deg,#F8FAFA,white)]">
       <div className="mx-auto grid max-w-page gap-12 px-5 py-16 sm:px-8 md:grid-cols-12">
         <div className="md:col-span-5">
           <Logo />
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate">
-            {locale === 'te' ? MEDICAL_DISCLAIMER_TE : MEDICAL_DISCLAIMER}
-          </p>
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate">{MEDICAL_DISCLAIMER}</p>
           <a href={whatsappUrl()} className="mt-4 inline-block text-sm font-medium text-teal-dark">
             {t('cta.whatsapp')}
           </a>

@@ -11,6 +11,7 @@ import { Heading, Text } from '@/components/ui/Typography'
 import { Tabs } from '@/components/ui/Tabs'
 import { track } from '@/services/analytics'
 import type { ExpertSpeciality } from '@/types/domain'
+import { Media } from '@/components/media/Media'
 
 const SPECIALITIES: ExpertSpeciality[] = [
   'Garbh Sanskar Guides',
@@ -33,8 +34,9 @@ export function ExpertsPage() {
   return (
     <>
       <Seo title="Experts" description="WonderHug faculty seats and booking via WhatsApp." path="/experts" />
-      <header className="border-b border-line py-16">
-        <Container>
+      <header className="relative overflow-hidden border-b border-line">
+        <Media src="/images/placeholder-ai-faculty-seat.png" alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait." className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <Container className="relative py-16">
           <Heading as="h1">Faculty and booking</Heading>
           <Text muted className="mt-4 max-w-2xl text-lg">
             Named clinicians publish after WonderHug verifies credentials. Until then, each speciality is a faculty seat that books through the WhatsApp care desk (AiSensy). We do not invent hospitals or degrees.
@@ -51,7 +53,9 @@ export function ExpertsPage() {
         {list.length === 0 ? <EmptyState title="No seats in this speciality" description="" /> : null}
         <ul className="mt-10 grid gap-6 md:grid-cols-2">
           {list.map((expert) => (
-            <li key={expert.id} className="rounded-2xl border border-line p-6">
+            <li key={expert.id} className="overflow-hidden rounded-2xl border border-line bg-white">
+              <Media src={expert.photo} alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait." className="aspect-[16/9] w-full object-cover" />
+              <div className="p-6">
               <Badge>{expert.speciality}</Badge>
               <h2 className="mt-4 font-serif text-2xl">
                 <Link to={`/experts/${expert.slug}`} onClick={() => track('expert_opened', { slug: expert.slug })}>
@@ -59,6 +63,7 @@ export function ExpertsPage() {
                 </Link>
               </h2>
               <p className="mt-2 text-sm text-slate">{expert.qualification}</p>
+              </div>
             </li>
           ))}
         </ul>

@@ -24,14 +24,25 @@ export function ToolsPage() {
   return (
     <>
       <Seo title="Tools" description="Due date, kicks, contractions, weight." path="/tools" />
+      <header className="relative overflow-hidden border-b border-line">
+        <Media src="/images/placeholder-ai-tool-due.png" alt="placeholder-ai- Tools atmosphere" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <Container className="relative py-16">
+          <Heading as="h1">Tools</Heading>
+          <Text muted className="mt-4 max-w-2xl text-lg">
+            Due date, kick counts, contractions and weight — educational helpers, not a diagnosis.
+          </Text>
+        </Container>
+      </header>
       <Container className="py-16">
-        <Heading as="h1">Tools</Heading>
-        <ul className="mt-10 grid gap-6 md:grid-cols-2">
+        <ul className="grid gap-6 md:grid-cols-2">
           {TOOLS.filter((tool) => tool.href.startsWith('/tools/')).map((tool) => (
             <li key={tool.id}>
-              <Link to={tool.href} className="block rounded-3xl border border-line bg-white p-8 transition hover:-translate-y-0.5 hover:shadow-lift">
-                <span className="font-serif text-3xl">{pick(tool.name, locale)}</span>
-                <p className="mt-3 text-slate">{pick(tool.description, locale)}</p>
+              <Link to={tool.href} className="block overflow-hidden rounded-3xl border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-lift">
+                <Media src={tool.image} alt={tool.imageAlt} className="aspect-[16/9] w-full object-cover" />
+                <span className="block p-8">
+                  <span className="font-serif text-3xl">{pick(tool.name, locale)}</span>
+                  <p className="mt-3 text-slate">{pick(tool.description, locale)}</p>
+                </span>
               </Link>
             </li>
           ))}

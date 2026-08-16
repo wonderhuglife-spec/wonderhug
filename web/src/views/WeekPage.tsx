@@ -9,6 +9,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { MEDICAL_DISCLAIMER } from '@/lib/constants'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
+import { Media } from '@/components/media/Media'
 
 export function WeekPage({ week: weekProp }: { week?: string }) {
   const params = useParams()
@@ -27,6 +28,7 @@ export function WeekPage({ week: weekProp }: { week?: string }) {
     <>
       <Seo title={pick(guide.title, locale)} description={pick(guide.body, locale).slice(0, 150)} path={`/pregnancy/week/${guide.week}`} />
       <Container narrow className="py-16">
+        <Media src="/images/placeholder-ai-program-womb.png" alt="placeholder-ai- Week guide atmosphere." className="mb-8 aspect-[16/9] w-full rounded-3xl object-cover" />
         <Heading as="h1">{pick(guide.title, locale)}</Heading>
         <p className="mt-6 text-lg leading-relaxed">{pick(guide.body, locale)}</p>
         <p className="mt-6 rounded-2xl bg-teal-soft p-5">{pick(guide.garbhFocus, locale)}</p>

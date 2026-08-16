@@ -37,12 +37,13 @@ export function FeaturedContent() {
           <div className="flex flex-col justify-center gap-8 lg:col-span-5">
             {rest.map((post) => (
               <article key={post.id} className="border-t border-line pt-6">
-                <h3 className="font-serif text-2xl">
-                  <Link to={`/blog/${post.slug}`} className="hover:text-teal-dark">
-                    {pick(post.title, locale)}
-                  </Link>
-                </h3>
-                <p className="mt-2 text-sm text-slate">{pick(post.excerpt, locale)}</p>
+                <Link to={`/blog/${post.slug}`} className="group grid gap-4 sm:grid-cols-5">
+                  <Media src={post.featuredImage} alt={post.featuredImageAlt} className="aspect-[16/10] w-full rounded-xl object-cover sm:col-span-2" width={400} height={250} />
+                  <span className="sm:col-span-3">
+                    <h3 className="font-serif text-2xl group-hover:text-teal-dark">{pick(post.title, locale)}</h3>
+                    <p className="mt-2 text-sm text-slate">{pick(post.excerpt, locale)}</p>
+                  </span>
+                </Link>
               </article>
             ))}
           </div>

@@ -5,6 +5,7 @@ import { Container } from '@/components/ui/Container'
 import { Heading, Text } from '@/components/ui/Typography'
 import { Link } from '@/lib/navigation'
 import { Badge } from '@/components/ui/Badge'
+import { Media } from '@/components/media/Media'
 
 export function ExpertsPreview() {
   const preview = EXPERTS.slice(0, 4)
@@ -27,10 +28,13 @@ export function ExpertsPreview() {
         </div>
         <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
           {preview.map((expert) => (
-            <li key={expert.id} className="rounded-2xl border border-line p-5">
-              <Badge tone="muted">{expert.speciality}</Badge>
-              <p className="mt-3 font-medium text-ink">{expert.name}</p>
-              <p className="mt-2 text-sm text-slate">{expert.qualification}</p>
+            <li key={expert.id} className="overflow-hidden rounded-2xl border border-line bg-white">
+              <Media src={expert.photo} alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait." className="aspect-[16/10] w-full object-cover" width={640} height={400} />
+              <div className="p-5">
+                <Badge tone="muted">{expert.speciality}</Badge>
+                <p className="mt-3 font-medium text-ink">{expert.name}</p>
+                <p className="mt-2 text-sm text-slate">{expert.qualification}</p>
+              </div>
             </li>
           ))}
         </ul>

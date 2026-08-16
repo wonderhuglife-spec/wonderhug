@@ -7,6 +7,7 @@ import { Container } from '@/components/ui/Container'
 import { Heading, Text } from '@/components/ui/Typography'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
+import { Media } from '@/components/media/Media'
 
 export function PracticesPage() {
   const locale = currentLocale()
@@ -18,16 +19,19 @@ export function PracticesPage() {
         <Text muted className="mt-4 max-w-xl">
           Audio files ship with the daily pack after purchase. These guides work offline in the app once saved.
         </Text>
-        <ul className="mt-10 space-y-6">
+        <ul className="mt-10 grid gap-6 md:grid-cols-2">
           {PRACTICES.map((practice) => (
-            <li key={practice.id} className="border-b border-line pb-6">
-              <h2 className="font-serif text-2xl">
-                <Link to={`/practices/${practice.slug}`}>{pick(practice.title, locale)}</Link>
-              </h2>
-              <p className="mt-2 text-slate">{pick(practice.description, locale)}</p>
-              <p className="mt-2 text-xs text-slate-muted">
-                {practice.durationMinutes} min · {practice.mediaType}
-              </p>
+            <li key={practice.id} className="overflow-hidden rounded-3xl border border-line bg-white">
+              <Media src="/images/placeholder-ai-practice.png" alt="placeholder-ai- Practice still life." className="aspect-[16/9] w-full object-cover" />
+              <div className="p-6">
+                <h2 className="font-serif text-2xl">
+                  <Link to={`/practices/${practice.slug}`}>{pick(practice.title, locale)}</Link>
+                </h2>
+                <p className="mt-2 text-slate">{pick(practice.description, locale)}</p>
+                <p className="mt-2 text-xs text-slate-muted">
+                  {practice.durationMinutes} min · {practice.mediaType}
+                </p>
+              </div>
             </li>
           ))}
         </ul>

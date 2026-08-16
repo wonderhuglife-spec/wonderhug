@@ -12,12 +12,6 @@ test('journey selection to shop checkout demo', async ({ page }) => {
   await expect(page.getByRole('heading', { name: /order received/i })).toBeVisible()
 })
 
-test('telugu language switch', async ({ page }) => {
-  await page.goto('/')
-  await page.getByRole('button', { name: 'తెలుగు' }).click()
-  await expect(page.getByRole('link', { name: 'అంగడి' }).first()).toBeVisible()
-})
-
 test('signin offers phone OTP', async ({ page }) => {
   await page.goto('/signin')
   await expect(page.getByLabel(/mobile number/i)).toBeVisible()

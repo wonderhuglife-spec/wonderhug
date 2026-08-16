@@ -11,6 +11,7 @@ import { GOALS } from '@/lib/constants'
 import { useTranslation } from 'react-i18next'
 import type { Goal, JourneyStage } from '@/types/domain'
 import { Baby, Flower2, Heart, Home, Sparkles, Users } from 'lucide-react'
+import { Media } from '@/components/media/Media'
 
 const ICONS = {
   planning: Sparkles,
@@ -20,6 +21,15 @@ const ICONS = {
   new_parent: Baby,
   parenting: Home,
 } as const
+
+const JOURNEY_ART: Record<string, { src: string; alt: string }> = {
+  planning: { src: '/images/placeholder-ai-journal-planning.png', alt: 'placeholder-ai- Planning pregnancy' },
+  ttc: { src: '/images/placeholder-ai-program-beej.png', alt: 'placeholder-ai- Trying to conceive' },
+  pregnant: { src: '/images/placeholder-ai-program-womb.png', alt: 'placeholder-ai- Pregnancy' },
+  birth_prep: { src: '/images/placeholder-ai-tool-contractions.png', alt: 'placeholder-ai- Birth preparation' },
+  new_parent: { src: '/images/placeholder-ai-journal-postpartum.png', alt: 'placeholder-ai- New parent' },
+  parenting: { src: '/images/placeholder-ai-program-parenting.png', alt: 'placeholder-ai- Parenting' },
+}
 
 export function JourneySelector() {
   const { profile, setJourneyStage, setGoals, setPregnancyWeek, narrative, recommendations } = useJourney()
@@ -47,18 +57,21 @@ export function JourneySelector() {
                   type="button"
                   aria-pressed={selected}
                   className={cn(
-                    'group min-h-[7.25rem] w-full rounded-3xl border px-5 py-5 text-left shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
+                    'group w-full overflow-hidden rounded-3xl border text-left shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
                     selected
                       ? 'border-transparent bg-white shadow-lift ring-2 ring-teal'
                       : 'border-line/80 bg-white/80 hover:-translate-y-0.5 hover:border-purple/30 hover:shadow-lift',
                   )}
                   onClick={() => setJourneyStage(option.id as JourneyStage)}
                 >
+                  <Media src={JOURNEY_ART[option.id].src} alt={JOURNEY_ART[option.id].alt} className="aspect-[16/9] w-full object-cover" height={360} width={640} />
+                  <span className="block px-5 py-5">
                   <span className={cn('inline-flex h-9 w-9 items-center justify-center rounded-full', selected ? 'bg-teal text-white' : 'bg-teal-soft text-teal-dark')}>
                     <Icon className="h-4 w-4" aria-hidden />
                   </span>
                   <span className="mt-3 block font-semibold text-ink">{pick(option.label, locale)}</span>
                   <span className="mt-1 block text-sm leading-snug text-slate">{pick(option.prompt, locale)}</span>
+                  </span>
                 </button>
               </li>
             )

@@ -263,4 +263,6 @@ export interface ToolDef {
   description: LocalizedText
   href: string
   stageFit: JourneyStage[]
+  image: string
+  imageAlt: string
 }

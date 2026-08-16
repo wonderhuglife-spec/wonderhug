@@ -8,6 +8,15 @@ import { Heading, Text } from '@/components/ui/Typography'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
+import { Media } from '@/components/media/Media'
+
+function hubArt(path: string) {
+  if (path.includes('garbh')) return '/images/placeholder-ai-journal-garbh.png'
+  if (path.includes('parent')) return '/images/placeholder-ai-program-parenting.png'
+  if (path.includes('postpartum')) return '/images/placeholder-ai-journal-postpartum.png'
+  if (path.includes('planning')) return '/images/placeholder-ai-journal-planning.png'
+  return '/images/placeholder-ai-program-womb.png'
+}
 
 export function HubPage({ path }: { path?: string }) {
   const { pathname } = useLocation()
@@ -37,8 +46,9 @@ export function HubPage({ path }: { path?: string }) {
       <Seo title={pick(hub.seoTitle, locale)} description={pick(hub.seoDescription, locale)} path={hub.path} />
       <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, ...crumbs])} />
       <article>
-        <header className="border-b border-line bg-canvas py-16">
-          <Container narrow>
+        <header className="relative overflow-hidden border-b border-line">
+          <Media src={hubArt(resolved)} alt="placeholder-ai- Topic hub atmosphere." className="absolute inset-0 h-full w-full object-cover opacity-30" />
+          <Container narrow className="relative py-16">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-dark">{pick(hub.kicker, locale)}</p>
             <Heading as="h1" className="mt-4">
               {pick(hub.title, locale)}

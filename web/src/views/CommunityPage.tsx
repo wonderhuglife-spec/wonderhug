@@ -13,6 +13,7 @@ import { Input, Label } from '@/components/ui/Input'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { captureWhatsappLead, whatsappUrl } from '@/services/whatsapp'
+import { Media } from '@/components/media/Media'
 
 export function CommunityPage() {
   const { t } = useTranslation()
@@ -27,8 +28,9 @@ export function CommunityPage() {
   return (
     <>
       <Seo title="Community" description={t('community.whatsappBody')} path="/community" />
-      <header className="border-b border-line py-16">
-        <Container>
+      <header className="relative overflow-hidden border-b border-line">
+        <Media src="/images/placeholder-ai-community.png" alt="placeholder-ai- Community atmosphere." className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <Container className="relative py-16">
           <Heading as="h1">{t('community.whatsappTitle')}</Heading>
           <Text muted className="mt-4 max-w-2xl text-lg">
             {t('community.whatsappBody')}
@@ -55,9 +57,12 @@ export function CommunityPage() {
       </header>
       <Container className="grid gap-6 py-12 md:grid-cols-2">
         {COMMUNITY_GROUPS.map((group) => (
-          <Link key={group.id} to={`/community/${group.slug}`} className="rounded-2xl border border-line p-6">
+          <Link key={group.id} to={`/community/${group.slug}`} className="overflow-hidden rounded-2xl border border-line bg-white transition hover:shadow-lift">
+            <Media src="/images/placeholder-ai-community.png" alt="placeholder-ai- Community room." className="aspect-[16/8] w-full object-cover" width={800} height={400} />
+            <span className="block p-6">
             <h2 className="font-serif text-2xl">{pick(group.name, locale)}</h2>
             <p className="mt-3 text-slate">{pick(group.description, locale)}</p>
+            </span>
           </Link>
         ))}
       </Container>

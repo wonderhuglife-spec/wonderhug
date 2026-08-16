@@ -37,8 +37,9 @@ export function ProgramsPage() {
   return (
     <>
       <Seo title={t('programs.title')} description={t('programs.intro')} path="/programs" />
-      <header className="border-b border-line py-16">
-        <Container>
+      <header className="relative overflow-hidden border-b border-line">
+        <Media src="/images/placeholder-ai-program-womb.png" alt="placeholder-ai- Programmes atmosphere" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <Container className="relative py-20">
           <Heading as="h1">{t('programs.title')}</Heading>
           <Text muted className="mt-4 max-w-2xl text-lg">
             {t('programs.intro')}

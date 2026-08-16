@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: '%s | WonderHug.Life',
   },
   description:
-    'Garbh Sanskar practice, modern maternity education, programmes and a WhatsApp community of 50,000+ mothers. Telugu and English.',
+    'Garbh Sanskar practice, modern maternity education, programmes and a WhatsApp community of 50,000+ mothers for Telugu-speaking homes in Telangana and Andhra Pradesh.',
   icons: { icon: '/favicon.svg', apple: '/logo.png' },
 }
 
