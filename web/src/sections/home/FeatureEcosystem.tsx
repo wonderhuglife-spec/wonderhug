@@ -8,6 +8,7 @@ import { Link } from '@/lib/navigation'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { formatInr } from '@/lib/constants'
+import { Media } from '@/components/media/Media'
 import { useTranslation } from 'react-i18next'
 
 export function FeatureEcosystem() {
@@ -41,12 +42,15 @@ export function FeatureEcosystem() {
             <Link
               key={program.id}
               to={`/programs/${program.slug}`}
-              className="group overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-teal-soft to-white p-6 shadow-sm transition hover:shadow-lift"
+              className="group overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-teal-soft to-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lift"
             >
+              <Media src={program.coverImage} alt={program.coverImageAlt} className="aspect-[16/10] w-full object-cover" />
+              <div className="p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-dark">{program.durationWeeks} {t('home.weeks')}</p>
               <p className="mt-3 font-serif text-2xl text-ink group-hover:text-purple">{pick(program.name, locale)}</p>
               <p className="mt-2 text-sm text-slate">{pick(program.summary, locale)}</p>
               <p className="mt-6 text-lg font-semibold text-navy">{formatInr(program.pricePaise, locale)}</p>
+              </div>
             </Link>
           ))}
         </div>

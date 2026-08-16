@@ -12,12 +12,14 @@ import { useCart } from '@/hooks/useCart'
 import { placeOrder } from '@/services/checkout'
 import { formatInr } from '@/lib/constants'
 import { currentLocale } from '@/i18n'
+import { useToast } from '@/components/ui/Toast'
 
 export function CheckoutPage() {
   const { t } = useTranslation()
   const locale = currentLocale()
   const { items, totalPaise, clear } = useCart()
   const navigate = useNavigate()
+  const toast = useToast()
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -30,6 +32,7 @@ export function CheckoutPage() {
     try {
       const order = await placeOrder(items, email, phone)
       clear()
+      toast('Enrolment confirmed')
       navigate(`/order/${order.id}`, { state: { order } })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Checkout failed')

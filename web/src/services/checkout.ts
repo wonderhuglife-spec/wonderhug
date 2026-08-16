@@ -2,6 +2,7 @@ import type { CartItem, Order } from '@/types/domain'
 import { cartTotal } from '@/hooks/useCart'
 import { supabase } from '@/lib/supabase'
 import { track } from '@/services/analytics'
+import { enrollLocal } from '@/services/lms'
 
 const KEY = 'wonderhug.orders'
 
@@ -70,6 +71,9 @@ async function persistRemote(order: Order, email?: string, phone?: string) {
 
 function persist(order: Order) {
   saveOrders([order, ...loadOrders().filter((row) => row.id !== order.id)])
+  for (const item of order.items) {
+    if (item.kind === 'program') enrollLocal(item.slug)
+  }
 }
 
 async function createServerOrder(amountPaise: number): Promise<string | undefined> {

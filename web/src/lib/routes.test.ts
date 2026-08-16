@@ -8,6 +8,7 @@ describe('route manifest', () => {
     expect(paths).toContain('/shop')
     expect(paths).toContain('/tools/due-date')
     expect(paths).toContain('/blog/garbh-sanskar-as-practice-not-promise')
-    expect(paths).toContain('/experts/garbh-sanskar-guide')
+    expect(paths).toContain('/learn/beej-sanskar')
+    expect(paths).toContain('/learn/beej-sanskar/week-1-shared-rhythm')
   })
 })

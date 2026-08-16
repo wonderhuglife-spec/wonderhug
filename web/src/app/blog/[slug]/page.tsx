@@ -5,8 +5,10 @@ import { BlogPostPage } from '@/views/BlogPostPage'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbJsonLd, organizationJsonLd } from '@/lib/jsonld'
 import { env } from '@/lib/env'
+import { getPostBySlug } from '@/services/content'
 
-export const revalidate = 3600
+export const revalidate = 60
+export const dynamicParams = true
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -16,7 +18,8 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
-  const post = BLOG_POSTS.find((item) => item.slug === slug && item.isPublished)
+  const result = await getPostBySlug(slug)
+  const post = result.data
   if (!post) return pageMetadata({ title: 'Article', description: '', path: `/blog/${slug}` })
   return pageMetadata({
     title: post.seoTitle.en,
@@ -29,9 +32,11 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params
-  const post = BLOG_POSTS.find((item) => item.slug === slug && item.isPublished)
+  const result = await getPostBySlug(slug)
+  const post = result.data
   if (!post) notFound()
   const site = env.siteUrl
+  const image = post.featuredImage.startsWith('http') ? post.featuredImage : `${site}${post.featuredImage}`
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
@@ -50,7 +55,7 @@ export default async function Page({ params }: Props) {
           description: post.excerpt.en,
           datePublished: post.publishedAt,
           inLanguage: 'en-IN',
-          image: `${site}${post.featuredImage}`,
+          image,
           publisher: { '@type': 'Organization', name: 'WonderHug.Life', url: site },
         }}
       />

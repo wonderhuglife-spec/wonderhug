@@ -29,11 +29,15 @@ const STATIC_ROUTES: RouteEntry[] = [
   { path: '/download', description: 'Native app download / TestFlight notes' },
   { path: '/signin', description: 'Phone OTP and email magic-link sign-in' },
   { path: '/account', description: 'Profile, timeline, orders, saved articles' },
-  { path: '/admin', description: 'Staff CMS for homepage, journal, products, experts' },
+  { path: '/admin', description: 'Staff CMS for homepage, journal, products, experts, media assets' },
   { path: '/privacy', description: 'Operational privacy notice (counsel copy pending)' },
   { path: '/terms', description: 'Operational terms (counsel copy pending)' },
   { path: '/medical-disclaimer', description: 'Education-not-diagnosis disclaimer' },
   { path: '/pregnancy/week-by-week', description: 'Index of forty educational week notes' },
+  { path: '/learn/beej-sanskar', description: 'Beej Sanskar lesson player (enrolment-gated)' },
+  { path: '/learn/womb-care', description: 'Womb Care lesson player (enrolment-gated)' },
+  { path: '/learn/super-parenting', description: 'Super Parenting lesson player (enrolment-gated)' },
+  { path: '/learn/beej-sanskar/week-1-shared-rhythm', description: 'Beej Sanskar first lesson player' },
 ]
 
 export function allAppRoutes(): RouteEntry[] {

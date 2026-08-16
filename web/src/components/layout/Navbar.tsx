@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from '@/lib/navigation'
-import { Menu, ShoppingBag } from 'lucide-react'
+import { Menu, ShoppingBag, UserRound, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Logo } from '@/components/brand/Logo'
 import { ButtonLink } from '@/components/ui/Button'
-import { Drawer } from '@/components/ui/Drawer'
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { NAV_GROUPS, NAV_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/cn'
@@ -18,16 +18,25 @@ import { JOURNEY_OPTIONS } from '@/data/journeys'
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
-    'min-h-11 rounded-full px-3 text-sm font-medium text-slate transition-colors hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
+    'min-h-11 rounded-full px-3 text-sm font-medium text-slate transition hover:bg-canvas hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
     isActive && 'bg-teal-soft text-purple',
   )
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const reduce = useReducedMotion()
   const { t } = useTranslation()
   const { count } = useCart()
   const { user } = useAuth()
   const locale = currentLocale()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const journeyLinks = JOURNEY_OPTIONS.map((item) => ({
     to:
@@ -46,9 +55,16 @@ export function Navbar() {
   }))
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/60 bg-white/80 shadow-[0_1px_0_rgba(121,64,155,0.06)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-[80rem] items-center justify-between gap-3 px-5 py-2.5 sm:px-8">
-        <Logo />
+    <header
+      className={cn(
+        'sticky top-0 z-40 border-b transition-all duration-300',
+        scrolled
+          ? 'border-purple/10 bg-white/95 py-0 shadow-[0_8px_30px_rgba(121,64,155,0.08)] backdrop-blur-md'
+          : 'border-white/60 bg-white/75 py-0.5 shadow-[0_1px_0_rgba(121,64,155,0.06)] backdrop-blur-md',
+      )}
+    >
+      <div className="mx-auto flex max-w-[80rem] items-center justify-between gap-3 px-5 py-2 sm:px-8">
+        <Logo compact={scrolled} />
         <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           <NavLink to="/" end className={linkClass}>
             {t('nav.home')}
@@ -77,16 +93,26 @@ export function Navbar() {
             </NavLink>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-1.5 md:flex">
           <LanguageSwitcher compact />
-          <NavLink to="/cart" className="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line bg-white" aria-label={t('nav.cart')}>
+          <NavLink
+            to="/cart"
+            className="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line/80 bg-white/90 text-navy transition hover:border-teal hover:text-teal-dark"
+            aria-label={t('nav.cart')}
+          >
             <ShoppingBag className="h-4 w-4" />
-            {count > 0 ? <span className="absolute right-1 top-1 h-4 min-w-4 rounded-full bg-purple text-center text-[10px] text-white">{count}</span> : null}
+            {count > 0 ? (
+              <span className="absolute right-1 top-1 h-4 min-w-4 rounded-full bg-purple text-center text-[10px] text-white">{count}</span>
+            ) : null}
           </NavLink>
-          <ButtonLink to={user ? '/account' : '/signin'} variant="ghost" size="sm">
-            {user ? t('nav.account') : t('cta.signIn')}
-          </ButtonLink>
-          <ButtonLink to="/start" size="sm">
+          <NavLink
+            to={user ? '/account' : '/signin'}
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line/80 bg-white/90 text-navy transition hover:border-purple hover:text-purple"
+            aria-label={user ? t('nav.account') : t('cta.signIn')}
+          >
+            <UserRound className="h-4 w-4" />
+          </NavLink>
+          <ButtonLink to="/start" size="sm" variant="teal" className="ml-1 shadow-[0_8px_20px_rgba(48,146,146,0.35)] hover:scale-[1.03]">
             {t('cta.start')}
           </ButtonLink>
         </div>
@@ -99,32 +125,57 @@ export function Navbar() {
           <Menu className="h-5 w-5" aria-hidden />
         </button>
       </div>
-      <Drawer open={open} title={t('nav.menu')} onClose={() => setOpen(false)}>
-        <LanguageSwitcher />
-        <nav className="mt-6 flex flex-col gap-1" aria-label="Mobile">
-          <NavLink to="/" className="min-h-11 rounded-xl px-3 py-2" onClick={() => setOpen(false)}>
-            {t('nav.home')}
-          </NavLink>
-          {NAV_GROUPS[0].items.map((item) => (
-            <NavLink key={item.to} to={item.to} className="min-h-11 rounded-xl px-3 py-2" onClick={() => setOpen(false)}>
-              {t(item.key)}
-            </NavLink>
-          ))}
-          {NAV_ITEMS.map((item) => (
-            <NavLink key={item.to} to={item.to} className="min-h-11 rounded-xl px-3 py-2" onClick={() => setOpen(false)}>
-              {t(item.key)}
-            </NavLink>
-          ))}
-        </nav>
-        <div className="mt-8 flex flex-col gap-3">
-          <ButtonLink to="/start" onClick={() => setOpen(false)}>
-            {t('cta.start')}
-          </ButtonLink>
-          <ButtonLink to="/cart" variant="secondary" onClick={() => setOpen(false)}>
-            {t('nav.cart')}
-          </ButtonLink>
-        </div>
-      </Drawer>
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            className="fixed inset-0 z-50 bg-[#FBF7F2]"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="drawer-title"
+            initial={reduce ? false : { opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 24 }}
+          >
+            <div className="flex items-center justify-between px-5 py-4">
+              <h2 id="drawer-title" className="font-serif text-2xl text-purple">
+                {t('nav.menu')}
+              </h2>
+              <button type="button" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border" aria-label="Close menu" onClick={() => setOpen(false)}>
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="px-5">
+              <LanguageSwitcher />
+            </div>
+            <nav className="mt-6 flex flex-col gap-1 px-5" aria-label="Mobile">
+              <NavLink to="/" className="min-h-12 rounded-2xl px-3 py-3 font-medium" onClick={() => setOpen(false)}>
+                {t('nav.home')}
+              </NavLink>
+              {NAV_GROUPS[0].items.map((item) => (
+                <NavLink key={item.to} to={item.to} className="min-h-12 rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
+                  {t(item.key)}
+                </NavLink>
+              ))}
+              {NAV_ITEMS.map((item) => (
+                <NavLink key={item.to} to={item.to} className="min-h-12 rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
+                  {t(item.key)}
+                </NavLink>
+              ))}
+            </nav>
+            <div className="mt-10 flex flex-col gap-3 px-5">
+              <ButtonLink to="/start" variant="teal" className="shadow-[0_10px_24px_rgba(48,146,146,0.35)]" onClick={() => setOpen(false)}>
+                {t('cta.start')}
+              </ButtonLink>
+              <ButtonLink to="/cart" variant="secondary" onClick={() => setOpen(false)}>
+                {t('nav.cart')}
+              </ButtonLink>
+              <ButtonLink to={user ? '/account' : '/signin'} variant="ghost" onClick={() => setOpen(false)}>
+                {user ? t('nav.account') : t('cta.signIn')}
+              </ButtonLink>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   )
 }

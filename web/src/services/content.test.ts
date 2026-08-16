@@ -14,9 +14,11 @@ describe('contentService fallback', () => {
     expect(result.status).toBe('empty')
   })
 
-  it('loads a known article', async () => {
+  it('loads a known article with a full body and tagged image', async () => {
     const result = await getPostBySlug('garbh-sanskar-as-practice-not-promise')
     expect(result.status).toBe('success')
     expect(result.data?.title.en).toMatch(/Garbh Sanskar/i)
+    expect(result.data?.content.en.replace(/\s+/g, ' ').length).toBeGreaterThan(400)
+    expect(result.data?.featuredImage).toMatch(/placeholder-ai-/)
   })
 })

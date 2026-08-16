@@ -62,4 +62,54 @@ class OfflineStore {
   Future<void> addOrder(Map<String, dynamic> order) async {
     await _prefs.setString('wonderhug.orders', jsonEncode([order, ...orders]));
   }
+
+  List<String> get enrollments => _prefs.getStringList('wonderhug.enrollments') ?? [];
+
+  Future<void> enroll(String slug) async {
+    final next = {...enrollments, slug}.toList();
+    await _prefs.setStringList('wonderhug.enrollments', next);
+  }
+
+  Map<String, dynamic> get lessonProgress {
+    final raw = _prefs.getString('wonderhug.lessonProgress');
+    if (raw == null) return {};
+    return (jsonDecode(raw) as Map).cast<String, dynamic>();
+  }
+
+  Future<void> setLessonProgress(String lessonId, {int? position, String? completedAt}) async {
+    final next = {...lessonProgress};
+    final prev = (next[lessonId] as Map?)?.cast<String, dynamic>() ?? {};
+    next[lessonId] = {
+      ...prev,
+      if (position != null) 'position': position,
+      if (completedAt != null) 'completedAt': completedAt,
+    };
+    await _prefs.setString('wonderhug.lessonProgress', jsonEncode(next));
+  }
+
+  List<String> get downloadedLessons => _prefs.getStringList('wonderhug.downloadedLessons') ?? [];
+
+  Future<void> markDownloaded(String lessonId, String path) async {
+    await _prefs.setString('wonderhug.download.$lessonId', path);
+    final next = {...downloadedLessons, lessonId}.toList();
+    await _prefs.setStringList('wonderhug.downloadedLessons', next);
+  }
+
+  String? downloadPath(String lessonId) => _prefs.getString('wonderhug.download.$lessonId');
+
+  List<Map<String, dynamic>> get kickSessions {
+    final raw = _prefs.getString('wonderhug.kickSessions');
+    if (raw == null) return [];
+    return (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+  }
+
+  Future<void> addKickSession(int count) async {
+    await _prefs.setString(
+      'wonderhug.kickSessions',
+      jsonEncode([
+        {'at': DateTime.now().toIso8601String(), 'count': count},
+        ...kickSessions,
+      ]),
+    );
+  }
 }

@@ -19,6 +19,13 @@ npm run dev                  # Next.js on http://localhost:5173
 
 You should see the WonderHug hugging-arms logo in the header and a bilingual hero. `/admin` must load a CMS page, not “This page is not on the journey.” If you still see the old 404 header (no Shop / no language switcher), you are on a stale Vite process — kill anything bound to 5173 and rerun `npm run dev` in `web/`.
 
+```bash
+npm test
+npm run typecheck
+npm run build
+npx playwright install chromium && npm run test:e2e
+```
+
 Without Supabase/Razorpay keys the site uses the bilingual catalogue and **demo checkout**.
 
 ## Run locally (mobile)

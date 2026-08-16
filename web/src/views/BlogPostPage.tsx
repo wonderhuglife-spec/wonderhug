@@ -9,6 +9,8 @@ import { Container } from '@/components/ui/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { Heading } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
+import { Media } from '@/components/media/Media'
+import { Reveal } from '@/components/motion/Reveal'
 import { MEDICAL_DISCLAIMER } from '@/lib/constants'
 import { isArticleSaved, toggleSavedArticle } from '@/services/saved'
 import { track } from '@/services/analytics'
@@ -17,6 +19,7 @@ import { EXPERTS } from '@/data/experts'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { env } from '@/lib/env'
+import { useToast } from '@/components/ui/Toast'
 
 export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: BlogPost }) {
   const params = useParams()
@@ -24,6 +27,7 @@ export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: B
   const data = post ?? BLOG_POSTS.find((item) => item.slug === slug && item.isPublished)
   const locale = currentLocale()
   const [saved, setSaved] = useState(false)
+  const toast = useToast()
 
   useEffect(() => {
     if (data) {
@@ -43,6 +47,8 @@ export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: B
   const related = BLOG_POSTS.filter((item) => data.relatedSlugs.includes(item.slug))
   const expert = EXPERTS.find((item) => item.slug === data.relatedExpertSlug)
   const site = env.siteUrl
+  const body = pick(data.content, locale)
+  const paragraphs = body.split('\n\n').filter((para) => para.trim().length > 0)
 
   return (
     <>
@@ -56,11 +62,12 @@ export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: B
           description: pick(data.excerpt, locale),
           datePublished: data.publishedAt,
           inLanguage: locale === 'te' ? 'te-IN' : 'en-IN',
+          image: data.featuredImage.startsWith('http') ? data.featuredImage : `${site}${data.featuredImage}`,
           publisher: { '@type': 'Organization', name: 'WonderHug.Life', url: site },
         }}
       />
       <article>
-        <header className="border-b border-line py-16">
+        <header className="border-b border-line py-12">
           <Container narrow>
             <Badge>{data.category}</Badge>
             <Heading as="h1" className="mt-5">
@@ -74,20 +81,34 @@ export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: B
             <Button
               className="mt-6"
               variant="secondary"
-              onClick={() => setSaved(toggleSavedArticle(data.id).includes(data.id))}
+              onClick={() => {
+                const next = toggleSavedArticle(data.id)
+                setSaved(next.includes(data.id))
+                toast(next.includes(data.id) ? 'Article saved' : 'Removed from saved')
+              }}
             >
               {saved ? 'Saved' : 'Save article'}
             </Button>
           </Container>
         </header>
-        <Container narrow className="py-12">
-          {pick(data.content, locale)
-            .split('\n\n')
-            .map((para) => (
-              <p key={para.slice(0, 32)} className="mb-5 text-lg leading-relaxed">
-                {para}
-              </p>
+        <Container narrow className="py-10">
+          {data.featuredImage ? (
+            <Media
+              src={data.featuredImage}
+              alt={data.featuredImageAlt}
+              className="mb-10 aspect-[16/9] w-full rounded-3xl object-cover"
+              width={1600}
+              height={900}
+              priority
+            />
+          ) : null}
+          <div data-testid="article-body">
+            {paragraphs.map((para) => (
+              <Reveal key={para.slice(0, 40)}>
+                <p className="mb-5 text-lg leading-relaxed">{para}</p>
+              </Reveal>
             ))}
+          </div>
           <aside className="mt-12 rounded-2xl bg-canvas p-6 text-sm text-slate">{MEDICAL_DISCLAIMER}</aside>
           {expert ? (
             <p className="mt-8">

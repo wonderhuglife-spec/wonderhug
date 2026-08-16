@@ -23,7 +23,7 @@ Every path in this table is a real App Router page. Direct navigation (reload / 
 | `/download` | Native app download / TestFlight notes |
 | `/signin` | Phone OTP and email magic-link sign-in |
 | `/account` | Profile, timeline, orders, saved articles |
-| `/admin` | Staff CMS for homepage, journal, products, experts |
+| `/admin` | Staff CMS for homepage, journal, products, experts, media assets |
 | `/privacy` | Operational privacy notice (counsel copy pending) |
 | `/terms` | Operational terms (counsel copy pending) |
 | `/medical-disclaimer` | Education-not-diagnosis disclaimer |
@@ -112,6 +112,10 @@ Every path in this table is a real App Router page. Direct navigation (reload / 
 | `/community/breastfeeding` | Community room breastfeeding |
 | `/community/baby-development` | Community room baby-development |
 | `/community/parenting` | Community room parenting |
+| `/learn/beej-sanskar` | Beej Sanskar lesson player (enrolment-gated) |
+| `/learn/womb-care` | Womb Care lesson player (enrolment-gated) |
+| `/learn/super-parenting` | Super Parenting lesson player (enrolment-gated) |
+| `/learn/beej-sanskar/week-1-shared-rhythm` | Beej Sanskar first lesson player |
 | `/order/demo-preview` | Order confirmation (unknown id still renders a real page) |
 
-Total: 109 routes.
+Total: 113 routes.

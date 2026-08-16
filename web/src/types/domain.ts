@@ -156,6 +156,34 @@ export interface Product {
   isPublished: boolean
 }
 
+export interface ProgramQuiz {
+  question: LocalizedText
+  options: LocalizedText[]
+  answerIndex: number
+  explanation: LocalizedText
+}
+
+export interface ProgramModule {
+  id: string
+  title: LocalizedText
+  body: LocalizedText
+  displayOrder: number
+  quiz?: ProgramQuiz
+}
+
+export interface ProgramLesson {
+  id: string
+  slug: string
+  moduleId: string
+  title: LocalizedText
+  kind: 'video' | 'audio' | 'text'
+  body: LocalizedText
+  mediaUrl: string | null
+  resourceUrl: string | null
+  durationSeconds: number
+  displayOrder: number
+}
+
 export interface Program {
   id: string
   slug: string
@@ -164,9 +192,15 @@ export interface Program {
   description: LocalizedText
   pricePaise: number
   durationWeeks: number
+  level: 'all' | 'beginner' | 'intermediate'
+  coverImage: string
+  coverImageAlt: string
+  instructorSlug: string | null
+  instructorName: string
   journeyStages: JourneyStage[]
   goals: Goal[]
-  modules: { title: LocalizedText; body: LocalizedText }[]
+  modules: ProgramModule[]
+  lessons: ProgramLesson[]
   isPublished: boolean
 }
 

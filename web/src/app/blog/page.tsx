@@ -1,5 +1,8 @@
 import { pageMetadata } from '@/lib/seo'
 import { BlogIndexPage } from '@/views/BlogIndexPage'
+import { listPublishedPosts } from '@/services/content'
+
+export const revalidate = 60
 
 export const metadata = pageMetadata({
   title: 'Journal',
@@ -7,6 +10,8 @@ export const metadata = pageMetadata({
   path: '/blog',
 })
 
-export default function Page() {
-  return <BlogIndexPage />
+export default async function Page() {
+  const result = await listPublishedPosts()
+  const posts = result.data ?? []
+  return <BlogIndexPage posts={posts} />
 }

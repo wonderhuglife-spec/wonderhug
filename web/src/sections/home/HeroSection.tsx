@@ -1,8 +1,9 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
+import { useCmsImage } from '@/hooks/useCmsImages'
 import { ButtonLink } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { track } from '@/services/analytics'
@@ -13,6 +14,9 @@ export function HeroSection() {
   const reduce = useReducedMotion()
   const { t } = useTranslation()
   const locale = currentLocale()
+  const heroArt = useCmsImage('hero_home')
+  const { scrollY } = useScroll()
+  const y = useTransform(scrollY, [0, 420], [0, 48])
 
   return (
     <section className="relative overflow-hidden">
@@ -71,6 +75,9 @@ export function HeroSection() {
           transition={{ duration: reduce ? 0 : 0.6, delay: reduce ? 0 : 0.08 }}
         >
           <div className="relative mx-auto max-w-md">
+            <motion.div style={{ y: reduce ? 0 : y }} className="pointer-events-none absolute -inset-10 -z-10 overflow-hidden rounded-[3rem]">
+              <Image src={heroArt.src} alt={heroArt.alt} width={900} height={700} className="h-full w-full object-cover opacity-70" />
+            </motion.div>
             <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-purple/20 via-white to-teal/25 blur-2xl" />
             <figure className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-lift">
               <Image

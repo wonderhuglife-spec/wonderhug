@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from '@/lib/navigation'
 import { BLOG_CATEGORIES, BLOG_POSTS } from '@/data/blog'
+import type { BlogPost } from '@/types/domain'
 import { Seo } from '@/components/seo/Seo'
 import { Badge } from '@/components/ui/Badge'
 import { Container } from '@/components/ui/Container'
@@ -11,22 +12,23 @@ import { Heading, Text } from '@/components/ui/Typography'
 import { Tabs } from '@/components/ui/Tabs'
 import { Input } from '@/components/ui/Input'
 import { Media } from '@/components/media/Media'
+import { Reveal } from '@/components/motion/Reveal'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import type { BlogCategory } from '@/types/domain'
 
 type Filter = BlogCategory | 'all'
 
-export function BlogIndexPage() {
+export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
   const [filter, setFilter] = useState<Filter>('all')
   const [q, setQ] = useState('')
   const locale = currentLocale()
+  const source = postsProp ?? BLOG_POSTS.filter((post) => post.isPublished)
   const posts = useMemo(() => {
-    const list = BLOG_POSTS.filter((post) => post.isPublished)
-    const byCat = filter === 'all' ? list : list.filter((post) => post.category === filter)
+    const byCat = filter === 'all' ? source : source.filter((post) => post.category === filter)
     if (!q) return byCat
-    return byCat.filter((p) => `${p.title.en} ${p.title.te} ${p.tags.join(' ')}`.toLowerCase().includes(q.toLowerCase()))
-  }, [filter, q])
+    return byCat.filter((p) => `${p.title.en} ${p.title.te} ${p.tags.join(' ')} ${p.content.en}`.toLowerCase().includes(q.toLowerCase()))
+  }, [filter, q, source])
   const lead = posts[0]
   const rest = posts.slice(1)
 
@@ -58,7 +60,7 @@ export function BlogIndexPage() {
           <div className="mt-12 grid gap-12 lg:grid-cols-12">
             <article className="lg:col-span-7">
               <Link to={`/blog/${lead.slug}`} className="group">
-                <Media src={lead.featuredImage} alt={lead.featuredImageAlt} className="aspect-[16/10] w-full rounded-2xl bg-canvas object-cover" />
+                <Media src={lead.featuredImage} alt={lead.featuredImageAlt} className="aspect-[16/10] w-full rounded-2xl bg-canvas object-cover transition group-hover:shadow-lift" />
                 <Badge className="mt-5">{lead.category}</Badge>
                 <h2 className="mt-3 font-serif text-4xl group-hover:text-teal-dark">{pick(lead.title, locale)}</h2>
                 <p className="mt-4 text-lg text-slate">{pick(lead.excerpt, locale)}</p>
@@ -66,11 +68,14 @@ export function BlogIndexPage() {
             </article>
             <div className="lg:col-span-5">
               {rest.map((post) => (
-                <article key={post.id} className="border-t border-line py-6">
-                  <h2 className="font-serif text-2xl">
-                    <Link to={`/blog/${post.slug}`}>{pick(post.title, locale)}</Link>
-                  </h2>
-                </article>
+                <Reveal key={post.id}>
+                  <article className="border-t border-line py-6">
+                    <Media src={post.featuredImage} alt={post.featuredImageAlt} className="mb-4 aspect-[16/9] w-full rounded-xl object-cover" width={640} height={360} />
+                    <h2 className="font-serif text-2xl">
+                      <Link to={`/blog/${post.slug}`}>{pick(post.title, locale)}</Link>
+                    </h2>
+                  </article>
+                </Reveal>
               ))}
             </div>
           </div>

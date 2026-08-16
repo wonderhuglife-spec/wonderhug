@@ -15,9 +15,44 @@ test('capture verification screenshots', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   await page.screenshot({ path: resolve(dir, 'blog-post.png'), fullPage: true })
 
+  await page.goto('/programs/womb-care')
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  await page.screenshot({ path: resolve(dir, 'program-detail.png'), fullPage: true })
+
+  await page.getByRole('button', { name: /enrol|enroll/i }).click()
+  await page.getByRole('button', { name: 'Checkout' }).click()
+  await expect(page.getByRole('heading', { name: /order received/i })).toBeVisible()
+  await page.goto('/learn/womb-care/first-trimester-rest')
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  await page.screenshot({ path: resolve(dir, 'lesson-player.png'), fullPage: true })
+
   await page.goto('/tools/due-date')
   await expect(page.getByRole('heading', { name: /due date/i })).toBeVisible()
   await page.screenshot({ path: resolve(dir, 'tools-due-date.png'), fullPage: true })
+
+  await page.goto('/tools/kicks')
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  await page.screenshot({ path: resolve(dir, 'tools-kicks.png'), fullPage: true })
+
+  await page.goto('/tools/contractions')
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  await page.screenshot({ path: resolve(dir, 'tools-contractions.png'), fullPage: true })
+
+  await page.goto('/tools/weight')
+  await expect(page.getByRole('heading', { name: /weight/i })).toBeVisible()
+  await page.screenshot({ path: resolve(dir, 'tools-weight.png'), fullPage: true })
+
+  await page.setViewportSize({ width: 1280, height: 800 })
+  await page.goto('/')
+  await expect(page.getByRole('navigation', { name: 'Primary' })).toBeVisible()
+  await page.locator('header').screenshot({ path: resolve(dir, 'header-desktop.png') })
+
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Open menu' }).click()
+  await expect(page.getByRole('dialog', { name: 'Menu' })).toBeVisible()
+  await page.screenshot({ path: resolve(dir, 'header-mobile.png') })
+  await page.setViewportSize({ width: 1280, height: 800 })
 
   await page.goto('/shop/garbh-sanskar-daily-pack')
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()

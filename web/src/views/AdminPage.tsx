@@ -14,6 +14,7 @@ import { PROGRAMS } from '@/data/programs'
 import { BLOG_POSTS } from '@/data/blog'
 import { EXPERTS } from '@/data/experts'
 import { supabase } from '@/lib/supabase'
+import { MEDIA_ASSET_LIST } from '@/data/mediaAssets'
 
 export function AdminPage() {
   const { t } = useTranslation()
@@ -151,8 +152,55 @@ export function AdminPage() {
             <li>RLS: public read for published content; is_staff() write</li>
           </ul>
         </section>
+        <section className="mt-12">
+          <h2 className="font-serif text-2xl">Placeholder images (CMS-swappable)</h2>
+          <p className="mt-2 max-w-2xl text-sm text-slate">
+            Every AI image is tagged <code>placeholder-ai-</code> in the filename and alt text. Paste a new URL to swap it site-wide via the <code>media_assets</code> cms_block.
+          </p>
+          <MediaAssetEditor onSave={saveBlock} />
+        </section>
         {message ? <p className="mt-8 text-sm text-navy">{message}</p> : null}
       </Container>
     </>
+  )
+}
+
+function MediaAssetEditor({
+  onSave,
+}: {
+  onSave: (blockKey: string, locale: 'en' | 'te', payload: Record<string, unknown>) => Promise<void>
+}) {
+  const [urls, setUrls] = useState<Record<string, string>>({})
+  return (
+    <div className="mt-6 grid gap-6">
+      {MEDIA_ASSET_LIST.map((asset) => (
+        <div key={asset.key} className="rounded-2xl border border-line p-4">
+          <p className="font-medium">{asset.label}</p>
+          <p className="mt-1 break-all text-xs text-slate">{asset.src}</p>
+          <Label htmlFor={`media-${asset.key}`}>Replacement URL</Label>
+          <Input
+            id={`media-${asset.key}`}
+            value={urls[asset.key] ?? ''}
+            onChange={(e) => setUrls((prev) => ({ ...prev, [asset.key]: e.target.value }))}
+            placeholder={asset.src}
+          />
+          <Button
+            className="mt-3"
+            variant="secondary"
+            onClick={() => {
+              const payload = Object.fromEntries(
+                MEDIA_ASSET_LIST.map((item) => [
+                  item.key,
+                  { src: (item.key === asset.key ? urls[asset.key] : urls[item.key]) || item.src, alt: item.alt },
+                ]),
+              )
+              void onSave('media_assets', 'en', payload)
+            }}
+          >
+            Save this image
+          </Button>
+        </div>
+      ))}
+    </div>
   )
 }

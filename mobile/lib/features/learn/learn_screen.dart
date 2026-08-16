@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wonderhug/core/l10n.dart';
 import 'package:wonderhug/core/locale_controller.dart';
 import 'package:wonderhug/features/learn/practices_screen.dart';
+import 'package:wonderhug/features/learn/programs_screen.dart';
 import 'package:wonderhug/features/shop/shop_screen.dart';
 
 class LearnScreen extends ConsumerWidget {
@@ -15,6 +16,11 @@ class LearnScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(tr(locale, 'nav.learn'))),
       body: ListView(
         children: [
+          ListTile(
+            title: const Text('Programmes'),
+            subtitle: const Text('Catalogue, enrolled programmes, lesson player'),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ProgramsScreen())),
+          ),
           ListTile(
             title: Text(tr(locale, 'learn.library')),
             onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const PracticesScreen())),
