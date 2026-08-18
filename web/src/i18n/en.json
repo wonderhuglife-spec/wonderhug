@@ -116,7 +116,7 @@
   },
   "admin": {
     "title": "WonderHug CMS",
-    "help": "Signed-in staff can edit posts, products, programs and pages here. Connect Supabase and set your profile role to admin."
+    "help": "Create, edit, unpublish and delete every public page and catalogue item. Content loads from Supabase when connected, and from this browser when it is not."
   },
   "footer": {
     "legal": "Legal",

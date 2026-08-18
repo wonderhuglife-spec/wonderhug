@@ -1,6 +1,6 @@
 'use client'
 
-import { COMMUNITY_GROUPS } from '@/data/community'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Container } from '@/components/ui/Container'
 import { Heading, Text } from '@/components/ui/Typography'
 import { Link } from '@/lib/navigation'
@@ -12,6 +12,7 @@ import { ButtonLink } from '@/components/ui/Button'
 import { HoverMedia } from '@/components/editorial/HoverMedia'
 
 export function CommunityPreview() {
+  const { groups } = useCatalog()
   const locale = currentLocale()
   const { t } = useTranslation()
   return (
@@ -30,7 +31,7 @@ export function CommunityPreview() {
                 {t('cta.whatsapp')}
               </ButtonLink>
               <ul className="mt-10 flex flex-wrap gap-2">
-                {COMMUNITY_GROUPS.map((group) => (
+                {groups.map((group) => (
                   <li key={group.id}>
                     <Link
                       to={`/community/${group.slug}`}

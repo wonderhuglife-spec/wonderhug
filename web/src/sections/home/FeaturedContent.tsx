@@ -1,6 +1,6 @@
 'use client'
 
-import { BLOG_POSTS } from '@/data/blog'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Container } from '@/components/ui/Container'
 import { Link } from '@/lib/navigation'
 import { Badge } from '@/components/ui/Badge'
@@ -11,7 +11,8 @@ import { SectionHeader } from '@/components/editorial/SectionHeader'
 
 export function FeaturedContent() {
   const locale = currentLocale()
-  const featured = BLOG_POSTS.filter((post) => post.isFeatured)
+  const { posts } = useCatalog()
+  const featured = posts.filter((post) => post.isFeatured && post.isPublished)
   const lead = featured[0]
   const rest = featured.slice(1)
   if (!lead) return null

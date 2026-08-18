@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/lib/navigation'
-import { PRACTICES } from '@/data/practices'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
 import { pick } from '@/lib/locale'
@@ -12,6 +12,7 @@ import { Reveal } from '@/components/motion/Reveal'
 
 export function PracticesPage() {
   const locale = currentLocale()
+  const { practices } = useCatalog()
   return (
     <>
       <Seo title="Garbh Sanskar practice library" description="Short daily practices." path="/practices" />
@@ -24,7 +25,7 @@ export function PracticesPage() {
       />
       <Container className="py-16">
         <ul className="grid gap-6 md:grid-cols-2">
-          {PRACTICES.map((practice, index) => (
+          {practices.map((practice, index) => (
             <Reveal key={practice.id} delay={index * 0.04}>
               <li className="overflow-hidden rounded-3xl border border-line bg-white">
                 <HoverMedia src="/images/placeholder-ai-practice.png" alt="placeholder-ai- Practice still life." className="aspect-[16/9] w-full" />

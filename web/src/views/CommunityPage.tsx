@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from '@/lib/navigation'
 import { useTranslation } from 'react-i18next'
-import { COMMUNITY_GROUPS } from '@/data/community'
+import { useCatalog } from '@/hooks/useCatalog'
 import { communityService } from '@/services/community'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
@@ -18,6 +18,7 @@ import { PageHero } from '@/components/editorial/PageHero'
 export function CommunityPage() {
   const { t } = useTranslation()
   const locale = currentLocale()
+  const { groups } = useCatalog()
   const [phone, setPhone] = useState('+91')
   const [note, setNote] = useState<string | null>(null)
 
@@ -56,7 +57,7 @@ export function CommunityPage() {
           {note ? <p className="mt-3 text-sm text-navy">{note}</p> : null}
         </form>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {COMMUNITY_GROUPS.map((group) => (
+          {groups.map((group) => (
             <Link key={group.id} to={`/community/${group.slug}`} className="overflow-hidden rounded-2xl border border-line bg-white transition hover:shadow-lift">
               <HoverMedia src="/images/placeholder-ai-community.png" alt="placeholder-ai- Community room." className="aspect-[16/8] w-full" width={800} height={400} />
               <span className="block p-6">

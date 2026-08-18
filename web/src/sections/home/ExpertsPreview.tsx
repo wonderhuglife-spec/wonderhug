@@ -1,6 +1,6 @@
 'use client'
 
-import { EXPERTS } from '@/data/experts'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Container } from '@/components/ui/Container'
 import { Link } from '@/lib/navigation'
 import { Badge } from '@/components/ui/Badge'
@@ -9,7 +9,8 @@ import { SectionHeader } from '@/components/editorial/SectionHeader'
 import { Reveal } from '@/components/motion/Reveal'
 
 export function ExpertsPreview() {
-  const preview = EXPERTS.slice(0, 4)
+  const { experts } = useCatalog()
+  const preview = experts.filter((item) => item.isListed).slice(0, 4)
   return (
     <section className="py-20">
       <Container className="grid gap-12 lg:grid-cols-12">

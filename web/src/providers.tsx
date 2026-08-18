@@ -8,6 +8,7 @@ import { CartProvider } from '@/hooks/useCart'
 import { JourneyProvider } from '@/hooks/useJourney'
 import { ToastProvider } from '@/components/ui/Toast'
 import { CmsImagesProvider } from '@/hooks/useCmsImages'
+import { CatalogProvider } from '@/hooks/useCatalog'
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
@@ -15,9 +16,11 @@ export function AppProviders({ children }: { children: ReactNode }) {
       <AuthProvider>
         <CartProvider>
           <JourneyProvider>
-            <CmsImagesProvider>
-              <ToastProvider>{children}</ToastProvider>
-            </CmsImagesProvider>
+            <CatalogProvider>
+              <CmsImagesProvider>
+                <ToastProvider>{children}</ToastProvider>
+              </CmsImagesProvider>
+            </CatalogProvider>
           </JourneyProvider>
         </CartProvider>
       </AuthProvider>

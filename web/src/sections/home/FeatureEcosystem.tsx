@@ -1,7 +1,7 @@
 'use client'
 
-import { PROGRAMS } from '@/data/programs'
 import { FEATURE_ECOSYSTEM } from '@/data/features'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Container } from '@/components/ui/Container'
 import { Link } from '@/lib/navigation'
 import { pick } from '@/lib/locale'
@@ -12,6 +12,7 @@ import { SectionHeader } from '@/components/editorial/SectionHeader'
 import { useTranslation } from 'react-i18next'
 
 export function FeatureEcosystem() {
+  const { programs } = useCatalog()
   const locale = currentLocale()
   const { t } = useTranslation()
   return (
@@ -32,7 +33,7 @@ export function FeatureEcosystem() {
           ))}
         </ol>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {PROGRAMS.map((program) => (
+          {programs.filter((program) => program.isPublished).map((program) => (
             <Link
               key={program.id}
               to={`/programs/${program.slug}`}

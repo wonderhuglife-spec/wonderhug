@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from '@/lib/navigation'
 import { useTranslation } from 'react-i18next'
-import { programBySlug } from '@/data/programs'
+import { useCatalog } from '@/hooks/useCatalog'
 import type { Program } from '@/types/domain'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
@@ -16,7 +16,6 @@ import { useCart } from '@/hooks/useCart'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { formatInr, MEDICAL_DISCLAIMER } from '@/lib/constants'
-import { EXPERTS } from '@/data/experts'
 import { useToast } from '@/components/ui/Toast'
 import { isEnrolled } from '@/services/lms'
 import { useCmsImage } from '@/hooks/useCmsImages'
@@ -30,8 +29,9 @@ const COVER_KEY: Record<string, MediaAssetKey> = {
 
 export function ProgramDetailPage({ slug: slugProp, program: programProp }: { slug?: string; program?: Program }) {
   const params = useParams()
+  const { programs, experts } = useCatalog()
   const slug = slugProp ?? String(params.slug ?? '')
-  const program = programProp ?? programBySlug(slug)
+  const program = programProp ?? programs.find((item) => item.slug === slug && item.isPublished)
   const locale = currentLocale()
   const { add } = useCart()
   const { t } = useTranslation()
@@ -54,7 +54,7 @@ export function ProgramDetailPage({ slug: slugProp, program: programProp }: { sl
   }
 
   const name = pick(program.name, locale)
-  const expert = EXPERTS.find((item) => item.slug === program.instructorSlug)
+  const expert = experts.find((item) => item.slug === program.instructorSlug)
   const coverSrc = cmsCover.src || program.coverImage
   const coverAlt = cmsCover.alt || program.coverImageAlt
 

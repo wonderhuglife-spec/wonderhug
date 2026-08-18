@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useParams } from '@/lib/navigation'
-import { COMMUNITY_GROUPS, COMMUNITY_POSTS } from '@/data/community'
+import { COMMUNITY_POSTS } from '@/data/community'
+import { useCatalog } from '@/hooks/useCatalog'
 import { communityService } from '@/services/community'
 import { Seo } from '@/components/seo/Seo'
 import { Badge } from '@/components/ui/Badge'
@@ -22,7 +23,8 @@ export function CommunityGroupPage({ slug: slugProp }: { slug?: string }) {
   const slug = slugProp ?? String(params.slug ?? '')
   const locale = currentLocale()
   const { user } = useAuth()
-  const group = COMMUNITY_GROUPS.find((item) => item.slug === slug)
+  const { groups } = useCatalog()
+  const group = groups.find((item) => item.slug === slug)
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [localPosts, setLocalPosts] = useState<CommunityPost[]>([])

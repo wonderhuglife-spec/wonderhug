@@ -2,7 +2,7 @@
 
 import { Link } from '@/lib/navigation'
 import { useTranslation } from 'react-i18next'
-import { PRODUCTS } from '@/data/products'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
@@ -18,9 +18,11 @@ import { Reveal } from '@/components/motion/Reveal'
 
 export function ShopPage() {
   const { t } = useTranslation()
+  const { products } = useCatalog()
   const locale = currentLocale()
   const { add } = useCart()
   const toast = useToast()
+  const list = products.filter((product) => product.isPublished)
   return (
     <>
       <Seo title={t('shop.title')} description={t('shop.intro')} path="/shop" />
@@ -39,7 +41,7 @@ export function ShopPage() {
         alt="placeholder-ai- Shop atmosphere"
       />
       <Container className="grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-3">
-        {PRODUCTS.map((product, index) => (
+        {list.map((product, index) => (
           <Reveal key={product.id} delay={index * 0.04}>
             <article className="overflow-hidden rounded-3xl border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-lift">
               <Link to={`/shop/${product.slug}`} className="block">

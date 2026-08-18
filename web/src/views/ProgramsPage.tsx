@@ -3,7 +3,7 @@
 import type { ReactNode } from 'react'
 import { Link } from '@/lib/navigation'
 import { useTranslation } from 'react-i18next'
-import { PROGRAMS } from '@/data/programs'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
 import { Media } from '@/components/media/Media'
@@ -33,13 +33,14 @@ function ProgramCard({ slug, children }: { slug: string; children: ReactNode }) 
 
 export function ProgramsPage() {
   const { t } = useTranslation()
+  const { programs } = useCatalog()
   const locale = currentLocale()
   return (
     <>
       <Seo title={t('programs.title')} description={t('programs.intro')} path="/programs" />
       <PageHero kicker="Education · practice" title={t('programs.title')} lede={t('programs.intro')} src="/images/placeholder-ai-program-womb.png" alt="placeholder-ai- Programmes atmosphere" />
       <Container className="grid gap-8 py-12 md:grid-cols-3">
-        {PROGRAMS.map((program, index) => (
+        {programs.filter((program) => program.isPublished).map((program, index) => (
           <Reveal key={program.id} delay={index * 0.05}>
             <ProgramCard slug={program.slug}>
               <div className="p-6">

@@ -2,7 +2,8 @@
 
 import { Link, useParams } from '@/lib/navigation'
 import { useTranslation } from 'react-i18next'
-import { PRODUCTS } from '@/data/products'
+import { useCatalog } from '@/hooks/useCatalog'
+import type { Product } from '@/types/domain'
 import { Seo, JsonLd } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
 import { Heading } from '@/components/ui/Typography'
@@ -13,14 +14,13 @@ import { useToast } from '@/components/ui/Toast'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { formatInr } from '@/lib/constants'
-
-import type { Product } from '@/types/domain'
 import { Media } from '@/components/media/Media'
 
 export function ProductPage({ slug: slugProp, product: productProp }: { slug?: string; product?: Product }) {
   const params = useParams()
+  const { products } = useCatalog()
   const slug = slugProp ?? String(params.slug ?? '')
-  const product = productProp ?? PRODUCTS.find((item) => item.slug === slug)
+  const product = productProp ?? products.find((item) => item.slug === slug && item.isPublished)
   const locale = currentLocale()
   const { add } = useCart()
   const { t } = useTranslation()

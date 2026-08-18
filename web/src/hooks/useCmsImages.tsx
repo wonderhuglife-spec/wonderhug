@@ -3,13 +3,14 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { DEFAULT_MEDIA_ASSETS, type MediaAssetKey } from '@/data/mediaAssets'
 import { supabase } from '@/lib/supabase'
+import { useCatalog } from '@/hooks/useCatalog'
 
 type Overrides = Partial<Record<MediaAssetKey, { src?: string; alt?: string }>>
 
 const CmsImagesContext = createContext<Overrides>({})
 
 export function CmsImagesProvider({ children }: { children: ReactNode }) {
-  const [overrides, setOverrides] = useState<Overrides>({})
+  const [remote, setRemote] = useState<Overrides>({})
 
   useEffect(() => {
     if (!supabase) return
@@ -20,21 +21,23 @@ export function CmsImagesProvider({ children }: { children: ReactNode }) {
       .maybeSingle()
       .then(({ data }) => {
         const payload = (data?.payload ?? {}) as Overrides
-        setOverrides(payload)
+        setRemote(payload)
       })
   }, [])
 
-  return <CmsImagesContext.Provider value={overrides}>{children}</CmsImagesContext.Provider>
+  return <CmsImagesContext.Provider value={remote}>{children}</CmsImagesContext.Provider>
 }
 
 export function useCmsImage(key: MediaAssetKey) {
-  const overrides = useContext(CmsImagesContext)
+  const remote = useContext(CmsImagesContext)
+  const catalog = useCatalog()
   const fallback = DEFAULT_MEDIA_ASSETS[key]
-  return useMemo(
-    () => ({
-      src: overrides[key]?.src?.trim() || fallback.src,
-      alt: overrides[key]?.alt?.trim() || fallback.alt,
-    }),
-    [overrides, key, fallback.src, fallback.alt],
-  )
+  return useMemo(() => {
+    const fromCatalog = catalog.media[key]
+    const fromRemote = remote[key]
+    return {
+      src: fromCatalog?.src?.trim() || fromRemote?.src?.trim() || fallback.src,
+      alt: fromCatalog?.alt?.trim() || fromRemote?.alt?.trim() || fallback.alt,
+    }
+  }, [remote, catalog.media, key, fallback.src, fallback.alt])
 }
