@@ -24,7 +24,7 @@ export function StartPage() {
         title="What describes your journey?"
         lede="One question. Then the homepage and shop follow you."
         src="/images/placeholder-ai-journal-planning.png"
-        alt="placeholder-ai- Start your journey atmosphere."
+        alt="A couple planning pregnancy together at the kitchen table."
       />
       <Container className="py-16">
         <div className="grid gap-3 sm:grid-cols-2">

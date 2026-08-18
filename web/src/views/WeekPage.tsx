@@ -30,7 +30,7 @@ export function WeekPage({ week: weekProp }: { week?: string }) {
         kicker={`Week ${guide.week}`}
         title={pick(guide.title, locale)}
         src="/images/placeholder-ai-program-womb.png"
-        alt="placeholder-ai- Week guide atmosphere."
+        alt="A pregnant woman resting in a home courtyard for this week’s note."
       />
       <Container narrow className="py-16">
         <p className="text-lg leading-relaxed">{pick(guide.body, locale)}</p>

@@ -30,7 +30,7 @@ export function ToolsPage() {
         title="Tools"
         lede="Due date, kick counts, contractions and weight — notebooks for this week, not a diagnosis."
         src="/images/placeholder-ai-tool-due.png"
-        alt="placeholder-ai- Tools atmosphere"
+        alt="A family calendar and pregnancy journal for due-date and kick tools."
       />
       <Container className="py-16">
         <ul className="grid gap-6 md:grid-cols-2">

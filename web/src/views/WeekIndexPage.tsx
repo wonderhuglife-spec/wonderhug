@@ -19,7 +19,7 @@ export function WeekIndexPage() {
         title={locale === 'te' ? 'వారం వారం' : 'Week by week'}
         lede="Educational notes. Not a scan report."
         src="/images/placeholder-ai-program-womb.png"
-        alt="placeholder-ai- Week-by-week atmosphere."
+        alt="A pregnant woman resting in a home courtyard for week-by-week notes."
       />
       <Container className="py-16">
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

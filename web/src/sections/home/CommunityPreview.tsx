@@ -19,7 +19,7 @@ export function CommunityPreview() {
       <Container>
         <div className="overflow-hidden rounded-[2rem] bg-navy text-white">
           <div className="grid lg:grid-cols-2">
-            <HoverMedia src="/images/placeholder-ai-community.png" alt="placeholder-ai- Community gathering atmosphere." className="min-h-[16rem] w-full lg:min-h-full" width={960} height={720} />
+            <HoverMedia src="/images/placeholder-ai-community.png" alt="Mothers and babies sitting together in a bright community room." className="min-h-[16rem] w-full lg:min-h-full" width={960} height={720} />
             <div className="px-6 py-14 sm:px-12">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">AiSensy · WhatsApp</p>
               <Heading as="h2" className="mt-3 text-white">

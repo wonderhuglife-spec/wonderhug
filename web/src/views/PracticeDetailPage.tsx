@@ -31,7 +31,7 @@ export function PracticeDetailPage({ slug: slugProp, practice: practiceProp }: {
         title={pick(practice.title, locale)}
         lede={pick(practice.description, locale)}
         src="/images/placeholder-ai-practice.png"
-        alt="placeholder-ai- Practice still life."
+        alt="Quiet Garbh Sanskar rest with music and a lamp at home."
       />
       <Container narrow className="py-16">
         <p className="text-lg leading-relaxed text-slate">Official audio/video files are part of purchased packs. This page is the guided script you can use today.</p>

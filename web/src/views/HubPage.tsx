@@ -52,7 +52,7 @@ export function HubPage({ path }: { path?: string }) {
           title={pick(hub.title, locale)}
           lede={pick(hub.intro, locale)}
           src={hubArt(resolved)}
-          alt="placeholder-ai- Topic hub atmosphere."
+          alt="A pregnant woman resting in a home courtyard."
         />
         <Container narrow className="py-14">
           {hub.sections.map((section) => (

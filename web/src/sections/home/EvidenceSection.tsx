@@ -10,7 +10,7 @@ export function EvidenceSection() {
       <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <HoverMedia
           src="/images/placeholder-ai-journal-garbh.png"
-          alt="placeholder-ai- Quiet rest for science-and-tradition storytelling."
+          alt="A pregnant woman resting by a window for Garbh Sanskar practice."
           className="aspect-[4/5] w-full rounded-3xl"
           width={720}
           height={900}
