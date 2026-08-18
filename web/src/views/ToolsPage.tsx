@@ -18,20 +18,30 @@ import { useAuth } from '@/hooks/useAuth'
 import { useCmsImage } from '@/hooks/useCmsImages'
 import { SignInToSaveNote, appendTracker, listTracker } from '@/services/trackers'
 import { useToast } from '@/components/ui/Toast'
+import { PageHero } from '@/components/editorial/PageHero'
 
 export function ToolsPage() {
   const locale = currentLocale()
   return (
     <>
       <Seo title="Tools" description="Due date, kicks, contractions, weight." path="/tools" />
+      <PageHero
+        kicker="Educational helpers"
+        title="Tools"
+        lede="Due date, kick counts, contractions and weight — notebooks for this week, not a diagnosis."
+        src="/images/placeholder-ai-tool-due.png"
+        alt="placeholder-ai- Tools atmosphere"
+      />
       <Container className="py-16">
-        <Heading as="h1">Tools</Heading>
-        <ul className="mt-10 grid gap-6 md:grid-cols-2">
+        <ul className="grid gap-6 md:grid-cols-2">
           {TOOLS.filter((tool) => tool.href.startsWith('/tools/')).map((tool) => (
             <li key={tool.id}>
-              <Link to={tool.href} className="block rounded-3xl border border-line bg-white p-8 transition hover:-translate-y-0.5 hover:shadow-lift">
-                <span className="font-serif text-3xl">{pick(tool.name, locale)}</span>
-                <p className="mt-3 text-slate">{pick(tool.description, locale)}</p>
+              <Link to={tool.href} className="block overflow-hidden rounded-3xl border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-lift">
+                <Media src={tool.image} alt={tool.imageAlt} className="aspect-[16/9] w-full object-cover" />
+                <span className="block p-8">
+                  <span className="font-serif text-3xl">{pick(tool.name, locale)}</span>
+                  <p className="mt-3 text-slate">{pick(tool.description, locale)}</p>
+                </span>
               </Link>
             </li>
           ))}

@@ -8,7 +8,7 @@ export const EXPERTS: Expert[] = [
     id: 'fac-garbh',
     slug: 'garbh-sanskar-guide',
     name: 'Garbh Sanskar faculty',
-    photo: '/images/portrait-placeholder.svg',
+    photo: '/images/placeholder-ai-faculty-seat.png',
     speciality: 'Garbh Sanskar Guides',
     qualification: 'Named guide publishes after WonderHug verifies training. Book via WhatsApp care desk until then.',
     bio: loc(
@@ -27,7 +27,7 @@ export const EXPERTS: Expert[] = [
     id: 'fac-nutrition',
     slug: 'nutrition-educator',
     name: 'Nutrition education faculty',
-    photo: '/images/portrait-placeholder.svg',
+    photo: '/images/placeholder-ai-faculty-seat.png',
     speciality: 'Nutrition Experts',
     qualification: 'Kitchen education for Telugu households. Clinical diets remain with a licensed dietitian.',
     bio: loc(
@@ -46,7 +46,7 @@ export const EXPERTS: Expert[] = [
     id: 'fac-yoga',
     slug: 'yoga-faculty',
     name: 'Yoga faculty',
-    photo: '/images/portrait-placeholder.svg',
+    photo: '/images/placeholder-ai-faculty-seat.png',
     speciality: 'Yoga Experts',
     qualification: 'Gentle prenatal and fertility-support movement. Not a medical therapy.',
     bio: loc(
@@ -65,7 +65,7 @@ export const EXPERTS: Expert[] = [
     id: 'fac-lactation',
     slug: 'lactation-faculty',
     name: 'Lactation faculty',
-    photo: '/images/portrait-placeholder.svg',
+    photo: '/images/placeholder-ai-faculty-seat.png',
     speciality: 'Lactation Experts',
     qualification: 'Feeding education and referral. In-person help is still the gold standard for latch pain.',
     bio: loc(
@@ -84,7 +84,7 @@ export const EXPERTS: Expert[] = [
     id: 'fac-counsellor',
     slug: 'counsellor-faculty',
     name: 'Counsellor faculty',
-    photo: '/images/portrait-placeholder.svg',
+    photo: '/images/placeholder-ai-faculty-seat.png',
     speciality: 'Counsellors',
     qualification: 'Talk therapy booking. Not an emergency service.',
     bio: loc(
@@ -103,7 +103,7 @@ export const EXPERTS: Expert[] = [
     id: 'fac-parenting',
     slug: 'parenting-faculty',
     name: 'Parenting faculty',
-    photo: '/images/portrait-placeholder.svg',
+    photo: '/images/placeholder-ai-faculty-seat.png',
     speciality: 'Parenting Specialists',
     qualification: 'Everyday parenting education for joint families.',
     bio: loc(

@@ -3,12 +3,12 @@
 import { PROGRAMS } from '@/data/programs'
 import { FEATURE_ECOSYSTEM } from '@/data/features'
 import { Container } from '@/components/ui/Container'
-import { Heading, Text } from '@/components/ui/Typography'
 import { Link } from '@/lib/navigation'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { formatInr } from '@/lib/constants'
-import { Media } from '@/components/media/Media'
+import { HoverMedia } from '@/components/editorial/HoverMedia'
+import { SectionHeader } from '@/components/editorial/SectionHeader'
 import { useTranslation } from 'react-i18next'
 
 export function FeatureEcosystem() {
@@ -17,13 +17,7 @@ export function FeatureEcosystem() {
   return (
     <section className="py-20">
       <Container>
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-purple">{t('home.ecosystemKicker')}</p>
-        <Heading as="h2" className="mt-3">
-          {t('home.ecosystemTitle')}
-        </Heading>
-        <Text muted className="mt-4 max-w-2xl text-lg">
-          {t('home.ecosystemBody')}
-        </Text>
+        <SectionHeader kicker={t('home.ecosystemKicker')} title={t('home.ecosystemTitle')} lede={t('home.ecosystemBody')} />
         <ol className="mt-12 grid gap-3 md:grid-cols-2">
           {FEATURE_ECOSYSTEM.map((item, index) => (
             <li key={item.id}>
@@ -44,7 +38,7 @@ export function FeatureEcosystem() {
               to={`/programs/${program.slug}`}
               className="group overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-teal-soft to-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lift"
             >
-              <Media src={program.coverImage} alt={program.coverImageAlt} className="aspect-[16/10] w-full object-cover" />
+              <HoverMedia src={program.coverImage} alt={program.coverImageAlt} className="aspect-[16/10] w-full" />
               <div className="p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-dark">{program.durationWeeks} {t('home.weeks')}</p>
               <p className="mt-3 font-serif text-2xl text-ink group-hover:text-purple">{pick(program.name, locale)}</p>

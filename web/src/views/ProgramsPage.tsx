@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next'
 import { PROGRAMS } from '@/data/programs'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
-import { Heading, Text } from '@/components/ui/Typography'
 import { Media } from '@/components/media/Media'
 import { Reveal } from '@/components/motion/Reveal'
 import { pick } from '@/lib/locale'
@@ -14,6 +13,7 @@ import { currentLocale } from '@/i18n'
 import { formatInr } from '@/lib/constants'
 import { useCmsImage } from '@/hooks/useCmsImages'
 import type { MediaAssetKey } from '@/data/mediaAssets'
+import { PageHero } from '@/components/editorial/PageHero'
 
 const KEYS: Record<string, MediaAssetKey> = {
   'beej-sanskar': 'program_beej',
@@ -37,14 +37,7 @@ export function ProgramsPage() {
   return (
     <>
       <Seo title={t('programs.title')} description={t('programs.intro')} path="/programs" />
-      <header className="border-b border-line py-16">
-        <Container>
-          <Heading as="h1">{t('programs.title')}</Heading>
-          <Text muted className="mt-4 max-w-2xl text-lg">
-            {t('programs.intro')}
-          </Text>
-        </Container>
-      </header>
+      <PageHero kicker="Education · practice" title={t('programs.title')} lede={t('programs.intro')} src="/images/placeholder-ai-program-womb.png" alt="placeholder-ai- Programmes atmosphere" />
       <Container className="grid gap-8 py-12 md:grid-cols-3">
         {PROGRAMS.map((program, index) => (
           <Reveal key={program.id} delay={index * 0.05}>

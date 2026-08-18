@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Logo } from '@/components/brand/Logo'
 import { ButtonLink } from '@/components/ui/Button'
-import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { NAV_GROUPS, NAV_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/cn'
 import { useCart } from '@/hooks/useCart'
@@ -15,10 +14,12 @@ import { useAuth } from '@/hooks/useAuth'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { JOURNEY_OPTIONS } from '@/data/journeys'
+import { JOURNEY_ART, JOURNEY_HREF } from '@/data/journeyArt'
+import { HoverMedia } from '@/components/editorial/HoverMedia'
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
-    'min-h-11 rounded-full px-3 text-sm font-medium text-slate transition hover:bg-canvas hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
+    'inline-flex h-11 items-center rounded-full px-3 text-sm font-medium leading-none text-slate transition hover:bg-canvas hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
     isActive && 'bg-teal-soft text-purple',
   )
 
@@ -39,19 +40,10 @@ export function Navbar() {
   }, [])
 
   const journeyLinks = JOURNEY_OPTIONS.map((item) => ({
-    to:
-      item.id === 'planning'
-        ? '/pregnancy-planning'
-        : item.id === 'ttc'
-          ? '/pregnancy-planning'
-          : item.id === 'pregnant'
-            ? '/pregnancy'
-            : item.id === 'birth_prep'
-              ? '/pregnancy/birth-preparation'
-              : item.id === 'new_parent'
-                ? '/parenting/newborn'
-                : '/parenting',
+    to: JOURNEY_HREF[item.id],
     label: pick(item.label, locale),
+    src: JOURNEY_ART[item.id].src,
+    alt: JOURNEY_ART[item.id].alt,
   }))
 
   return (
@@ -59,8 +51,8 @@ export function Navbar() {
       className={cn(
         'sticky top-0 z-40 border-b transition-all duration-300',
         scrolled
-          ? 'border-purple/10 bg-white/95 py-0 shadow-[0_8px_30px_rgba(121,64,155,0.08)] backdrop-blur-md'
-          : 'border-white/60 bg-white/75 py-0.5 shadow-[0_1px_0_rgba(121,64,155,0.06)] backdrop-blur-md',
+          ? 'border-purple/10 bg-white/95 py-0 shadow-nav backdrop-blur-md'
+          : 'border-white/60 bg-white/80 py-0.5 shadow-[0_1px_0_rgba(121,64,155,0.06)] backdrop-blur-md',
       )}
     >
       <div className="mx-auto flex max-w-[80rem] items-center justify-between gap-3 px-5 py-2 sm:px-8">
@@ -70,21 +62,26 @@ export function Navbar() {
             {t('nav.home')}
           </NavLink>
           <div className="relative group">
-            <button type="button" className="min-h-11 rounded-full px-3 text-sm font-medium text-slate hover:text-purple">
+            <button type="button" className="inline-flex h-11 items-center rounded-full px-3 text-sm font-medium leading-none text-slate hover:text-purple">
               {t('nav.journey')}
             </button>
-            <div className="invisible absolute left-0 top-full z-20 min-w-60 rounded-2xl border border-line bg-white p-2 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-              {journeyLinks.map((item) => (
-                <NavLink key={item.to + item.label} to={item.to} className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
-                  {item.label}
+            <div className="invisible absolute left-0 top-full z-20 w-[min(36rem,calc(100vw-2.5rem))] rounded-2xl border border-line bg-white p-3 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              <div className="grid gap-1 sm:grid-cols-2">
+                {journeyLinks.map((item) => (
+                  <NavLink key={item.to + item.label} to={item.to} className="inline-flex min-h-11 items-center gap-3 rounded-xl px-2 py-2 text-sm leading-none text-ink hover:bg-canvas">
+                    <HoverMedia src={item.src} alt="" className="h-12 w-12 shrink-0 rounded-lg" width={96} height={96} zoomOnHover={false} />
+                    {item.label}
+                  </NavLink>
+                ))}
+              </div>
+              <div className="mt-2 border-t border-line pt-2">
+                <NavLink to="/garbh-sanskar" className="inline-flex min-h-11 items-center rounded-xl px-3 py-2 text-sm leading-none text-ink hover:bg-teal-soft">
+                  {t('nav.garbh')}
                 </NavLink>
-              ))}
-              <NavLink to="/garbh-sanskar" className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
-                {t('nav.garbh')}
-              </NavLink>
-              <NavLink to="/tools" className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
-                {t('nav.tools')}
-              </NavLink>
+                <NavLink to="/tools" className="inline-flex min-h-11 items-center rounded-xl px-3 py-2 text-sm leading-none text-ink hover:bg-teal-soft">
+                  {t('nav.tools')}
+                </NavLink>
+              </div>
             </div>
           </div>
           {NAV_ITEMS.map((item) => (
@@ -94,7 +91,6 @@ export function Navbar() {
           ))}
         </nav>
         <div className="hidden items-center gap-1.5 md:flex">
-          <LanguageSwitcher compact />
           <NavLink
             to="/cart"
             className="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line/80 bg-white/90 text-navy transition hover:border-teal hover:text-teal-dark"
@@ -144,20 +140,17 @@ export function Navbar() {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <div className="px-5">
-              <LanguageSwitcher />
-            </div>
             <nav className="mt-6 flex flex-col gap-1 px-5" aria-label="Mobile">
-              <NavLink to="/" className="min-h-12 rounded-2xl px-3 py-3 font-medium" onClick={() => setOpen(false)}>
+              <NavLink to="/" className="inline-flex min-h-12 items-center rounded-2xl px-3 py-3 font-medium" onClick={() => setOpen(false)}>
                 {t('nav.home')}
               </NavLink>
               {NAV_GROUPS[0].items.map((item) => (
-                <NavLink key={item.to} to={item.to} className="min-h-12 rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
+                <NavLink key={item.to} to={item.to} className="inline-flex min-h-12 items-center rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
                   {t(item.key)}
                 </NavLink>
               ))}
               {NAV_ITEMS.map((item) => (
-                <NavLink key={item.to} to={item.to} className="min-h-12 rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
+                <NavLink key={item.to} to={item.to} className="inline-flex min-h-12 items-center rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
                   {t(item.key)}
                 </NavLink>
               ))}

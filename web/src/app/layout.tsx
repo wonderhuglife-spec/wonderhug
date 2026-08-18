@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     template: '%s | WonderHug.Life',
   },
   description:
-    'Garbh Sanskar practice, modern maternity education, programmes and a WhatsApp community of 50,000+ mothers. Telugu and English.',
+    'Garbh Sanskar practice, modern maternity education, programmes and a WhatsApp community of 50,000+ mothers for Telugu-speaking homes in Telangana and Andhra Pradesh.',
   icons: { icon: '/favicon.svg', apple: '/logo.png' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${figtree.variable} ${newsreader.variable}`}>
-      <body className="min-h-svh bg-white font-sans text-ink antialiased">
+      <body className="min-h-svh bg-paper font-sans text-ink antialiased">
         <AppProviders>
           <SiteChrome>{children}</SiteChrome>
         </AppProviders>

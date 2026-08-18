@@ -12,7 +12,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname()
   const reduce = useReducedMotion()
   return (
-    <div className="flex min-h-svh flex-col bg-[#FBFCFA] text-ink">
+    <div className="flex min-h-svh flex-col bg-paper text-ink">
       <SkipLink />
       <Navbar />
       <AnimatePresence mode="wait">

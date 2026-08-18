@@ -1,9 +1,9 @@
 'use client'
 
 import { JOURNEY_OPTIONS } from '@/data/journeys'
+import { JOURNEY_ART } from '@/data/journeyArt'
 import { useJourney } from '@/hooks/useJourney'
 import { Container } from '@/components/ui/Container'
-import { Heading, Text } from '@/components/ui/Typography'
 import { cn } from '@/lib/cn'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
@@ -11,6 +11,8 @@ import { GOALS } from '@/lib/constants'
 import { useTranslation } from 'react-i18next'
 import type { Goal, JourneyStage } from '@/types/domain'
 import { Baby, Flower2, Heart, Home, Sparkles, Users } from 'lucide-react'
+import { HoverMedia } from '@/components/editorial/HoverMedia'
+import { SectionHeader } from '@/components/editorial/SectionHeader'
 
 const ICONS = {
   planning: Sparkles,
@@ -28,37 +30,34 @@ export function JourneySelector() {
 
   return (
     <section className="relative py-20" aria-labelledby="journey-heading">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(240,253,250,0.9)_12%,#F8FAFA_100%)]" />
       <Container className="relative">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-dark">{t('nav.journey')}</p>
-        <Heading as="h2" id="journey-heading" className="mt-3">
-          {t('journey.heading')}
-        </Heading>
-        <Text muted className="mt-4 max-w-2xl text-lg">
-          {t('journey.help')}
-        </Text>
+        <SectionHeader kicker={t('nav.journey')} title={t('journey.heading')} lede={t('journey.help')} />
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {JOURNEY_OPTIONS.map((option) => {
             const selected = profile.journeyStage === option.id
             const Icon = ICONS[option.id]
+            const art = JOURNEY_ART[option.id]
             return (
               <li key={option.id}>
                 <button
                   type="button"
                   aria-pressed={selected}
                   className={cn(
-                    'group min-h-[7.25rem] w-full rounded-3xl border px-5 py-5 text-left shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
+                    'group w-full overflow-hidden rounded-3xl border text-left shadow-sm transition duration-300 ease-editorial focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
                     selected
                       ? 'border-transparent bg-white shadow-lift ring-2 ring-teal'
                       : 'border-line/80 bg-white/80 hover:-translate-y-0.5 hover:border-purple/30 hover:shadow-lift',
                   )}
                   onClick={() => setJourneyStage(option.id as JourneyStage)}
                 >
-                  <span className={cn('inline-flex h-9 w-9 items-center justify-center rounded-full', selected ? 'bg-teal text-white' : 'bg-teal-soft text-teal-dark')}>
-                    <Icon className="h-4 w-4" aria-hidden />
+                  <HoverMedia src={art.src} alt={art.alt} className="aspect-[16/9] w-full" height={360} width={640} />
+                  <span className="block px-5 py-5">
+                    <span className={cn('inline-flex h-9 w-9 items-center justify-center rounded-full', selected ? 'bg-teal text-white' : 'bg-teal-soft text-teal-dark')}>
+                      <Icon className="h-4 w-4" aria-hidden />
+                    </span>
+                    <span className="mt-3 block font-semibold text-ink">{pick(option.label, locale)}</span>
+                    <span className="mt-1 block text-sm leading-snug text-slate">{pick(option.prompt, locale)}</span>
                   </span>
-                  <span className="mt-3 block font-semibold text-ink">{pick(option.label, locale)}</span>
-                  <span className="mt-1 block text-sm leading-snug text-slate">{pick(option.prompt, locale)}</span>
                 </button>
               </li>
             )

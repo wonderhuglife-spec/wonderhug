@@ -51,7 +51,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 2),
                       height: ((session['count'] as num?)?.toDouble() ?? 0) * 4 + 8,
-                      color: WonderHugColors.teal.withOpacity(0.7),
+                      color: WonderHugColors.teal.withValues(alpha: 0.7),
                     ),
                   ),
               ],

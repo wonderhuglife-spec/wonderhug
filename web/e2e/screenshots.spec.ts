@@ -54,6 +54,10 @@ test('capture verification screenshots', async ({ page }) => {
   await page.screenshot({ path: resolve(dir, 'header-mobile.png') })
   await page.setViewportSize({ width: 1280, height: 800 })
 
+  await page.goto('/shop')
+  await expect(page.getByRole('heading', { name: 'Shop' })).toBeVisible()
+  await page.screenshot({ path: resolve(dir, 'shop.png'), fullPage: true })
+
   await page.goto('/shop/garbh-sanskar-daily-pack')
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   await page.screenshot({ path: resolve(dir, 'shop-pdp.png'), fullPage: true })
@@ -77,9 +81,4 @@ test('capture verification screenshots', async ({ page }) => {
   await page.goto('/admin')
   await expect(page.getByRole('heading', { name: 'WonderHug CMS' })).toBeVisible()
   await page.screenshot({ path: resolve(dir, 'admin.png'), fullPage: true })
-
-  await page.goto('/')
-  await page.getByRole('button', { name: 'తెలుగు' }).click()
-  await expect(page.getByRole('link', { name: 'అంగడి' }).first()).toBeVisible()
-  await page.screenshot({ path: resolve(dir, 'homepage-telugu.png'), fullPage: true })
 })

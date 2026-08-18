@@ -1,14 +1,22 @@
 :root {
   --wh-purple: #79409b;
+  --wh-purple-dark: #5c2f78;
   --wh-teal: #309292;
-  --wh-navy: #2f4275;
+  --wh-teal-dark: #246e6e;
   --wh-teal-soft: #f0fdfa;
+  --wh-navy: #2f4275;
   --wh-white: #ffffff;
-  --wh-text: #1f2937;
-  --wh-text-secondary: #64748b;
-  --wh-text-muted: #94a3b8;
-  --wh-border: #e5e7eb;
-  --wh-bg-soft: #f8fafa;
+  --wh-bg: #fbf7f2;
+  --wh-canvas: #f3eee8;
+  --wh-ink: #1f2937;
+  --wh-slate: #5c6570;
+  --wh-slate-muted: #8b939e;
+  --wh-line: #e7e0d8;
+  --wh-error: #b42318;
+  --wh-shadow-lift: 0 18px 50px -28px rgba(47, 66, 117, 0.28);
+  --wh-shadow-nav: 0 8px 30px rgba(121, 64, 155, 0.08);
+  --wh-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --wh-duration: 500ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

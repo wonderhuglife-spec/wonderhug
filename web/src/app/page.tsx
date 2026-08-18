@@ -29,10 +29,10 @@ export default function Page() {
             },
             {
               '@type': 'Question',
-              name: 'Is Telugu supported?',
+              name: 'Who is WonderHug for?',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Yes. English and Telugu are first-class locales on the website and in the native app.',
+                text: 'The website is in English and written for Telugu-speaking families in Telangana and Andhra Pradesh. It is education and practice, not a clinic.',
               },
             },
             {

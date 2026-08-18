@@ -11,6 +11,11 @@ export type MediaAssetKey =
   | 'tool_kicks'
   | 'tool_contractions'
   | 'tool_weight'
+  | 'shop_journal'
+  | 'shop_kitchen'
+  | 'community'
+  | 'practice'
+  | 'faculty_seat'
 
 export interface MediaAsset {
   key: MediaAssetKey
@@ -24,8 +29,8 @@ export const DEFAULT_MEDIA_ASSETS: Record<MediaAssetKey, MediaAsset> = {
   hero_home: {
     key: 'hero_home',
     label: 'Homepage hero atmosphere',
-    src: '/images/placeholder-ai-hero-home.png',
-    alt: 'placeholder-ai- Warm coral living room light for the WonderHug homepage hero (temporary AI image).',
+    src: '/images/photo-hero-home.png',
+    alt: 'Photoreal still — sunlit South Indian living room for the WonderHug homepage hero.',
   },
   journal_planning: {
     key: 'journal_planning',
@@ -92,6 +97,36 @@ export const DEFAULT_MEDIA_ASSETS: Record<MediaAssetKey, MediaAsset> = {
     label: 'Tool — weight log',
     src: '/images/placeholder-ai-tool-weight.png',
     alt: 'placeholder-ai- Kitchen scale and notebook, temporary AI illustration for the weight log.',
+  },
+  shop_journal: {
+    key: 'shop_journal',
+    label: 'Shop — pregnancy journal',
+    src: '/images/placeholder-ai-shop-journal.png',
+    alt: 'placeholder-ai- Linen journal and jasmine, temporary AI product image.',
+  },
+  shop_kitchen: {
+    key: 'shop_kitchen',
+    label: 'Shop — kitchen cards',
+    src: '/images/placeholder-ai-shop-kitchen.png',
+    alt: 'placeholder-ai- Seasonal kitchen still life, temporary AI product image.',
+  },
+  community: {
+    key: 'community',
+    label: 'Community atmosphere',
+    src: '/images/placeholder-ai-community.png',
+    alt: 'placeholder-ai- Soft gathering of mothers, temporary AI illustration.',
+  },
+  practice: {
+    key: 'practice',
+    label: 'Practice library',
+    src: '/images/placeholder-ai-practice.png',
+    alt: 'placeholder-ai- Warm oil and lamp for Garbh Sanskar practice, temporary AI illustration.',
+  },
+  faculty_seat: {
+    key: 'faculty_seat',
+    label: 'Faculty seat atmosphere',
+    src: '/images/placeholder-ai-faculty-seat.png',
+    alt: 'placeholder-ai- Empty chair by a window, temporary AI faculty-seat image — not a real portrait.',
   },
 }
 

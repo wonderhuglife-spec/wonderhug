@@ -18,6 +18,7 @@ describe('Navbar', () => {
     const nav = screen.getByRole('navigation', { name: 'Primary' })
     expect(within(nav).getByRole('link', { name: 'Shop' })).toHaveAttribute('href', '/shop')
     expect(within(nav).getByRole('link', { name: 'Programs' })).toHaveAttribute('href', '/programs')
+    expect(screen.queryByRole('group', { name: /language/i })).not.toBeInTheDocument()
   })
 
   it('opens mobile drawer', async () => {
@@ -25,5 +26,6 @@ describe('Navbar', () => {
     render(wrap(<Navbar />))
     await user.click(screen.getByRole('button', { name: 'Open menu' }))
     expect(screen.getByRole('dialog', { name: 'Menu' })).toBeInTheDocument()
+    expect(screen.queryByRole('group', { name: /language/i })).not.toBeInTheDocument()
   })
 })

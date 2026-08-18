@@ -8,7 +8,6 @@ import { Seo } from '@/components/seo/Seo'
 import { Badge } from '@/components/ui/Badge'
 import { Container } from '@/components/ui/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { Heading, Text } from '@/components/ui/Typography'
 import { Button, ButtonLink } from '@/components/ui/Button'
 import { Input, Label, Textarea } from '@/components/ui/Input'
 import { pick } from '@/lib/locale'
@@ -16,6 +15,7 @@ import { currentLocale } from '@/i18n'
 import { whatsappUrl } from '@/services/whatsapp'
 import { useAuth } from '@/hooks/useAuth'
 import type { CommunityPost } from '@/types/domain'
+import { PageHero } from '@/components/editorial/PageHero'
 
 export function CommunityGroupPage({ slug: slugProp }: { slug?: string }) {
   const params = useParams()
@@ -38,14 +38,18 @@ export function CommunityGroupPage({ slug: slugProp }: { slug?: string }) {
   return (
     <>
       <Seo title={pick(group.name, locale)} description={pick(group.description, locale)} path={`/community/${group.slug}`} />
-      <Container className="py-16">
-        <Heading as="h1">{pick(group.name, locale)}</Heading>
-        <Text muted className="mt-4">
-          {pick(group.description, locale)}
-        </Text>
-        <ButtonLink to={whatsappUrl(`I would like to join the ${group.slug} room.`)} className="mt-6" variant="teal">
+      <PageHero
+        kicker="Community room"
+        title={pick(group.name, locale)}
+        lede={pick(group.description, locale)}
+        src="/images/placeholder-ai-community.png"
+        alt="placeholder-ai- Community room atmosphere."
+      >
+        <ButtonLink to={whatsappUrl(`I would like to join the ${group.slug} room.`)} variant="teal">
           Continue on WhatsApp
         </ButtonLink>
+      </PageHero>
+      <Container className="py-16">
         <form
           className="mt-10 rounded-2xl border border-line p-6"
           onSubmit={async (event) => {
