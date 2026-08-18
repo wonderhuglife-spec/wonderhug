@@ -1,0 +1,23 @@
+:root {
+  --wh-purple: #79409b;
+  --wh-teal: #309292;
+  --wh-navy: #2f4275;
+  --wh-teal-soft: #f0fdfa;
+  --wh-white: #ffffff;
+  --wh-text: #1f2937;
+  --wh-text-secondary: #64748b;
+  --wh-text-muted: #94a3b8;
+  --wh-border: #e5e7eb;
+  --wh-bg-soft: #f8fafa;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
