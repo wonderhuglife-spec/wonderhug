@@ -23,12 +23,9 @@ export function Logo({ className, compact = false }: { className?: string; compa
         priority
       />
       {compact ? null : (
-        <span className="leading-none">
-          <span className="block font-sans text-[1.05rem] font-bold tracking-tight text-purple">
-            WonderHug
-            <span className="ml-0.5 inline-block h-1.5 w-1.5 translate-y-[-0.55rem] rounded-full bg-teal" aria-hidden />
-          </span>
-          <span className="block font-sans text-[0.95rem] font-bold tracking-tight text-teal">.Life</span>
+        <span className="flex items-center font-sans text-[1.05rem] font-bold leading-none tracking-tight">
+          <span className="text-purple">WonderHug</span>
+          <span className="text-teal">.Life</span>
         </span>
       )}
     </Link>

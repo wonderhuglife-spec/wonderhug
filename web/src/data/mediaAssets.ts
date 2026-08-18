@@ -29,8 +29,8 @@ export const DEFAULT_MEDIA_ASSETS: Record<MediaAssetKey, MediaAsset> = {
   hero_home: {
     key: 'hero_home',
     label: 'Homepage hero atmosphere',
-    src: '/images/placeholder-ai-hero-home.png',
-    alt: 'placeholder-ai- Warm coral living room light for the WonderHug homepage hero (temporary AI image).',
+    src: '/images/photo-hero-home.png',
+    alt: 'Photoreal still — sunlit South Indian living room for the WonderHug homepage hero.',
   },
   journal_planning: {
     key: 'journal_planning',

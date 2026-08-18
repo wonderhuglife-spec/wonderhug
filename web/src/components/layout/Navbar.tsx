@@ -19,7 +19,7 @@ import { HoverMedia } from '@/components/editorial/HoverMedia'
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
-    'min-h-11 rounded-full px-3 text-sm font-medium text-slate transition hover:bg-canvas hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
+    'inline-flex h-11 items-center rounded-full px-3 text-sm font-medium leading-none text-slate transition hover:bg-canvas hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal',
     isActive && 'bg-teal-soft text-purple',
   )
 
@@ -62,23 +62,23 @@ export function Navbar() {
             {t('nav.home')}
           </NavLink>
           <div className="relative group">
-            <button type="button" className="min-h-11 rounded-full px-3 text-sm font-medium text-slate hover:text-purple">
+            <button type="button" className="inline-flex h-11 items-center rounded-full px-3 text-sm font-medium leading-none text-slate hover:text-purple">
               {t('nav.journey')}
             </button>
             <div className="invisible absolute left-0 top-full z-20 w-[min(36rem,calc(100vw-2.5rem))] rounded-2xl border border-line bg-white p-3 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
               <div className="grid gap-1 sm:grid-cols-2">
                 {journeyLinks.map((item) => (
-                  <NavLink key={item.to + item.label} to={item.to} className="flex min-h-11 items-center gap-3 rounded-xl px-2 py-2 text-sm text-ink hover:bg-canvas">
+                  <NavLink key={item.to + item.label} to={item.to} className="inline-flex min-h-11 items-center gap-3 rounded-xl px-2 py-2 text-sm leading-none text-ink hover:bg-canvas">
                     <HoverMedia src={item.src} alt="" className="h-12 w-12 shrink-0 rounded-lg" width={96} height={96} zoomOnHover={false} />
                     {item.label}
                   </NavLink>
                 ))}
               </div>
               <div className="mt-2 border-t border-line pt-2">
-                <NavLink to="/garbh-sanskar" className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
+                <NavLink to="/garbh-sanskar" className="inline-flex min-h-11 items-center rounded-xl px-3 py-2 text-sm leading-none text-ink hover:bg-teal-soft">
                   {t('nav.garbh')}
                 </NavLink>
-                <NavLink to="/tools" className="block min-h-11 rounded-xl px-3 py-2 text-sm text-ink hover:bg-teal-soft">
+                <NavLink to="/tools" className="inline-flex min-h-11 items-center rounded-xl px-3 py-2 text-sm leading-none text-ink hover:bg-teal-soft">
                   {t('nav.tools')}
                 </NavLink>
               </div>
@@ -141,16 +141,16 @@ export function Navbar() {
               </button>
             </div>
             <nav className="mt-6 flex flex-col gap-1 px-5" aria-label="Mobile">
-              <NavLink to="/" className="min-h-12 rounded-2xl px-3 py-3 font-medium" onClick={() => setOpen(false)}>
+              <NavLink to="/" className="inline-flex min-h-12 items-center rounded-2xl px-3 py-3 font-medium" onClick={() => setOpen(false)}>
                 {t('nav.home')}
               </NavLink>
               {NAV_GROUPS[0].items.map((item) => (
-                <NavLink key={item.to} to={item.to} className="min-h-12 rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
+                <NavLink key={item.to} to={item.to} className="inline-flex min-h-12 items-center rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
                   {t(item.key)}
                 </NavLink>
               ))}
               {NAV_ITEMS.map((item) => (
-                <NavLink key={item.to} to={item.to} className="min-h-12 rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
+                <NavLink key={item.to} to={item.to} className="inline-flex min-h-12 items-center rounded-2xl px-3 py-3" onClick={() => setOpen(false)}>
                   {t(item.key)}
                 </NavLink>
               ))}

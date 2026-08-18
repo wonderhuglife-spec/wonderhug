@@ -1,6 +1,5 @@
 'use client'
 
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { useCmsImage } from '@/hooks/useCmsImages'
@@ -10,26 +9,16 @@ import { track } from '@/services/analytics'
 import { whatsappUrl } from '@/services/whatsapp'
 
 export function HeroSection() {
-  const reduce = useReducedMotion()
   const { t } = useTranslation()
   const heroArt = useCmsImage('hero_home')
-  const { scrollY } = useScroll()
-  const y = useTransform(scrollY, [0, 500], [0, 80])
 
   return (
     <section className="relative min-h-[min(92vh,54rem)] overflow-hidden">
-      <motion.div className="absolute inset-0 overflow-hidden" style={{ y: reduce ? 0 : y }}>
-        <Image src={heroArt.src} alt={heroArt.alt} fill priority className="object-cover" sizes="100vw" />
-      </motion.div>
+      <Image src={heroArt.src} alt={heroArt.alt} fill priority className="object-cover" sizes="100vw" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#1A1220]/55 via-[#FBF7F2]/72 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-black/10" />
       <Container className="relative grid min-h-[min(92vh,54rem)] items-end pb-20 pt-28 lg:items-center lg:py-28">
-        <motion.div
-          className="max-w-2xl"
-          initial={reduce ? false : { opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduce ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="max-w-2xl">
           <p className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-purple shadow-sm backdrop-blur">
             {t('hero.kicker')}
           </p>
@@ -60,7 +49,7 @@ export function HeroSection() {
               <dd className="mt-1 font-serif text-2xl text-navy">{t('hero.statCareValue')}</dd>
             </div>
           </dl>
-        </motion.div>
+        </div>
       </Container>
     </section>
   )

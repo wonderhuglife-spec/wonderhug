@@ -1,12 +1,12 @@
 import type { JourneyStage } from '@/types/domain'
 
 export const JOURNEY_ART: Record<JourneyStage, { src: string; alt: string }> = {
-  planning: { src: '/images/placeholder-ai-journal-planning.png', alt: 'placeholder-ai- Planning pregnancy' },
-  ttc: { src: '/images/placeholder-ai-program-beej.png', alt: 'placeholder-ai- Trying to conceive' },
-  pregnant: { src: '/images/placeholder-ai-program-womb.png', alt: 'placeholder-ai- Pregnancy' },
-  birth_prep: { src: '/images/placeholder-ai-tool-contractions.png', alt: 'placeholder-ai- Birth preparation' },
-  new_parent: { src: '/images/placeholder-ai-journal-postpartum.png', alt: 'placeholder-ai- New parent' },
-  parenting: { src: '/images/placeholder-ai-program-parenting.png', alt: 'placeholder-ai- Parenting' },
+  planning: { src: '/images/photo-chapter-expecting.png', alt: 'Photoreal still — planning at a kitchen table' },
+  ttc: { src: '/images/photo-chapter-learning.png', alt: 'Photoreal still — seeds and flowers' },
+  pregnant: { src: '/images/photo-chapter-growing.png', alt: 'Photoreal still — courtyard rest' },
+  birth_prep: { src: '/images/photo-chapter-preparing.png', alt: 'Photoreal still — packed bag' },
+  new_parent: { src: '/images/photo-chapter-parenting.png', alt: 'Photoreal still — newborn rest' },
+  parenting: { src: '/images/photo-chapter-parenting.png', alt: 'Photoreal still — parenting at home' },
 }
 
 export const JOURNEY_HREF: Record<JourneyStage, string> = {

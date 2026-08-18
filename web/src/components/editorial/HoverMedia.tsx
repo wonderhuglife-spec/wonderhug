@@ -14,7 +14,7 @@ export function HoverMedia({
   fill = false,
   sizes,
   priority = false,
-  zoomOnHover = true,
+  zoomOnHover = false,
 }: {
   src: string
   alt: string
