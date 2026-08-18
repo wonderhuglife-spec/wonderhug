@@ -2,6 +2,7 @@
 
 import { Link, useLocation } from '@/lib/navigation'
 import { hubByPath } from '@/data/hubs'
+import { useCatalog } from '@/hooks/useCatalog'
 import { JsonLd, Seo, breadcrumbJsonLd } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -22,7 +23,8 @@ function hubArt(path: string) {
 export function HubPage({ path }: { path?: string }) {
   const { pathname } = useLocation()
   const resolved = path ?? pathname
-  const hub = hubByPath(resolved)
+  const { hubs } = useCatalog()
+  const hub = hubs.find((item) => item.path === resolved) ?? hubByPath(resolved)
   const locale = currentLocale()
 
   if (!hub) {

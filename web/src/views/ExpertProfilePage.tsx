@@ -2,7 +2,7 @@
 
 import { useParams } from '@/lib/navigation'
 import type { Expert } from '@/types/domain'
-import { EXPERTS } from '@/data/experts'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Seo } from '@/components/seo/Seo'
 import { Badge } from '@/components/ui/Badge'
 import { Container } from '@/components/ui/Container'
@@ -15,8 +15,9 @@ import { currentLocale } from '@/i18n'
 
 export function ExpertProfilePage({ slug: slugProp, expert }: { slug?: string; expert?: Expert }) {
   const params = useParams()
+  const { experts } = useCatalog()
   const slug = slugProp ?? String(params.slug ?? '')
-  const data = expert ?? EXPERTS.find((item) => item.slug === slug && item.isListed)
+  const data = expert ?? experts.find((item) => item.slug === slug && item.isListed)
   const locale = currentLocale()
 
   if (!data) {

@@ -2,8 +2,11 @@ import { notFound } from 'next/navigation'
 import { COMMUNITY_GROUPS } from '@/data/community'
 import { pageMetadata } from '@/lib/seo'
 import { CommunityGroupPage } from '@/views/CommunityGroupPage'
+import { loadCatalog } from '@/cms/catalog'
 
 type Props = { params: Promise<{ slug: string }> }
+
+export const dynamicParams = true
 
 export function generateStaticParams() {
   return COMMUNITY_GROUPS.map((group) => ({ slug: group.slug }))
@@ -22,7 +25,8 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params
-  const group = COMMUNITY_GROUPS.find((item) => item.slug === slug)
+  const catalog = await loadCatalog()
+  const group = catalog.groups.find((item) => item.slug === slug)
   if (!group) notFound()
   return <CommunityGroupPage slug={slug} />
 }

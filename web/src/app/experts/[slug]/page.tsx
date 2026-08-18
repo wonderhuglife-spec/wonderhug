@@ -4,8 +4,10 @@ import { pageMetadata } from '@/lib/seo'
 import { ExpertProfilePage } from '@/views/ExpertProfilePage'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { organizationJsonLd } from '@/lib/jsonld'
+import { getExpertBySlug } from '@/services/content'
 
 export const revalidate = 3600
+export const dynamicParams = true
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -15,7 +17,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
-  const expert = EXPERTS.find((item) => item.slug === slug)
+  const expert = (await getExpertBySlug(slug)) ?? EXPERTS.find((item) => item.slug === slug)
   if (!expert) return pageMetadata({ title: 'Expert', description: '', path: `/experts/${slug}` })
   return pageMetadata({
     title: expert.name,
@@ -26,7 +28,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params
-  const expert = EXPERTS.find((item) => item.slug === slug && item.isListed)
+  const expert = await getExpertBySlug(slug)
   if (!expert) notFound()
   return (
     <>

@@ -14,8 +14,7 @@ import { Reveal } from '@/components/motion/Reveal'
 import { MEDICAL_DISCLAIMER } from '@/lib/constants'
 import { isArticleSaved, toggleSavedArticle } from '@/services/saved'
 import { track } from '@/services/analytics'
-import { BLOG_POSTS } from '@/data/blog'
-import { EXPERTS } from '@/data/experts'
+import { useCatalog } from '@/hooks/useCatalog'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { env } from '@/lib/env'
@@ -23,8 +22,9 @@ import { useToast } from '@/components/ui/Toast'
 
 export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: BlogPost }) {
   const params = useParams()
+  const { posts, experts } = useCatalog()
   const slug = slugProp ?? String(params.slug ?? '')
-  const data = post ?? BLOG_POSTS.find((item) => item.slug === slug && item.isPublished)
+  const data = post ?? posts.find((item) => item.slug === slug && item.isPublished)
   const locale = currentLocale()
   const [saved, setSaved] = useState(false)
   const toast = useToast()
@@ -44,8 +44,8 @@ export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: B
     )
   }
 
-  const related = BLOG_POSTS.filter((item) => data.relatedSlugs.includes(item.slug))
-  const expert = EXPERTS.find((item) => item.slug === data.relatedExpertSlug)
+  const related = posts.filter((item) => data.relatedSlugs.includes(item.slug))
+  const expert = experts.find((item) => item.slug === data.relatedExpertSlug)
   const site = env.siteUrl
   const body = pick(data.content, locale)
   const paragraphs = body.split('\n\n').filter((para) => para.trim().length > 0)

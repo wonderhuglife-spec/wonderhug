@@ -12,19 +12,20 @@ import { formatInr } from '@/lib/constants'
 import { currentLocale } from '@/i18n'
 import { useJourney } from '@/hooks/useJourney'
 import { listSavedArticleIds } from '@/services/saved'
-import { BLOG_POSTS } from '@/data/blog'
 import { pick } from '@/lib/locale'
 import { Link } from '@/lib/navigation'
+import { useCatalog } from '@/hooks/useCatalog'
 
 export function AccountPage() {
   const { t } = useTranslation()
   const { user, signOut } = useAuth()
   const { profile } = useJourney()
   const locale = currentLocale()
+  const { posts } = useCatalog()
   const [orders] = useState(() => listLocalOrders())
   const programs = programAccessFromOrders()
   const saved = listSavedArticleIds()
-    .map((id) => BLOG_POSTS.find((post) => post.id === id || post.slug === id))
+    .map((id) => posts.find((post) => post.id === id || post.slug === id))
     .filter(Boolean)
 
   return (
@@ -102,6 +103,13 @@ export function AccountPage() {
               )}
             </ul>
           )}
+        </section>
+        <section className="mt-10">
+          <h2 className="font-serif text-2xl">Website CMS</h2>
+          <p className="mt-2 text-slate">Edit pages, journal posts, shop, programmes, faculty, practices, and media.</p>
+          <ButtonLink to="/admin" className="mt-3">
+            Open WonderHug CMS
+          </ButtonLink>
         </section>
         {user ? (
           <Button className="mt-10" variant="secondary" onClick={() => void signOut()}>

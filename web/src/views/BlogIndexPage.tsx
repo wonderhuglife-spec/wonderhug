@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from 'react'
 import { Link } from '@/lib/navigation'
-import { BLOG_CATEGORIES, BLOG_POSTS } from '@/data/blog'
+import { BLOG_CATEGORIES } from '@/data/blog'
+import { useCatalog } from '@/hooks/useCatalog'
 import type { BlogPost } from '@/types/domain'
 import { Seo } from '@/components/seo/Seo'
 import { Badge } from '@/components/ui/Badge'
@@ -23,7 +24,8 @@ export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
   const [filter, setFilter] = useState<Filter>('all')
   const [q, setQ] = useState('')
   const locale = currentLocale()
-  const source = postsProp ?? BLOG_POSTS.filter((post) => post.isPublished)
+  const { posts: catalogPosts } = useCatalog()
+  const source = postsProp ?? catalogPosts.filter((post) => post.isPublished)
   const posts = useMemo(() => {
     const byCat = filter === 'all' ? source : source.filter((post) => post.category === filter)
     if (!q) return byCat

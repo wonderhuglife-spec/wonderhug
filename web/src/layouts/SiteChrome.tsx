@@ -11,6 +11,15 @@ import { SkipLink } from '@/components/layout/SkipLink'
 export function SiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname()
   const reduce = useReducedMotion()
+  const isAdmin = pathname.startsWith('/admin')
+  if (isAdmin) {
+    return (
+      <div className="min-h-svh bg-[#f0f0f1] text-ink">
+        <SkipLink />
+        {children}
+      </div>
+    )
+  }
   return (
     <div className="flex min-h-svh flex-col bg-paper text-ink">
       <SkipLink />

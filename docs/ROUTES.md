@@ -23,7 +23,16 @@ Every path in this table is a real App Router page. Direct navigation (reload / 
 | `/download` | Native app download / TestFlight notes |
 | `/signin` | Phone OTP and email magic-link sign-in |
 | `/account` | Profile, timeline, orders, saved articles |
-| `/admin` | Staff CMS for homepage, journal, products, experts, media assets |
+| `/admin` | WordPress-style CMS dashboard |
+| `/admin/posts` | Journal posts CRUD |
+| `/admin/pages` | Topic hub pages CRUD |
+| `/admin/products` | Shop products CRUD |
+| `/admin/programs` | Programmes CRUD |
+| `/admin/experts` | Faculty seats CRUD |
+| `/admin/practices` | Practice library CRUD |
+| `/admin/groups` | Community rooms CRUD |
+| `/admin/media` | Site-wide photographs |
+| `/admin/settings` | Homepage hero |
 | `/privacy` | Operational privacy notice (counsel copy pending) |
 | `/terms` | Operational terms (counsel copy pending) |
 | `/medical-disclaimer` | Education-not-diagnosis disclaimer |

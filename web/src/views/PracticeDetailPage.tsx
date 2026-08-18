@@ -1,7 +1,7 @@
 'use client'
 
 import { useParams } from '@/lib/navigation'
-import { PRACTICES } from '@/data/practices'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Seo } from '@/components/seo/Seo'
 import { Container } from '@/components/ui/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -13,8 +13,9 @@ import type { Practice } from '@/types/domain'
 
 export function PracticeDetailPage({ slug: slugProp, practice: practiceProp }: { slug?: string; practice?: Practice }) {
   const params = useParams()
+  const { practices } = useCatalog()
   const slug = slugProp ?? String(params.slug ?? '')
-  const practice = practiceProp ?? PRACTICES.find((item) => item.slug === slug)
+  const practice = practiceProp ?? practices.find((item) => item.slug === slug)
   const locale = currentLocale()
   if (!practice) {
     return (

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { Link } from '@/lib/navigation'
-import { EXPERTS } from '@/data/experts'
+import { useCatalog } from '@/hooks/useCatalog'
 import { Seo } from '@/components/seo/Seo'
 import { Badge } from '@/components/ui/Badge'
 import { Container } from '@/components/ui/Container'
@@ -26,10 +26,11 @@ type Filter = ExpertSpeciality | 'all'
 
 export function ExpertsPage() {
   const [filter, setFilter] = useState<Filter>('all')
+  const { experts } = useCatalog()
   const list = useMemo(() => {
-    const rows = EXPERTS.filter((item) => item.isListed)
+    const rows = experts.filter((item) => item.isListed)
     return filter === 'all' ? rows : rows.filter((item) => item.speciality === filter)
-  }, [filter])
+  }, [filter, experts])
 
   return (
     <>
