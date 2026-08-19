@@ -1,3 +1,11 @@
+-- Supabase keeps pgcrypto in schema extensions. Login used search_path = public only.
+
+create extension if not exists pgcrypto with schema extensions;
+
+alter function public.cms_admin_verify(uuid) set search_path = public, extensions;
+alter function public.cms_admin_list(uuid) set search_path = public, extensions;
+alter function public.cms_save_state(uuid, jsonb, jsonb, jsonb, jsonb) set search_path = public, extensions;
+
 create or replace function public.cms_admin_login(p_username text, p_password text)
 returns jsonb
 language plpgsql
