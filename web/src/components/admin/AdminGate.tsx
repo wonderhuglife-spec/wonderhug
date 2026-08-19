@@ -12,8 +12,9 @@ export function useAdminSession() {
 }
 
 export function AdminGate({ children }: { children: ReactNode }) {
+  // Always start signed out so the server HTML and the first client paint match.
   const [session, setSession] = useState<AdminSession | null>(null)
-  const [ready, setReady] = useState(false)
+  const [checked, setChecked] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -22,7 +23,7 @@ export function AdminGate({ children }: { children: ReactNode }) {
       if (cancelled) return
       if (stored && !next) logoutAdmin()
       setSession(next)
-      setReady(true)
+      setChecked(true)
     })
     const onChange = () => setSession(readAdminSession())
     window.addEventListener('wonderhug-admin-session', onChange)
@@ -32,12 +33,8 @@ export function AdminGate({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  if (!ready) {
-    return <div className="min-h-svh bg-[#f0f0f1]" aria-busy="true" aria-label="Loading CMS" />
-  }
-
   if (!session) {
-    return <AdminLoginPage />
+    return <AdminLoginPage checking={checked === false} />
   }
 
   return (

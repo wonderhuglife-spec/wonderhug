@@ -20,15 +20,15 @@ export function PracticesPage() {
         kicker="Garbh Sanskar"
         title="Practice library"
         lede="Audio files ship with the daily pack after purchase. These guides work offline in the app once saved."
-        src="/images/placeholder-ai-practice.png"
-        alt="placeholder-ai- Practice still life."
+        src="/images/photo-garbh-rest.png"
+        alt="Practice still life."
       />
       <Container className="py-16">
         <ul className="grid gap-6 md:grid-cols-2">
           {practices.map((practice, index) => (
             <Reveal key={practice.id} delay={index * 0.04}>
               <li className="overflow-hidden rounded-3xl border border-line bg-white">
-                <HoverMedia src="/images/placeholder-ai-practice.png" alt="placeholder-ai- Practice still life." className="aspect-[16/9] w-full" />
+                <HoverMedia src="/images/photo-garbh-rest.png" alt="Practice still life." className="aspect-[16/9] w-full" />
                 <div className="p-6">
                   <h2 className="font-serif text-2xl">
                     <Link to={`/practices/${practice.slug}`}>{pick(practice.title, locale)}</Link>

@@ -9,8 +9,8 @@ export function EvidenceSection() {
     <section className="py-20">
       <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <HoverMedia
-          src="/images/placeholder-ai-journal-garbh.png"
-          alt="placeholder-ai- Quiet rest for science-and-tradition storytelling."
+          src="/images/photo-garbh-rest.png"
+          alt="Quiet rest for science-and-tradition storytelling."
           className="aspect-[4/5] w-full rounded-3xl"
           width={720}
           height={900}

@@ -37,15 +37,15 @@ export function ShopPage() {
         kicker="Wellness products · not medicines"
         title={t('shop.title')}
         lede={t('shop.intro')}
-        src="/images/placeholder-ai-shop-journal.png"
-        alt="placeholder-ai- Shop atmosphere"
+        src="/images/photo-planning.png"
+        alt="Shop atmosphere"
       />
       <Container className="grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-3">
         {list.map((product, index) => (
           <Reveal key={product.id} delay={index * 0.04}>
             <article className="overflow-hidden rounded-3xl border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-lift">
               <Link to={`/shop/${product.slug}`} className="block">
-                <HoverMedia src={product.image} alt={`placeholder-ai- ${pick(product.name, locale)}`} className="aspect-[4/3] w-full" />
+                <HoverMedia src={product.image} alt={`${pick(product.name, locale)}`} className="aspect-[4/3] w-full" />
               </Link>
               <div className="p-6">
                 <h2 className="font-serif text-2xl">

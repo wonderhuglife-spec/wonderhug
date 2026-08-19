@@ -50,7 +50,7 @@ export function ProductPage({ slug: slugProp, product: productProp }: { slug?: s
         }}
       />
       <Container className="grid gap-10 py-16 lg:grid-cols-2">
-        <Media src={product.image} alt={`placeholder-ai- ${name}`} className="aspect-square w-full rounded-2xl bg-canvas object-cover" width={800} height={800} />
+        <Media src={product.image} alt={`${name}`} className="aspect-square w-full rounded-2xl bg-canvas object-cover" width={800} height={800} />
         <div>
           <Heading as="h1">{name}</Heading>
           <p className="mt-4 text-lg text-slate">{description}</p>

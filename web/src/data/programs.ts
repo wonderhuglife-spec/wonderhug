@@ -2,9 +2,9 @@ import { loc } from '@/lib/locale'
 import { DEFAULT_MEDIA_ASSETS } from '@/data/mediaAssets'
 import type { Program, ProgramLesson, ProgramModule } from '@/types/domain'
 
-const AUDIO = '/media/placeholder-ai-lesson.mp3'
-const VIDEO = '/media/placeholder-ai-lesson.mp4'
-const PACK = '/media/placeholder-ai-lesson.mp3'
+const AUDIO = '/media/lesson.mp3'
+const VIDEO = '/media/lesson.mp4'
+const PACK = '/media/lesson.mp3'
 
 function mod(id: string, order: number, titleEn: string, titleTe: string, bodyEn: string, bodyTe: string, quiz?: ProgramModule['quiz']): ProgramModule {
   return { id, displayOrder: order, title: loc(titleEn, titleTe), body: loc(bodyEn, bodyTe), quiz }

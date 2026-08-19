@@ -31,7 +31,11 @@ supabase db push
 supabase db seed
 ```
 
-Apply `supabase/migrations` in order. Create an auth user and set `profiles.role = 'admin'` for CMS writes.
+Apply `supabase/migrations` in order, including `20260819120000_cms_admin_auth.sql` (CMS login, extra admins, media uploads).
+
+The site already uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (the `sb_publishable_…` key). Paste that SQL in **Supabase → SQL Editor → Run**. After it succeeds, CMS login `adminmani` / `maniadmin` is stored in the project, and **Admin users** can add more operators.
+
+Until that SQL runs, the same starter login still opens the panel in the browser, but new admins and uploaded files cannot be saved to Supabase (row-level security blocks anonymous writes).
 
 ## Mobile
 

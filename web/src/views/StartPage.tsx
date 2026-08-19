@@ -23,8 +23,8 @@ export function StartPage() {
         kicker="Begin here"
         title="What describes your journey?"
         lede="One question. Then the homepage and shop follow you."
-        src="/images/placeholder-ai-journal-planning.png"
-        alt="placeholder-ai- Start your journey atmosphere."
+        src="/images/photo-planning.png"
+        alt="Start your journey atmosphere."
       />
       <Container className="py-16">
         <div className="grid gap-3 sm:grid-cols-2">

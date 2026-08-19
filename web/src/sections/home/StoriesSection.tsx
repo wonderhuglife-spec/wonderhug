@@ -13,8 +13,8 @@ export function StoriesSection() {
     <section className="bg-canvas py-20">
       <Container className="grid items-center gap-10 lg:grid-cols-12">
         <HoverMedia
-          src="/images/placeholder-ai-community.png"
-          alt="placeholder-ai- Community atmosphere for consented stories."
+          src="/images/photo-chapter-connecting.png"
+          alt="Community atmosphere for consented stories."
           className="aspect-[4/5] w-full rounded-3xl lg:col-span-5"
           width={720}
           height={900}

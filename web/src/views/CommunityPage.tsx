@@ -33,8 +33,8 @@ export function CommunityPage() {
         kicker="AiSensy · WhatsApp"
         title={t('community.whatsappTitle')}
         lede={t('community.whatsappBody')}
-        src="/images/placeholder-ai-community.png"
-        alt="placeholder-ai- Community atmosphere."
+        src="/images/photo-chapter-connecting.png"
+        alt="Community atmosphere."
       >
         <ButtonLink to={whatsappUrl('Namaste, I would like to join the WonderHug WhatsApp community.')} variant="teal">
           {t('cta.whatsapp')}
@@ -59,7 +59,7 @@ export function CommunityPage() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {groups.map((group) => (
             <Link key={group.id} to={`/community/${group.slug}`} className="overflow-hidden rounded-2xl border border-line bg-white transition hover:shadow-lift">
-              <HoverMedia src="/images/placeholder-ai-community.png" alt="placeholder-ai- Community room." className="aspect-[16/8] w-full" width={800} height={400} />
+              <HoverMedia src="/images/photo-chapter-connecting.png" alt="Community room." className="aspect-[16/8] w-full" width={800} height={400} />
               <span className="block p-6">
                 <h2 className="font-serif text-2xl">{pick(group.name, locale)}</h2>
                 <p className="mt-3 text-slate">{pick(group.description, locale)}</p>

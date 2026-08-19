@@ -17,7 +17,7 @@ export const TEAM: TeamMember[] = [
       'The people shipping website, app and WhatsApp operations. Official names and portraits appear when WonderHug provides brand photography.',
       'వెబ్, యాప్, WhatsApp నడిపేవారు. అధికారిక పేర్లు, ఫోటోలు బ్రాండ్ ఫోటోగ్రఫీ వచ్చినప్పుడు.',
     ),
-    portrait: '/images/portrait-placeholder.svg',
+    portrait: '/images/faculty-seat.png',
   },
   {
     id: 'team-clinical',
@@ -27,7 +27,7 @@ export const TEAM: TeamMember[] = [
       'Articles can name a reviewer when one is assigned. Until named clinicians are verified, faculty seats book through the WhatsApp desk.',
       'సమీక్షకుడు ఉన్నప్పుడు వ్యాసాలు పేరు పెడతాయి. అప్పటి వరకు WhatsApp డెస్క్.',
     ),
-    portrait: '/images/portrait-placeholder.svg',
+    portrait: '/images/faculty-seat.png',
   },
   {
     id: 'team-community',
@@ -37,7 +37,7 @@ export const TEAM: TeamMember[] = [
       'Moderation and daily prompts run through AiSensy. This is the living community; website rooms are the quieter archive.',
       'పర్యవేక్షణ AiSensy ద్వారా. సజీవ సమూహం ఇది; వెబ్ గదులు నిశ్శబ్ద ఆర్కైవ్.',
     ),
-    portrait: '/images/portrait-placeholder.svg',
+    portrait: '/images/faculty-seat.png',
   },
   {
     id: 'team-content',
@@ -47,6 +47,6 @@ export const TEAM: TeamMember[] = [
       'Bilingual education that distinguishes practice from diagnosis. Named editors publish with the logo pack.',
       'సాధనను నిర్ధారణ నుంచి వేరు చేసే ద్విభాషా విద్య.',
     ),
-    portrait: '/images/portrait-placeholder.svg',
+    portrait: '/images/faculty-seat.png',
   },
 ]

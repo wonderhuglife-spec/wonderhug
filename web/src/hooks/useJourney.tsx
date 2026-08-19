@@ -1,12 +1,11 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import { useTranslation } from 'react-i18next'
+import { currentLocale } from '@/i18n'
 import { DEFAULT_JOURNEY } from '@/data/journeys'
 import { defaultProfile, narrativeFor, recommend } from '@/services/personalization'
 import { readStoredJourney, readStoredProfile, writeStoredJourney, writeStoredProfile } from '@/services/journeyStorage'
 import { track } from '@/services/analytics'
-import { currentLocale } from '@/i18n'
 import type { Goal, JourneyStage, PersonalizationProfile, RecommendedItem } from '@/types/domain'
 
 interface JourneyContextValue {
@@ -21,8 +20,7 @@ interface JourneyContextValue {
 const JourneyContext = createContext<JourneyContextValue | null>(null)
 
 export function JourneyProvider({ children }: { children: ReactNode }) {
-  const { i18n } = useTranslation()
-  const locale = i18n.language?.startsWith('te') ? 'te' : currentLocale()
+  const locale = currentLocale()
   const [profile, setProfile] = useState<PersonalizationProfile>(() => defaultProfile(DEFAULT_JOURNEY))
 
   useEffect(() => {
