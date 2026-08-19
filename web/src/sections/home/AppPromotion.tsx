@@ -10,7 +10,7 @@ export function AppPromotion() {
   return (
     <section className="py-20">
       <Container className="grid overflow-hidden rounded-[2rem] border border-line bg-white lg:grid-cols-2">
-        <HoverMedia src="/images/placeholder-ai-program-parenting.png" alt="placeholder-ai- Daily companion atmosphere." className="min-h-[18rem] w-full lg:min-h-full" width={900} height={700} />
+        <HoverMedia src="/images/placeholder-ai-program-parenting.png" alt="A parent at home with a toddler and a baby." className="min-h-[18rem] w-full lg:min-h-full" width={900} height={700} />
         <div className="px-8 py-14 sm:px-12">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-dark">Take WonderHug with you</p>
           <Heading as="h2" className="mt-4 max-w-xl">

@@ -25,7 +25,7 @@ export function SignInPage() {
         title={t('auth.title')}
         lede={t('auth.phoneHelp')}
         src="/images/placeholder-ai-faculty-seat.png"
-        alt="placeholder-ai- Sign in atmosphere."
+        alt="An empty consultation chair by a window — a faculty seat, not a verified portrait."
         tone="light"
       />
       <Container className="max-w-xl py-16">

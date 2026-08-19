@@ -13,7 +13,7 @@ export function NotFoundPage() {
         title="This page is not on the journey."
         lede="The URL may be mistyped, or the cluster page has not been published yet."
         src="/images/placeholder-ai-hero-home.png"
-        alt="placeholder-ai- Missing page atmosphere."
+        alt="An expecting couple sitting together in a sunlit family living room."
       >
         <ButtonLink to="/">Back home</ButtonLink>
       </PageHero>

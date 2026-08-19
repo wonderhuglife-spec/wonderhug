@@ -38,7 +38,7 @@ export function ShopPage() {
         title={t('shop.title')}
         lede={t('shop.intro')}
         src="/images/placeholder-ai-shop-journal.png"
-        alt="placeholder-ai- Shop atmosphere"
+        alt="A printable pregnancy journal on a family desk."
       />
       <Container className="grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-3">
         {list.map((product, index) => (

@@ -20,7 +20,7 @@ export function CartPage() {
   return (
     <>
       <Seo title={t('cart.title')} description={t('cart.title')} path="/cart" />
-      <PageHero kicker="Bag" title={t('cart.title')} src="/images/placeholder-ai-shop-kitchen.png" alt="placeholder-ai- Cart atmosphere." tone="light" />
+      <PageHero kicker="Bag" title={t('cart.title')} src="/images/placeholder-ai-shop-kitchen.png" alt="Home kitchen food and pregnancy kitchen cards." tone="light" />
       <Container className="py-16">
         {items.length === 0 ? (
           <div className="mt-10">

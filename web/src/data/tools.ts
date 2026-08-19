@@ -10,7 +10,7 @@ export const TOOLS: ToolDef[] = [
     href: '/tools/due-date',
     stageFit: ['planning', 'ttc', 'pregnant'],
     image: '/images/placeholder-ai-tool-due.png',
-    imageAlt: 'placeholder-ai- Calendar and lamp for the due-date tool.',
+    imageAlt: 'A family calendar and pregnancy journal for estimating a due date.',
   },
   {
     id: 'tool-kicks',
@@ -20,7 +20,7 @@ export const TOOLS: ToolDef[] = [
     href: '/tools/kicks',
     stageFit: ['pregnant', 'birth_prep'],
     image: '/images/placeholder-ai-tool-kicks.png',
-    imageAlt: 'placeholder-ai- Movement-count notebook for the kick counter.',
+    imageAlt: 'A pregnant parent’s hands on their belly while counting baby movements.',
   },
   {
     id: 'tool-contractions',
@@ -30,7 +30,7 @@ export const TOOLS: ToolDef[] = [
     href: '/tools/contractions',
     stageFit: ['pregnant', 'birth_prep'],
     image: '/images/placeholder-ai-tool-contractions.png',
-    imageAlt: 'placeholder-ai- Clock and rest for the contraction timer.',
+    imageAlt: 'A couple preparing for birth with a clock and notebook beside the bed.',
   },
   {
     id: 'tool-week',
@@ -40,7 +40,7 @@ export const TOOLS: ToolDef[] = [
     href: '/pregnancy/week-by-week',
     stageFit: ['pregnant', 'birth_prep'],
     image: '/images/placeholder-ai-program-womb.png',
-    imageAlt: 'placeholder-ai- Garden rest for the week guide.',
+    imageAlt: 'A pregnant woman resting in a courtyard for the week-by-week guide.',
   },
   {
     id: 'tool-weight',
@@ -50,6 +50,6 @@ export const TOOLS: ToolDef[] = [
     href: '/tools/weight',
     stageFit: ['pregnant', 'new_parent'],
     image: '/images/placeholder-ai-tool-weight.png',
-    imageAlt: 'placeholder-ai- Kitchen scale for the weight log.',
+    imageAlt: 'Home kitchen food for pregnancy beside a private weight-log notebook.',
   },
 ]

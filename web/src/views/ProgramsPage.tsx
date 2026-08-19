@@ -38,7 +38,7 @@ export function ProgramsPage() {
   return (
     <>
       <Seo title={t('programs.title')} description={t('programs.intro')} path="/programs" />
-      <PageHero kicker="Education · practice" title={t('programs.title')} lede={t('programs.intro')} src="/images/placeholder-ai-program-womb.png" alt="placeholder-ai- Programmes atmosphere" />
+      <PageHero kicker="Education · practice" title={t('programs.title')} lede={t('programs.intro')} src="/images/placeholder-ai-program-womb.png" alt="A pregnant woman resting in a home courtyard during a wellness programme." />
       <Container className="grid gap-8 py-12 md:grid-cols-3">
         {programs.filter((program) => program.isPublished).map((program, index) => (
           <Reveal key={program.id} delay={index * 0.05}>

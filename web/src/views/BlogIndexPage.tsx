@@ -42,7 +42,7 @@ export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
         title="Journal"
         lede="Search and categories. Every article names an author and review status."
         src="/images/placeholder-ai-journal-garbh.png"
-        alt="placeholder-ai- Journal atmosphere"
+        alt="A pregnant woman practising Garbh Sanskar rest at home."
       >
         <Input className="max-w-md bg-white/95" placeholder="Search" value={q} onChange={(e) => setQ(e.target.value)} />
       </PageHero>
