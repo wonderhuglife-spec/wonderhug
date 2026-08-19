@@ -41,8 +41,8 @@ export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
         kicker="Editorial"
         title="Journal"
         lede="Search and categories. Every article names an author and review status."
-        src="/images/placeholder-ai-journal-garbh.png"
-        alt="placeholder-ai- Journal atmosphere"
+        src="/images/photo-garbh-rest.png"
+        alt="Journal atmosphere"
       >
         <Input className="max-w-md bg-white/95" placeholder="Search" value={q} onChange={(e) => setQ(e.target.value)} />
       </PageHero>

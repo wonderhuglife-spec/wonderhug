@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { getWorkingCms, saveCmsSettings } from '@/cms/store'
+import { ImagePicker } from '@/components/admin/ImagePicker'
 import { persistRemoteCms } from '@/cms/remote'
 import { defaultSettings } from '@/cms/seed'
 import { Button } from '@/components/ui/Button'
@@ -37,10 +38,11 @@ export function AdminSettingsPage() {
           <Label htmlFor="body">Hero body</Label>
           <Textarea id="body" value={settings.heroBody} onChange={(event) => setSettings({ ...settings, heroBody: event.target.value })} />
         </div>
-        <div>
-          <Label htmlFor="image">Hero image URL</Label>
-          <Input id="image" value={settings.heroImageUrl} onChange={(event) => setSettings({ ...settings, heroImageUrl: event.target.value })} />
-        </div>
+        <ImagePicker
+          label="Hero image"
+          value={settings.heroImageUrl}
+          onChange={(heroImageUrl) => setSettings({ ...settings, heroImageUrl })}
+        />
         <div>
           <Label htmlFor="alt">Hero image alt</Label>
           <Input id="alt" value={settings.heroImageAlt} onChange={(event) => setSettings({ ...settings, heroImageAlt: event.target.value })} />

@@ -1,12 +1,12 @@
 import type { JourneyStage } from '@/types/domain'
 
 export const JOURNEY_ART: Record<JourneyStage, { src: string; alt: string }> = {
-  planning: { src: '/images/photo-chapter-expecting.png', alt: 'Photoreal still — planning at a kitchen table' },
-  ttc: { src: '/images/photo-chapter-learning.png', alt: 'Photoreal still — seeds and flowers' },
-  pregnant: { src: '/images/photo-chapter-growing.png', alt: 'Photoreal still — courtyard rest' },
-  birth_prep: { src: '/images/photo-chapter-preparing.png', alt: 'Photoreal still — packed bag' },
-  new_parent: { src: '/images/photo-chapter-parenting.png', alt: 'Photoreal still — newborn rest' },
-  parenting: { src: '/images/photo-chapter-parenting.png', alt: 'Photoreal still — parenting at home' },
+  planning: { src: '/images/photo-planning.png', alt: 'A couple planning pregnancy together at home' },
+  ttc: { src: '/images/photo-planning.png', alt: 'A couple preparing to conceive together' },
+  pregnant: { src: '/images/photo-garbh-rest.png', alt: 'A pregnant woman resting at home' },
+  birth_prep: { src: '/images/photo-first-birth.png', alt: 'A couple packing a hospital bag before first birth' },
+  new_parent: { src: '/images/photo-newborn.png', alt: 'A parent holding a newborn' },
+  parenting: { src: '/images/photo-chapter-parenting.png', alt: 'A parent with a toddler and a baby at home' },
 }
 
 export const JOURNEY_HREF: Record<JourneyStage, string> = {

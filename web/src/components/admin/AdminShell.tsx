@@ -14,9 +14,10 @@ import {
   Users,
   Flower2,
   MessagesSquare,
+  UserPlus,
   ExternalLink,
 } from 'lucide-react'
-import { useAuth } from '@/hooks/useAuth'
+import { logoutAdmin, type AdminSession } from '@/cms/adminAuth'
 import { supabase } from '@/lib/supabase'
 import { cn } from '@/lib/cn'
 
@@ -29,14 +30,13 @@ const NAV = [
   { href: '/admin/experts', label: 'Faculty', icon: Users },
   { href: '/admin/practices', label: 'Practices', icon: Flower2 },
   { href: '/admin/groups', label: 'Community', icon: MessagesSquare },
+  { href: '/admin/users', label: 'Admin users', icon: UserPlus },
   { href: '/admin/media', label: 'Media', icon: ImageIcon },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 
-export function AdminShell({ children }: { children: ReactNode }) {
+export function AdminShell({ children, session }: { children: ReactNode; session?: AdminSession | null }) {
   const pathname = usePathname()
-  const { user, role } = useAuth()
-  const staff = role === 'admin' || role === 'moderator' || role === 'expert'
   const backend = Boolean(supabase)
 
   return (
@@ -66,7 +66,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           })}
         </nav>
         <div className="border-t border-white/10 p-4 text-xs text-white/50">
-          {backend ? (staff ? `Staff · ${role}` : user ? 'Signed in · not staff' : 'Sign in for Supabase writes') : 'Local CMS · this browser'}
+          {session ? `Signed in · ${session.username}` : backend ? 'Supabase connected' : 'Local CMS'}
         </div>
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">
@@ -79,9 +79,16 @@ export function AdminShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <p className="hidden text-sm text-slate md:block">Manage pages, posts, shop, programmes, and media. Published content appears on the website.</p>
-          <Link to="/" className="inline-flex items-center gap-1 text-sm text-[#2271b1] hover:underline">
-            View site <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-          </Link>
+          <div className="flex items-center gap-3">
+            {session ? (
+              <button type="button" className="text-sm text-slate hover:text-ink" onClick={() => logoutAdmin()}>
+                Log out
+              </button>
+            ) : null}
+            <Link to="/" className="inline-flex items-center gap-1 text-sm text-[#2271b1] hover:underline">
+              View site <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </div>
         </header>
         <div className="flex-1 p-4 md:p-8" id="main">{children}</div>
       </div>

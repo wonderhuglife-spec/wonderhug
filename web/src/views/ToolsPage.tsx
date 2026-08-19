@@ -29,8 +29,8 @@ export function ToolsPage() {
         kicker="Educational helpers"
         title="Tools"
         lede="Due date, kick counts, contractions and weight — notebooks for this week, not a diagnosis."
-        src="/images/placeholder-ai-tool-due.png"
-        alt="placeholder-ai- Tools atmosphere"
+        src="/images/photo-chapter-preparing.png"
+        alt="Tools atmosphere"
       />
       <Container className="py-16">
         <ul className="grid gap-6 md:grid-cols-2">

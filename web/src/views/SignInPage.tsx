@@ -24,8 +24,8 @@ export function SignInPage() {
         kicker="Account"
         title={t('auth.title')}
         lede={t('auth.phoneHelp')}
-        src="/images/placeholder-ai-faculty-seat.png"
-        alt="placeholder-ai- Sign in atmosphere."
+        src="/images/faculty-seat.png"
+        alt="Sign in atmosphere."
         tone="light"
       />
       <Container className="max-w-xl py-16">

@@ -31,8 +31,8 @@ export function PracticeDetailPage({ slug: slugProp, practice: practiceProp }: {
         kicker={`${practice.durationMinutes} min · ${practice.mediaType}`}
         title={pick(practice.title, locale)}
         lede={pick(practice.description, locale)}
-        src="/images/placeholder-ai-practice.png"
-        alt="placeholder-ai- Practice still life."
+        src="/images/photo-garbh-rest.png"
+        alt="Practice still life."
       />
       <Container narrow className="py-16">
         <p className="text-lg leading-relaxed text-slate">Official audio/video files are part of purchased packs. This page is the guided script you can use today.</p>

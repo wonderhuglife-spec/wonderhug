@@ -43,7 +43,7 @@ export function downloadCertificatePdf(opts: { programName: string; userName: st
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `placeholder-ai-certificate-${opts.programName.replace(/\s+/g, '-').toLowerCase()}.pdf`
+  a.download = `certificate-${opts.programName.replace(/\s+/g, '-').toLowerCase()}.pdf`
   a.click()
   URL.revokeObjectURL(url)
   return { line1, line2, line3, line4, line5 }

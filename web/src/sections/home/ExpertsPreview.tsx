@@ -30,7 +30,7 @@ export function ExpertsPreview() {
           {preview.map((expert, index) => (
             <Reveal key={expert.id} delay={index * 0.04}>
               <li className="overflow-hidden rounded-2xl border border-line bg-white">
-                <HoverMedia src={expert.photo} alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait." className="aspect-[16/10] w-full" width={640} height={400} />
+                <HoverMedia src={expert.photo} alt="Faculty seat atmosphere, not a verified portrait." className="aspect-[16/10] w-full" width={640} height={400} />
                 <div className="p-5">
                   <Badge tone="muted">{expert.speciality}</Badge>
                   <p className="mt-3 font-medium text-ink">{expert.name}</p>

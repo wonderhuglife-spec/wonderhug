@@ -12,8 +12,8 @@ export function NotFoundPage() {
         kicker="404"
         title="This page is not on the journey."
         lede="The URL may be mistyped, or the cluster page has not been published yet."
-        src="/images/placeholder-ai-hero-home.png"
-        alt="placeholder-ai- Missing page atmosphere."
+        src="/images/photo-hero-home.png"
+        alt="Missing page atmosphere."
       >
         <ButtonLink to="/">Back home</ButtonLink>
       </PageHero>

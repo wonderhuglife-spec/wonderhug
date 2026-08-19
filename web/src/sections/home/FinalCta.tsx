@@ -13,7 +13,7 @@ export function FinalCta() {
     <section className="pb-8">
       <Container>
         <div className="relative overflow-hidden rounded-[2rem] px-6 py-16 text-center text-white sm:px-12">
-          <Image src="/images/placeholder-ai-hero-home.png" alt="placeholder-ai- Final call-to-action atmosphere." fill className="object-cover" sizes="1200px" />
+          <Image src="/images/photo-hero-home.png" alt="Final call-to-action atmosphere." fill className="object-cover" sizes="1200px" />
           <div className="absolute inset-0 bg-gradient-to-br from-purple/85 via-[#5C2F78]/80 to-navy/85" />
           <div className="relative">
             <Image src="/logo.png" alt="" width={96} height={96} className="mx-auto h-20 w-20 rounded-full bg-white object-contain p-1" />

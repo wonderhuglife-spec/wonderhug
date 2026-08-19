@@ -9,8 +9,8 @@ export const TOOLS: ToolDef[] = [
     description: loc('Estimate a due date from the last period (Naegele). An estimate, not a deadline.', 'చివరి రుతువు నుంచి గడువు. అంచనా, గడువు కాదు.'),
     href: '/tools/due-date',
     stageFit: ['planning', 'ttc', 'pregnant'],
-    image: '/images/placeholder-ai-tool-due.png',
-    imageAlt: 'placeholder-ai- Calendar and lamp for the due-date tool.',
+    image: '/images/photo-chapter-preparing.png',
+    imageAlt: 'A pregnant woman preparing at home before birth.',
   },
   {
     id: 'tool-kicks',
@@ -19,8 +19,8 @@ export const TOOLS: ToolDef[] = [
     description: loc('A notebook for movement sessions. Use the method your clinician taught you.', 'కదలిక సెషన్ల నోటుబుక్. వైద్యుడు నేర్పిన పద్ధతి.'),
     href: '/tools/kicks',
     stageFit: ['pregnant', 'birth_prep'],
-    image: '/images/placeholder-ai-tool-kicks.png',
-    imageAlt: 'placeholder-ai- Movement-count notebook for the kick counter.',
+    image: '/images/photo-garbh-rest.png',
+    imageAlt: 'A pregnant woman resting with a hand on her belly.',
   },
   {
     id: 'tool-contractions',
@@ -29,8 +29,8 @@ export const TOOLS: ToolDef[] = [
     description: loc('Time waves. This does not diagnose labour.', 'తరంగాల సమయం. ప్రసవ నిర్ధారణ కాదు.'),
     href: '/tools/contractions',
     stageFit: ['pregnant', 'birth_prep'],
-    image: '/images/placeholder-ai-tool-contractions.png',
-    imageAlt: 'placeholder-ai- Clock and rest for the contraction timer.',
+    image: '/images/photo-first-birth.png',
+    imageAlt: 'A couple packing a hospital bag before first birth.',
   },
   {
     id: 'tool-week',
@@ -39,8 +39,8 @@ export const TOOLS: ToolDef[] = [
     description: loc('Open the note that matches your week.', 'మీ వారపు గమనిక తెరవండి.'),
     href: '/pregnancy/week-by-week',
     stageFit: ['pregnant', 'birth_prep'],
-    image: '/images/placeholder-ai-program-womb.png',
-    imageAlt: 'placeholder-ai- Garden rest for the week guide.',
+    image: '/images/photo-garbh-rest.png',
+    imageAlt: 'A pregnant woman resting at home.',
   },
   {
     id: 'tool-weight',
@@ -49,7 +49,7 @@ export const TOOLS: ToolDef[] = [
     description: loc('A private log. Trends belong with your clinician, not with shame.', 'గోప్య నమోదు. ధోరణులు వైద్యునివి.'),
     href: '/tools/weight',
     stageFit: ['pregnant', 'new_parent'],
-    image: '/images/placeholder-ai-tool-weight.png',
-    imageAlt: 'placeholder-ai- Kitchen scale for the weight log.',
+    image: '/images/photo-planning.png',
+    imageAlt: 'A couple keeping pregnancy notes at the kitchen table.',
   },
 ]

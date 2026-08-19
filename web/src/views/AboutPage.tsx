@@ -24,8 +24,8 @@ export function AboutPage() {
         kicker="WonderHug.Life"
         title="A daily companion from planning to parenting"
         lede="Primary home is Telugu-speaking families in Telangana and Andhra Pradesh. Secondary is pan-India English. WhatsApp (AiSensy) already holds a community of 50,000+ mothers. Official logo and photography replace the lockup when supplied."
-        src="/images/placeholder-ai-hero-home.png"
-        alt="placeholder-ai- About atmosphere."
+        src="/images/photo-hero-home.png"
+        alt="About atmosphere."
       />
       {active ? (
         <div className="relative min-h-[28rem] bg-navy">

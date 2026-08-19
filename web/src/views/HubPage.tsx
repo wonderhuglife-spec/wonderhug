@@ -13,11 +13,12 @@ import { HoverMedia } from '@/components/editorial/HoverMedia'
 import { Reveal } from '@/components/motion/Reveal'
 
 function hubArt(path: string) {
-  if (path.includes('garbh')) return '/images/placeholder-ai-journal-garbh.png'
-  if (path.includes('parent')) return '/images/placeholder-ai-program-parenting.png'
-  if (path.includes('postpartum')) return '/images/placeholder-ai-journal-postpartum.png'
-  if (path.includes('planning')) return '/images/placeholder-ai-journal-planning.png'
-  return '/images/placeholder-ai-program-womb.png'
+  if (path.includes('garbh')) return '/images/photo-garbh-rest.png'
+  if (path.includes('parent') || path.includes('newborn')) return '/images/photo-newborn.png'
+  if (path.includes('postpartum')) return '/images/photo-newborn.png'
+  if (path.includes('planning')) return '/images/photo-planning.png'
+  if (path.includes('birth')) return '/images/photo-first-birth.png'
+  return '/images/photo-garbh-rest.png'
 }
 
 export function HubPage({ path }: { path?: string }) {
@@ -54,7 +55,7 @@ export function HubPage({ path }: { path?: string }) {
           title={pick(hub.title, locale)}
           lede={pick(hub.intro, locale)}
           src={hubArt(resolved)}
-          alt="placeholder-ai- Topic hub atmosphere."
+          alt="A pregnant woman resting at home."
         />
         <Container narrow className="py-14">
           {hub.sections.map((section) => (

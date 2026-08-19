@@ -1,6 +1,7 @@
 import type { CartItem, Order } from '@/types/domain'
 import { cartTotal } from '@/hooks/useCart'
 import { supabase } from '@/lib/supabase'
+import { publicSupabaseKey, publicSupabaseUrl } from '@/lib/supabaseKeys'
 import { track } from '@/services/analytics'
 import { enrollLocal } from '@/services/lms'
 
@@ -77,8 +78,8 @@ function persist(order: Order) {
 }
 
 async function createServerOrder(amountPaise: number): Promise<string | undefined> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const url = publicSupabaseUrl()
+  const anon = publicSupabaseKey()
   if (!url || !anon) return undefined
   try {
     const res = await fetch(`${url}/functions/v1/create-razorpay-order`, {

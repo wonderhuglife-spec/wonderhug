@@ -31,6 +31,7 @@ Every path in this table is a real App Router page. Direct navigation (reload / 
 | `/admin/experts` | Faculty seats CRUD |
 | `/admin/practices` | Practice library CRUD |
 | `/admin/groups` | Community rooms CRUD |
+| `/admin/users` | Add CMS admin users |
 | `/admin/media` | Site-wide photographs |
 | `/admin/settings` | Homepage hero |
 | `/privacy` | Operational privacy notice (counsel copy pending) |

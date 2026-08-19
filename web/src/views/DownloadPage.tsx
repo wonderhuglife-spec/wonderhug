@@ -13,8 +13,8 @@ export function DownloadPage() {
         kicker="Native app"
         title="Take WonderHug.Life with you"
         lede="The Flutter app is native: Home, Journey, Learn, Community, Profile, shop and trackers. App Store and Play listing assets are waiting on WonderHug. Until those URLs exist, clone the mobile/ folder and run on a device."
-        src="/images/placeholder-ai-program-parenting.png"
-        alt="placeholder-ai- App companion atmosphere."
+        src="/images/photo-chapter-parenting.png"
+        alt="App companion atmosphere."
       />
       <Container className="py-16">
         <EmptyState

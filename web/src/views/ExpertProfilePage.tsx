@@ -33,7 +33,7 @@ export function ExpertProfilePage({ slug: slugProp, expert }: { slug?: string; e
       <Seo title={data.name} description={pick(data.bio, locale)} path={`/experts/${data.slug}`} />
       <Container className="grid gap-10 py-16 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <Media src={data.photo} alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait." className="aspect-[4/5] w-full rounded-2xl bg-canvas object-cover" width={640} height={800} />
+          <Media src={data.photo} alt="Faculty seat atmosphere, not a verified portrait." className="aspect-[4/5] w-full rounded-2xl bg-canvas object-cover" width={640} height={800} />
         </div>
         <div className="lg:col-span-8">
           <Badge>{data.speciality}</Badge>

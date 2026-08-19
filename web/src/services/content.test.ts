@@ -19,6 +19,6 @@ describe('contentService fallback', () => {
     expect(result.status).toBe('success')
     expect(result.data?.title.en).toMatch(/Garbh Sanskar/i)
     expect(result.data?.content.en.replace(/\s+/g, ' ').length).toBeGreaterThan(400)
-    expect(result.data?.featuredImage).toMatch(/placeholder-ai-/)
+    expect(result.data?.featuredImage).toMatch(/\/images\//)
   })
 })

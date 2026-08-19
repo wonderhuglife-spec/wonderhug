@@ -16,7 +16,7 @@ export function PersonalizedExperience() {
     <section className="py-8">
       <Container>
         <div className="grid overflow-hidden rounded-[2rem] bg-navy text-white lg:grid-cols-2">
-          <HoverMedia src="/images/placeholder-ai-hero-home.png" alt="placeholder-ai- Companion atmosphere." className="min-h-[16rem] w-full lg:min-h-full" width={960} height={720} />
+          <HoverMedia src="/images/photo-hero-home.png" alt="An expecting couple at home." className="min-h-[16rem] w-full lg:min-h-full" width={960} height={720} />
           <div className="px-6 py-14 sm:px-12">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">{t('home.companionKicker')}</p>
             <Heading as="h2" className="mt-4 text-white">

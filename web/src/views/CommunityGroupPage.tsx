@@ -44,8 +44,8 @@ export function CommunityGroupPage({ slug: slugProp }: { slug?: string }) {
         kicker="Community room"
         title={pick(group.name, locale)}
         lede={pick(group.description, locale)}
-        src="/images/placeholder-ai-community.png"
-        alt="placeholder-ai- Community room atmosphere."
+        src="/images/photo-chapter-connecting.png"
+        alt="Community room atmosphere."
       >
         <ButtonLink to={whatsappUrl(`I would like to join the ${group.slug} room.`)} variant="teal">
           Continue on WhatsApp

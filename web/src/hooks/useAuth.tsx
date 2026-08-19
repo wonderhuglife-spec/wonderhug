@@ -51,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user])
 
   const sendPhoneOtp = async (phone: string) => {
-    if (!supabase) return 'Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to enable OTP.'
+    if (!supabase) return 'Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY to enable OTP.'
     track('signup_started', { method: 'phone' })
     const { error } = await supabase.auth.signInWithOtp({ phone })
     return error?.message ?? null

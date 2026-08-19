@@ -1,3 +1,4 @@
+import { readAdminSession } from '@/cms/adminAuth'
 import { supabase } from '@/lib/supabase'
 import { createServerSupabase } from '@/lib/supabase-server'
 import { publishedOnly } from '@/cms/apply'
@@ -62,22 +63,37 @@ export async function persistRemoteCms(state: CmsState): Promise<string | null> 
   const client = supabase
   if (!client) return 'Supabase is not configured. Content is saved in this browser until you add keys.'
   const published = publishedOnly(state)
+  const settingsPayload = {
+    body: state.settings.heroBody,
+    title: state.settings.heroTitle,
+    kicker: state.settings.heroKicker,
+    heroBody: state.settings.heroBody,
+    heroTitle: state.settings.heroTitle,
+    imageUrl: state.settings.heroImageUrl,
+    imageAlt: state.settings.heroImageAlt,
+    siteTagline: state.settings.siteTagline,
+  }
+  const session = readAdminSession()
+  if (session?.token && session.token !== 'bootstrap') {
+    const { data, error } = await client.rpc('cms_save_state', {
+      p_token: session.token,
+      p_staff: state,
+      p_published: published,
+      p_settings: settingsPayload,
+      p_media: state.media,
+    })
+    const payload = data as { ok?: boolean; error?: string } | null
+    if (payload?.ok) return persistTypedTables(state)
+    if (error && !/could not find|schema cache|function/i.test(error.message)) return error.message
+    if (payload && payload.ok === false) return payload.error ?? 'Could not save to Supabase.'
+  }
   const writes = [
     client.from('cms_blocks').upsert({ block_key: CMS_STAFF_BLOCK, locale: 'en', payload: state }),
     client.from('cms_blocks').upsert({ block_key: CMS_PUBLISHED_BLOCK, locale: 'en', payload: published }),
     client.from('cms_blocks').upsert({
       block_key: CMS_SETTINGS_BLOCK,
       locale: 'en',
-      payload: {
-        body: state.settings.heroBody,
-        title: state.settings.heroTitle,
-        kicker: state.settings.heroKicker,
-        heroBody: state.settings.heroBody,
-        heroTitle: state.settings.heroTitle,
-        imageUrl: state.settings.heroImageUrl,
-        imageAlt: state.settings.heroImageAlt,
-        siteTagline: state.settings.siteTagline,
-      },
+      payload: settingsPayload,
     }),
     client.from('cms_blocks').upsert({ block_key: CMS_MEDIA_BLOCK, locale: 'en', payload: state.media }),
   ]

@@ -39,8 +39,8 @@ export function ExpertsPage() {
         kicker="Faculty seats"
         title="Faculty and booking"
         lede="Named clinicians publish after WonderHug verifies credentials. Until then, each speciality is a faculty seat that books through the WhatsApp care desk (AiSensy). We do not invent hospitals or degrees."
-        src="/images/placeholder-ai-faculty-seat.png"
-        alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait."
+        src="/images/faculty-seat.png"
+        alt="Faculty seat atmosphere, not a verified portrait."
       />
       <Container className="py-12">
         <Tabs
@@ -53,7 +53,7 @@ export function ExpertsPage() {
         <ul className="mt-10 grid gap-6 md:grid-cols-2">
           {list.map((expert) => (
             <li key={expert.id} className="overflow-hidden rounded-2xl border border-line bg-white">
-              <Media src={expert.photo} alt="placeholder-ai- Faculty seat atmosphere, not a verified portrait." className="aspect-[16/9] w-full object-cover" />
+              <Media src={expert.photo} alt="Faculty seat atmosphere, not a verified portrait." className="aspect-[16/9] w-full object-cover" />
               <div className="p-6">
               <Badge>{expert.speciality}</Badge>
               <h2 className="mt-4 font-serif text-2xl">
