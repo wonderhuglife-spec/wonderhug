@@ -31,7 +31,7 @@ supabase db push
 supabase db seed
 ```
 
-Apply `supabase/migrations` in order, including `20260819120000_cms_admin_auth.sql` (CMS login, extra admins, media uploads).
+Apply `supabase/migrations` in order, including `20260819120000_cms_admin_auth.sql` and `20260819140000_cms_admin_pgcrypto_path.sql` (CMS login, extra admins, media uploads). Paste the SQL body into the dashboard — not the file path.
 
 The site already uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (the `sb_publishable_…` key). Paste that SQL in **Supabase → SQL Editor → Run**. After it succeeds, CMS login `adminmani` / `maniadmin` is stored in the project, and **Admin users** can add more operators.
 

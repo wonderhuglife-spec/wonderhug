@@ -1,6 +1,6 @@
 -- CMS admin users, login RPC, and a public media bucket for panel uploads.
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 create table if not exists public.cms_admins (
   id uuid primary key default gen_random_uuid(),
@@ -21,14 +21,14 @@ alter table public.cms_admins enable row level security;
 alter table public.cms_admin_sessions enable row level security;
 
 insert into public.cms_admins (username, password_hash, display_name)
-values ('adminmani', crypt('maniadmin', gen_salt('bf', 10)), 'WonderHug admin')
+values ('adminmani', extensions.crypt('maniadmin', extensions.gen_salt('bf', 10)), 'WonderHug admin')
 on conflict (username) do nothing;
 
 create or replace function public.cms_admin_login(p_username text, p_password text)
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, extensions
 as $$
 declare
   rec public.cms_admins%rowtype;
@@ -38,7 +38,7 @@ begin
   if rec.id is null then
     return jsonb_build_object('ok', false, 'error', 'Invalid username or password');
   end if;
-  if rec.password_hash <> crypt(p_password, rec.password_hash) then
+  if rec.password_hash <> extensions.crypt(p_password, rec.password_hash) then
     return jsonb_build_object('ok', false, 'error', 'Invalid username or password');
   end if;
   insert into public.cms_admin_sessions (admin_id)
@@ -57,7 +57,7 @@ create or replace function public.cms_admin_verify(p_token uuid)
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, extensions
 as $$
 declare
   rec public.cms_admins%rowtype;
@@ -77,7 +77,7 @@ create or replace function public.cms_admin_create(p_token uuid, p_username text
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, extensions
 as $$
 declare
   caller public.cms_admins%rowtype;
@@ -98,7 +98,7 @@ begin
     return jsonb_build_object('ok', false, 'error', 'Password must be at least 8 characters.');
   end if;
   insert into public.cms_admins (username, password_hash, display_name)
-  values (uname, crypt(p_password, gen_salt('bf', 10)), nullif(trim(p_display_name), ''))
+  values (uname, extensions.crypt(p_password, extensions.gen_salt('bf', 10)), nullif(trim(p_display_name), ''))
   returning * into created;
   return jsonb_build_object('ok', true, 'username', created.username, 'id', created.id);
 exception
@@ -111,7 +111,7 @@ create or replace function public.cms_admin_list(p_token uuid)
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, extensions
 as $$
 declare
   caller_id uuid;
@@ -141,7 +141,7 @@ create or replace function public.cms_save_state(p_token uuid, p_staff jsonb, p_
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, extensions
 as $$
 declare
   caller_id uuid;
