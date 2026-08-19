@@ -79,6 +79,9 @@ test('capture verification screenshots', async ({ page }) => {
   await page.screenshot({ path: resolve(dir, 'community-compose.png'), fullPage: true })
 
   await page.goto('/admin')
+  await page.getByLabel('Username').fill('adminmani')
+  await page.getByLabel('Password').fill('maniadmin')
+  await page.getByRole('button', { name: 'Log in' }).click()
   await expect(page.getByRole('heading', { name: 'WonderHug CMS' })).toBeVisible()
   await page.screenshot({ path: resolve(dir, 'admin.png'), fullPage: true })
 })

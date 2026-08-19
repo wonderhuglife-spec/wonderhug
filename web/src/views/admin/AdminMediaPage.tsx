@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { MEDIA_ASSET_LIST } from '@/data/mediaAssets'
 import { getWorkingCms, saveCmsMedia } from '@/cms/store'
+import { ImagePicker } from '@/components/admin/ImagePicker'
 import { persistRemoteCms } from '@/cms/remote'
 import { Button } from '@/components/ui/Button'
 import { Input, Label } from '@/components/ui/Input'
@@ -62,10 +63,7 @@ function MediaRow({
       <div>
         <h2 className="font-medium">{label}</h2>
         <p className="mt-1 break-all text-xs text-slate">{fallbackSrc}</p>
-        <div className="mt-3">
-          <Label htmlFor={`src-${assetKey}`}>Replacement URL</Label>
-          <Input id={`src-${assetKey}`} value={src} onChange={(event) => setSrc(event.target.value)} placeholder={fallbackSrc} />
-        </div>
+        <ImagePicker label="Replacement image" value={src} onChange={setSrc} />
         <div className="mt-3">
           <Label htmlFor={`alt-${assetKey}`}>Alt text</Label>
           <Input id={`alt-${assetKey}`} value={alt} onChange={(event) => setAlt(event.target.value)} />

@@ -8,6 +8,7 @@ import { deleteCmsItem, emptyItem, getWorkingCms, saveCmsItem, slugify } from '@
 import { persistRemoteCms } from '@/cms/remote'
 import { Button } from '@/components/ui/Button'
 import { Input, Label, Textarea } from '@/components/ui/Input'
+import { ImagePicker } from '@/components/admin/ImagePicker'
 import { Seo } from '@/components/seo/Seo'
 
 export function AdminEditPage({ collection, id }: { collection: CmsCollection; id: string }) {
@@ -72,29 +73,35 @@ export function AdminEditPage({ collection, id }: { collection: CmsCollection; i
             const fieldId = String(field.key)
             return (
               <div key={fieldId}>
-                <Label htmlFor={fieldId}>{field.label}</Label>
-                {field.type === 'textarea' ? (
-                  <Textarea id={fieldId} value={value} onChange={(event) => setValue(field, event.target.value)} className="min-h-40" />
-                ) : field.type === 'select' ? (
-                  <select
-                    id={fieldId}
-                    value={value}
-                    onChange={(event) => setValue(field, event.target.value)}
-                    className="min-h-12 w-full rounded-xl border border-line bg-white px-4"
-                  >
-                    {(field.options ?? []).map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+                {field.key === 'imageUrl' ? (
+                  <ImagePicker label={field.label} value={value} onChange={(next) => setValue(field, next)} />
                 ) : (
-                  <Input
-                    id={fieldId}
-                    type={field.type === 'number' ? 'number' : 'text'}
-                    value={value}
-                    onChange={(event) => setValue(field, event.target.value)}
-                  />
+                  <>
+                    <Label htmlFor={fieldId}>{field.label}</Label>
+                    {field.type === 'textarea' ? (
+                      <Textarea id={fieldId} value={value} onChange={(event) => setValue(field, event.target.value)} className="min-h-40" />
+                    ) : field.type === 'select' ? (
+                      <select
+                        id={fieldId}
+                        value={value}
+                        onChange={(event) => setValue(field, event.target.value)}
+                        className="min-h-12 w-full rounded-xl border border-line bg-white px-4"
+                      >
+                        {(field.options ?? []).map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <Input
+                        id={fieldId}
+                        type={field.type === 'number' ? 'number' : 'text'}
+                        value={value}
+                        onChange={(event) => setValue(field, event.target.value)}
+                      />
+                    )}
+                  </>
                 )}
                 {field.hint ? <p className="mt-1 text-xs text-slate">{field.hint}</p> : null}
               </div>

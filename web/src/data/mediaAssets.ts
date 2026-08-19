@@ -24,109 +24,109 @@ export interface MediaAsset {
   alt: string
 }
 
-/** Default AI placeholders — every filename and alt is tagged so they are trivial to swap from Admin. */
+/** Photoreal family photographs — CMS can still swap any slot. */
 export const DEFAULT_MEDIA_ASSETS: Record<MediaAssetKey, MediaAsset> = {
   hero_home: {
     key: 'hero_home',
-    label: 'Homepage hero atmosphere',
+    label: 'Homepage hero — expecting together',
     src: '/images/photo-hero-home.png',
-    alt: 'Photoreal still — sunlit South Indian living room for the WonderHug homepage hero.',
+    alt: 'An expecting couple sitting together in a sunlit family living room.',
   },
   journal_planning: {
     key: 'journal_planning',
     label: 'Journal — preparing together',
     src: '/images/placeholder-ai-journal-planning.png',
-    alt: 'placeholder-ai- Couple at a kitchen table at dusk, temporary AI illustration for a planning article.',
+    alt: 'A couple planning pregnancy together over chai and a notebook at the kitchen table.',
   },
   journal_garbh: {
     key: 'journal_garbh',
     label: 'Journal — Garbh Sanskar',
     src: '/images/placeholder-ai-journal-garbh.png',
-    alt: 'placeholder-ai- Quiet window-side rest with music, temporary AI illustration for Garbh Sanskar.',
+    alt: 'A pregnant woman resting by a window with music and a lamp for Garbh Sanskar practice.',
   },
   journal_postpartum: {
     key: 'journal_postpartum',
     label: 'Journal — fourth trimester',
     src: '/images/placeholder-ai-journal-postpartum.png',
-    alt: 'placeholder-ai- Postpartum rest in a family home, temporary AI illustration.',
+    alt: 'A new parent holding a sleeping newborn at home in the fourth trimester.',
   },
   journal_heat: {
     key: 'journal_heat',
-    label: 'Journal — Telangana heat',
+    label: 'Journal — rest in the heat',
     src: '/images/placeholder-ai-journal-heat.png',
-    alt: 'placeholder-ai- Shaded courtyard and water pot, temporary AI illustration for heat and rest.',
+    alt: 'A pregnant woman resting in a shaded courtyard with water nearby.',
   },
   program_beej: {
     key: 'program_beej',
     label: 'Programme — Beej Sanskar cover',
     src: '/images/placeholder-ai-program-beej.png',
-    alt: 'placeholder-ai- Seeds and flowers in a clay bowl, temporary AI cover for Beej Sanskar.',
+    alt: 'A couple sitting together with flowers and fruit while preparing to conceive.',
   },
   program_womb: {
     key: 'program_womb',
     label: 'Programme — Womb Care cover',
     src: '/images/placeholder-ai-program-womb.png',
-    alt: 'placeholder-ai- Garden rest during pregnancy, temporary AI cover for Womb Care.',
+    alt: 'A pregnant woman resting in a home courtyard with a hand on her belly.',
   },
   program_parenting: {
     key: 'program_parenting',
     label: 'Programme — Super Parenting cover',
     src: '/images/placeholder-ai-program-parenting.png',
-    alt: 'placeholder-ai- Parent holding an infant, temporary AI cover for Super Parenting.',
+    alt: 'A parent playing on the floor with a toddler while a baby rests nearby.',
   },
   tool_due: {
     key: 'tool_due',
     label: 'Tool — due date',
     src: '/images/placeholder-ai-tool-due.png',
-    alt: 'placeholder-ai- Calendar and lamp, temporary AI illustration for the due-date tool.',
+    alt: 'A pregnant woman writing in a due-date notebook at home.',
   },
   tool_kicks: {
     key: 'tool_kicks',
     label: 'Tool — kick counter',
     src: '/images/placeholder-ai-tool-kicks.png',
-    alt: 'placeholder-ai- Movement-count notebook, temporary AI illustration for the kick counter.',
+    alt: 'A pregnant woman counting baby movements with a notebook beside her.',
   },
   tool_contractions: {
     key: 'tool_contractions',
     label: 'Tool — contraction timer',
     src: '/images/placeholder-ai-tool-contractions.png',
-    alt: 'placeholder-ai- Clock and rest, temporary AI illustration for the contraction timer.',
+    alt: 'A pregnant woman resting at home while timing contractions with her partner nearby.',
   },
   tool_weight: {
     key: 'tool_weight',
     label: 'Tool — weight log',
     src: '/images/placeholder-ai-tool-weight.png',
-    alt: 'placeholder-ai- Kitchen scale and notebook, temporary AI illustration for the weight log.',
+    alt: 'A pregnant woman using a home weighing scale in the kitchen.',
   },
   shop_journal: {
     key: 'shop_journal',
     label: 'Shop — pregnancy journal',
     src: '/images/placeholder-ai-shop-journal.png',
-    alt: 'placeholder-ai- Linen journal and jasmine, temporary AI product image.',
+    alt: 'A printable pregnancy journal on a family desk.',
   },
   shop_kitchen: {
     key: 'shop_kitchen',
     label: 'Shop — kitchen cards',
     src: '/images/placeholder-ai-shop-kitchen.png',
-    alt: 'placeholder-ai- Seasonal kitchen still life, temporary AI product image.',
+    alt: 'Seasonal kitchen vegetables and recipe cards for pregnancy planning meals.',
   },
   community: {
     key: 'community',
     label: 'Community atmosphere',
     src: '/images/placeholder-ai-community.png',
-    alt: 'placeholder-ai- Soft gathering of mothers, temporary AI illustration.',
+    alt: 'Mothers and babies sitting together in a bright community room.',
   },
   practice: {
     key: 'practice',
     label: 'Practice library',
     src: '/images/placeholder-ai-practice.png',
-    alt: 'placeholder-ai- Warm oil and lamp for Garbh Sanskar practice, temporary AI illustration.',
+    alt: 'Quiet Garbh Sanskar rest with a lamp at home.',
   },
   faculty_seat: {
     key: 'faculty_seat',
     label: 'Faculty seat atmosphere',
     src: '/images/placeholder-ai-faculty-seat.png',
-    alt: 'placeholder-ai- Empty chair by a window, temporary AI faculty-seat image — not a real portrait.',
+    alt: 'An empty consultation chair by a window — a faculty seat, not a verified portrait.',
   },
 }
 

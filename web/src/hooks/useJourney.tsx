@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DEFAULT_JOURNEY } from '@/data/journeys'
 import { defaultProfile, narrativeFor, recommend } from '@/services/personalization'
@@ -20,20 +20,18 @@ interface JourneyContextValue {
 
 const JourneyContext = createContext<JourneyContextValue | null>(null)
 
-function initialStage(): JourneyStage {
-  const stored = typeof window === 'undefined' ? null : readStoredJourney()
-  const allowed: JourneyStage[] = ['planning', 'ttc', 'pregnant', 'birth_prep', 'new_parent', 'parenting']
-  if (stored && (allowed as string[]).includes(stored)) return stored as JourneyStage
-  return DEFAULT_JOURNEY
-}
-
 export function JourneyProvider({ children }: { children: ReactNode }) {
   const { i18n } = useTranslation()
   const locale = i18n.language?.startsWith('te') ? 'te' : currentLocale()
-  const [profile, setProfile] = useState<PersonalizationProfile>(() => {
-    const stored = typeof window === 'undefined' ? null : readStoredProfile<PersonalizationProfile>()
-    return stored ? { ...defaultProfile(stored.journeyStage ?? initialStage()), ...stored } : defaultProfile(initialStage())
-  })
+  const [profile, setProfile] = useState<PersonalizationProfile>(() => defaultProfile(DEFAULT_JOURNEY))
+
+  useEffect(() => {
+    const stored = readStoredProfile<PersonalizationProfile>()
+    const stage = readStoredJourney()
+    const allowed: JourneyStage[] = ['planning', 'ttc', 'pregnant', 'birth_prep', 'new_parent', 'parenting']
+    const resolvedStage = stage && (allowed as string[]).includes(stage) ? (stage as JourneyStage) : stored?.journeyStage ?? DEFAULT_JOURNEY
+    setProfile(stored ? { ...defaultProfile(resolvedStage), ...stored, journeyStage: stored.journeyStage ?? resolvedStage } : defaultProfile(resolvedStage))
+  }, [])
 
   const setJourneyStage = useCallback((stage: JourneyStage) => {
     setProfile((current) => {

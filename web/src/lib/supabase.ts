@@ -1,9 +1,10 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { publicSupabaseKey, publicSupabaseUrl } from '@/lib/supabaseKeys'
 
 export type ConfigStatus = 'ready' | 'unconfigured'
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
-const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
+const url = publicSupabaseUrl()
+const anonKey = publicSupabaseKey()
 
 export const supabaseConfigStatus: ConfigStatus =
   url.length > 0 && anonKey.length > 0 ? 'ready' : 'unconfigured'

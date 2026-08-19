@@ -33,7 +33,7 @@ const STATIC_ROUTES: RouteEntry[] = [
   { path: '/admin/posts', description: 'CMS: journal posts' },
   { path: '/admin/pages', description: 'CMS: topic hub pages' },
   { path: '/admin/products', description: 'CMS: shop products' },
-  { path: '/admin/settings', description: 'CMS: homepage hero and site settings' },
+  { path: '/admin/users', description: 'CMS: add admin users' },
   { path: '/privacy', description: 'Operational privacy notice (counsel copy pending)' },
   { path: '/terms', description: 'Operational terms (counsel copy pending)' },
   { path: '/medical-disclaimer', description: 'Education-not-diagnosis disclaimer' },

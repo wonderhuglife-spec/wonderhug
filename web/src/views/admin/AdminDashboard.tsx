@@ -3,14 +3,11 @@
 import { Link } from '@/lib/navigation'
 import { CMS_COLLECTIONS } from '@/cms/types'
 import { useCmsState } from '@/hooks/useCatalog'
-import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase'
 import { Seo } from '@/components/seo/Seo'
 
 export function AdminDashboard() {
   const state = useCmsState()
-  const { user, role } = useAuth()
-  const staff = role === 'admin' || role === 'moderator' || role === 'expert'
   const counts = CMS_COLLECTIONS.map((collection) => ({
     ...collection,
     total: state.items.filter((item) => item.collection === collection.id).length,
@@ -28,14 +25,15 @@ export function AdminDashboard() {
       </p>
       {!supabase ? (
         <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm">
-          Supabase keys are not set, so saves stay on this device. Add NEXT_PUBLIC_SUPABASE_URL and
-          NEXT_PUBLIC_SUPABASE_ANON_KEY, then set profiles.role to admin, to sync every visitor.
+          Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY to web/.env.local, then apply
+          supabase/migrations/20260819120000_cms_admin_auth.sql in the Supabase SQL editor.
         </p>
-      ) : user && !staff ? (
-        <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm">
-          You are signed in but this profile is not staff. Local edits still work; Studio writes need an admin role.
+      ) : (
+        <p className="mt-4 rounded-xl border border-teal/30 bg-teal-soft px-4 py-3 text-sm">
+          Supabase project is connected. After the cms_admin_auth migration is applied, saves and new admin users go to
+          this backend.
         </p>
-      ) : null}
+      )}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {counts.map((card) => (

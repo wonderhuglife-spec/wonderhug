@@ -11,7 +11,6 @@ import { NAV_GROUPS, NAV_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/cn'
 import { useCart } from '@/hooks/useCart'
 import { useAuth } from '@/hooks/useAuth'
-import { supabase } from '@/lib/supabase'
 import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { JOURNEY_OPTIONS } from '@/data/journeys'
@@ -30,9 +29,8 @@ export function Navbar() {
   const reduce = useReducedMotion()
   const { t } = useTranslation()
   const { count } = useCart()
-  const { user, role } = useAuth()
+  const { user } = useAuth()
   const locale = currentLocale()
-  const showCms = !supabase || role === 'admin' || role === 'moderator' || role === 'expert'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -110,11 +108,9 @@ export function Navbar() {
           >
             <UserRound className="h-4 w-4" />
           </NavLink>
-          {showCms ? (
-            <NavLink to="/admin" className={linkClass}>
-              CMS
-            </NavLink>
-          ) : null}
+          <NavLink to="/admin" className={linkClass}>
+            CMS
+          </NavLink>
           <ButtonLink to="/start" size="sm" variant="teal" className="ml-1 shadow-[0_8px_20px_rgba(48,146,146,0.35)] hover:scale-[1.03]">
             {t('cta.start')}
           </ButtonLink>
@@ -172,11 +168,9 @@ export function Navbar() {
               <ButtonLink to={user ? '/account' : '/signin'} variant="ghost" onClick={() => setOpen(false)}>
                 {user ? t('nav.account') : t('cta.signIn')}
               </ButtonLink>
-              {showCms ? (
-                <ButtonLink to="/admin" variant="ghost" onClick={() => setOpen(false)}>
-                  CMS
-                </ButtonLink>
-              ) : null}
+              <ButtonLink to="/admin" variant="ghost" onClick={() => setOpen(false)}>
+                CMS
+              </ButtonLink>
             </div>
           </motion.div>
         ) : null}
