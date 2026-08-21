@@ -31,7 +31,7 @@ supabase db push
 supabase db seed
 ```
 
-Apply `supabase/migrations` in order, including `20260819120000_cms_admin_auth.sql` and `20260819140000_cms_admin_pgcrypto_path.sql` (CMS login, extra admins, media uploads). Paste the SQL body into the dashboard — not the file path.
+Apply `supabase/migrations` in order, including `20260819120000_cms_admin_auth.sql`, `20260819140000_cms_admin_pgcrypto_path.sql`, and `20260821120000_cms_save_catalog.sql` (CMS login, extra admins, media uploads, catalogue writes). Paste the SQL body into the dashboard — not the file path. The last file lets CMS login save posts, products, programmes, practices, rooms, faculty, and pages without hitting row-level security.
 
 Put in Vercel and `web/.env.local` (never commit `.env.local`):
 
