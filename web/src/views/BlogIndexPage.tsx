@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Link } from '@/lib/navigation'
 import { BLOG_CATEGORIES } from '@/data/blog'
 import { useCatalog } from '@/hooks/useCatalog'
@@ -19,7 +19,7 @@ import type { BlogCategory } from '@/types/domain'
 import { PageHero } from '@/components/editorial/PageHero'
 import { HoverMedia } from '@/components/editorial/HoverMedia'
 import { cn } from '@/lib/cn'
-import { JOURNAL_PAGE_SIZE, paginatePosts, parsePageParam } from '@/lib/blogPagination'
+import { JOURNAL_PAGE_SIZE, paginatePosts } from '@/lib/blogPagination'
 
 type Filter = BlogCategory | 'all'
 
@@ -43,29 +43,26 @@ function PostCard({ post, featured = false }: { post: BlogPost; featured?: boole
   )
 }
 
-export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
+export function BlogIndexPage({ posts: postsProp, initialPage = 1 }: { posts?: BlogPost[]; initialPage?: number }) {
   const [filter, setFilter] = useState<Filter>('all')
   const [q, setQ] = useState('')
+  const [page, setPage] = useState(initialPage)
   const locale = currentLocale()
   const { posts: catalogPosts } = useCatalog()
   const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname() ?? '/blog'
   const source = postsProp ?? catalogPosts.filter((post) => post.isPublished)
   const posts = useMemo(() => {
     const byCat = filter === 'all' ? source : source.filter((post) => post.category === filter)
     if (!q) return byCat
     return byCat.filter((p) => `${p.title.en} ${p.title.te} ${p.tags.join(' ')} ${p.content.en}`.toLowerCase().includes(q.toLowerCase()))
   }, [filter, q, source])
-  const page = parsePageParam(searchParams.get('page'))
   const pagination = paginatePosts(posts, page, JOURNAL_PAGE_SIZE)
 
   function goToPage(next: number) {
-    const params = new URLSearchParams(searchParams.toString())
-    if (next <= 1) params.delete('page')
-    else params.set('page', String(next))
-    const query = params.toString()
-    router.push(query ? `${pathname}?${query}` : pathname)
+    setPage(next)
+    const href = next <= 1 ? pathname : `${pathname}?page=${next}`
+    router.push(href)
   }
 
   function onFilter(next: Filter) {

@@ -6,6 +6,8 @@ Every path in this table is a real App Router page. Direct navigation (reload / 
 | --- | --- |
 | `/` | Homepage: hero, journey selector, programmes, shop, WhatsApp, journal |
 | `/programs` | Wellness programme catalogue with INR pricing |
+| `/journey` | Journey home: stages, daily practice, programmes, planner CTA |
+| `/journey/planner` | Planner and payment: status, LMP, plan length, EMI display, checkout |
 | `/shop` | Product listing with add-to-cart |
 | `/cart` | Cart contents and checkout CTA |
 | `/checkout` | Razorpay or demo checkout form |
@@ -16,7 +18,7 @@ Every path in this table is a real App Router page. Direct navigation (reload / 
 | `/tools/kicks` | Kick / movement counter |
 | `/tools/contractions` | Contraction timer notebook |
 | `/tools/weight` | Weight log (not a medical chart) |
-| `/blog` | Journal index with category and search |
+| `/blog` | Journal index with featured post, two-column grid and pagination |
 | `/practices` | Garbh Sanskar practice library |
 | `/about` | About WonderHug and team seats |
 | `/start` | Start-your-journey onboarding |
@@ -95,6 +97,11 @@ Every path in this table is a real App Router page. Direct navigation (reload / 
 | `/blog/garbh-sanskar-as-practice-not-promise` | Journal article garbh-sanskar-as-practice-not-promise |
 | `/blog/fourth-trimester-is-still-your-journey` | Journal article fourth-trimester-is-still-your-journey |
 | `/blog/heat-water-rest-in-telangana-pregnancy` | Journal article heat-water-rest-in-telangana-pregnancy |
+| `/blog/visitors-in-a-joint-family-pregnancy` | Journal article visitors-in-a-joint-family-pregnancy |
+| `/blog/what-a-due-date-tool-is-not` | Journal article what-a-due-date-tool-is-not |
+| `/blog/naming-rest-to-elders` | Journal article naming-rest-to-elders |
+| `/blog/kitchen-plates-without-a-protocol` | Journal article kitchen-plates-without-a-protocol |
+| `/blog/ten-minute-evening-check-in` | Journal article ten-minute-evening-check-in |
 | `/experts/garbh-sanskar-guide` | Faculty profile garbh-sanskar-guide |
 | `/experts/nutrition-educator` | Faculty profile nutrition-educator |
 | `/experts/yoga-faculty` | Faculty profile yoga-faculty |
@@ -128,4 +135,4 @@ Every path in this table is a real App Router page. Direct navigation (reload / 
 | `/learn/beej-sanskar/week-1-shared-rhythm` | Beej Sanskar first lesson player |
 | `/order/demo-preview` | Order confirmation (unknown id still renders a real page) |
 
-Total: 113 routes.
+Total: 130 routes.
