@@ -6,6 +6,8 @@ describe('route manifest', () => {
     const paths = allAppRoutes().map((route) => route.path)
     expect(paths).toContain('/admin')
     expect(paths).toContain('/shop')
+    expect(paths).toContain('/journey')
+    expect(paths).toContain('/journey/planner')
     expect(paths).toContain('/tools/due-date')
     expect(paths).toContain('/blog/garbh-sanskar-as-practice-not-promise')
     expect(paths).toContain('/learn/beej-sanskar')

@@ -12,6 +12,8 @@ export type RouteEntry = { path: string; description: string }
 const STATIC_ROUTES: RouteEntry[] = [
   { path: '/', description: 'Homepage: hero, journey selector, programmes, shop, WhatsApp, journal' },
   { path: '/programs', description: 'Wellness programme catalogue with INR pricing' },
+  { path: '/journey', description: 'Journey home: stages, daily practice, programmes, planner CTA' },
+  { path: '/journey/planner', description: 'Planner and payment: status, LMP, plan length, EMI display, checkout' },
   { path: '/shop', description: 'Product listing with add-to-cart' },
   { path: '/cart', description: 'Cart contents and checkout CTA' },
   { path: '/checkout', description: 'Razorpay or demo checkout form' },
@@ -22,7 +24,7 @@ const STATIC_ROUTES: RouteEntry[] = [
   { path: '/tools/kicks', description: 'Kick / movement counter' },
   { path: '/tools/contractions', description: 'Contraction timer notebook' },
   { path: '/tools/weight', description: 'Weight log (not a medical chart)' },
-  { path: '/blog', description: 'Journal index with category and search' },
+  { path: '/blog', description: 'Journal index with featured post, two-column grid and pagination' },
   { path: '/practices', description: 'Garbh Sanskar practice library' },
   { path: '/about', description: 'About WonderHug and team seats' },
   { path: '/start', description: 'Start-your-journey onboarding' },

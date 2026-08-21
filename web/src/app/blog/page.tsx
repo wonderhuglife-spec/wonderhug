@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { pageMetadata } from '@/lib/seo'
 import { BlogIndexPage } from '@/views/BlogIndexPage'
 import { listPublishedPosts } from '@/services/content'
@@ -13,5 +14,9 @@ export const metadata = pageMetadata({
 export default async function Page() {
   const result = await listPublishedPosts()
   const posts = result.data ?? []
-  return <BlogIndexPage posts={posts} />
+  return (
+    <Suspense>
+      <BlogIndexPage posts={posts} />
+    </Suspense>
+  )
 }

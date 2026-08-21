@@ -78,6 +78,10 @@
     "add": "Add to cart",
     "added": "Added"
   },
+  "journeyPage": {
+    "title": "Journey",
+    "planner": "Choose a planner"
+  },
   "programs": {
     "title": "Wellness programs",
     "intro": "Structured programmes for Beej Sanskar, pregnancy (Womb Care) and the fourth trimester. Education and practice — not a clinic."

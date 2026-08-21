@@ -18,6 +18,7 @@ describe('Navbar', () => {
     const nav = screen.getByRole('navigation', { name: 'Primary' })
     expect(within(nav).getByRole('link', { name: 'Shop' })).toHaveAttribute('href', '/shop')
     expect(within(nav).getByRole('link', { name: 'Programs' })).toHaveAttribute('href', '/programs')
+    expect(within(nav).getAllByRole('link', { name: 'Journey' })[0]).toHaveAttribute('href', '/journey')
     expect(screen.queryByRole('group', { name: /language/i })).not.toBeInTheDocument()
   })
 
