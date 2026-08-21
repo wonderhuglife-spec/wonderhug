@@ -30,8 +30,8 @@ export function AdminDashboard() {
         </p>
       ) : (
         <p className="mt-4 rounded-xl border border-teal/30 bg-teal-soft px-4 py-3 text-sm">
-          Supabase project is connected. After the cms_admin_auth migration is applied, saves and new admin users go to
-          this backend.
+          Supabase project is connected. Saves use your CMS login (not the public key). Apply
+          supabase/migrations/20260821120000_cms_save_catalog.sql in the SQL editor if catalogue tables still reject rows.
         </p>
       )}
 
