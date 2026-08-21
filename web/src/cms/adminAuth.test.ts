@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { loginAdmin, logoutAdmin, readAdminSession } from '@/cms/adminAuth'
+import { supabase } from '@/lib/supabase'
+import { loginAdmin, logoutAdmin, readAdminSession, verifyAdminSession } from '@/cms/adminAuth'
 
 describe('admin login', () => {
   beforeEach(() => {
@@ -17,5 +18,16 @@ describe('admin login', () => {
     const error = await loginAdmin('adminmani', 'wrong')
     expect(error).toBeTruthy()
     expect(readAdminSession()).toBeNull()
+  })
+
+  it('does not keep a local-only session once Supabase is configured', async () => {
+    const next = await verifyAdminSession({
+      token: 'bootstrap',
+      username: 'adminmani',
+      displayName: 'WonderHug admin',
+      source: 'bootstrap',
+    })
+    if (supabase) expect(next).toBeNull()
+    else expect(next?.username).toBe('adminmani')
   })
 })

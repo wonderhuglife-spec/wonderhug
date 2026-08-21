@@ -70,11 +70,20 @@ export function logoutAdmin() {
 
 export async function verifyAdminSession(session: AdminSession | null): Promise<AdminSession | null> {
   if (!session) return null
+  if (supabase) {
+    if (session.token === 'bootstrap' || session.source === 'bootstrap') return null
+    const { data } = await supabase.rpc('cms_admin_verify', { p_token: session.token })
+    const payload = data as RpcLogin | null
+    if (payload?.ok) {
+      return {
+        ...session,
+        username: payload.username || session.username,
+        displayName: payload.displayName || session.displayName,
+      }
+    }
+    return null
+  }
   if (session.source === 'bootstrap' || session.token === 'bootstrap') return session
-  if (!supabase) return session
-  const { data } = await supabase.rpc('cms_admin_verify', { p_token: session.token })
-  const payload = data as RpcLogin | null
-  if (payload?.ok) return { ...session, username: payload.username || session.username, displayName: payload.displayName || session.displayName }
   return null
 }
 

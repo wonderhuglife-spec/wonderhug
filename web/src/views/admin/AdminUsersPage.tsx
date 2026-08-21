@@ -35,7 +35,10 @@ export function AdminUsersPage() {
     <>
       <Seo title="Admin users · WonderHug CMS" description="Add CMS operators." path="/admin/users" />
       <h1 className="font-serif text-3xl">Admin users</h1>
-      <p className="mt-2 max-w-2xl text-slate">People who can sign in to this panel. The first account is adminmani.</p>
+      <p className="mt-2 max-w-2xl text-slate">
+        Anyone listed here can sign in and publish posts, pages, products, programmes, faculty, practices, community
+        rooms, and images. Content is shared — the last save from any admin updates the live catalogue.
+      </p>
       {notice ? <p className="mt-4 text-sm text-navy">{notice}</p> : null}
       <form
         className="mt-8 max-w-lg space-y-4 rounded-2xl border border-[#c3c4c7] bg-white p-6"

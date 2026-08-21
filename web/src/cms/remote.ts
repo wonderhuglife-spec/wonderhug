@@ -83,5 +83,5 @@ export async function persistRemoteCms(state: CmsState): Promise<string | null> 
     if (payload && payload.ok === false) return payload.error ?? 'Could not save to Supabase.'
     return 'Apply supabase/migrations/20260821120000_cms_save_catalog.sql in the SQL editor (paste the file contents, not the path), then sign in again. Catalogue tables cannot be written with the public key.'
   }
-  return 'Sign in to the CMS so saves can use your admin session. The public Supabase key cannot insert into blog_posts, products, and the other catalogue tables.'
+  return 'Sign in again with your CMS username (any admin from Admin users). Local-only starter sessions cannot write catalogue tables.'
 }
