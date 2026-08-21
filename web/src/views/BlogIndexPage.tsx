@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { Link } from '@/lib/navigation'
 import { BLOG_CATEGORIES } from '@/data/blog'
 import { useCatalog } from '@/hooks/useCatalog'
@@ -17,22 +18,57 @@ import { currentLocale } from '@/i18n'
 import type { BlogCategory } from '@/types/domain'
 import { PageHero } from '@/components/editorial/PageHero'
 import { HoverMedia } from '@/components/editorial/HoverMedia'
+import { cn } from '@/lib/cn'
+import { JOURNAL_PAGE_SIZE, paginatePosts } from '@/lib/blogPagination'
 
 type Filter = BlogCategory | 'all'
 
-export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
+function PostCard({ post, featured = false }: { post: BlogPost; featured?: boolean }) {
+  const locale = currentLocale()
+  return (
+    <article className="h-full">
+      <Link to={`/blog/${post.slug}`} className="group block">
+        <HoverMedia
+          src={post.featuredImage}
+          alt={post.featuredImageAlt}
+          className={cn('w-full rounded-2xl bg-canvas', featured ? 'aspect-[16/8]' : 'aspect-[16/10]')}
+        />
+        <Badge className="mt-5">{post.category}</Badge>
+        <h2 className={cn('mt-3 font-serif group-hover:text-teal-dark', featured ? 'text-4xl' : 'text-2xl')}>
+          {pick(post.title, locale)}
+        </h2>
+        <p className={cn('mt-3 text-slate', featured ? 'text-lg' : 'text-base')}>{pick(post.excerpt, locale)}</p>
+      </Link>
+    </article>
+  )
+}
+
+export function BlogIndexPage({ posts: postsProp, initialPage = 1 }: { posts?: BlogPost[]; initialPage?: number }) {
   const [filter, setFilter] = useState<Filter>('all')
   const [q, setQ] = useState('')
+  const [page, setPage] = useState(initialPage)
   const locale = currentLocale()
   const { posts: catalogPosts } = useCatalog()
+  const router = useRouter()
+  const pathname = usePathname() ?? '/blog'
   const source = postsProp ?? catalogPosts.filter((post) => post.isPublished)
   const posts = useMemo(() => {
     const byCat = filter === 'all' ? source : source.filter((post) => post.category === filter)
     if (!q) return byCat
     return byCat.filter((p) => `${p.title.en} ${p.title.te} ${p.tags.join(' ')} ${p.content.en}`.toLowerCase().includes(q.toLowerCase()))
   }, [filter, q, source])
-  const lead = posts[0]
-  const rest = posts.slice(1)
+  const pagination = paginatePosts(posts, page, JOURNAL_PAGE_SIZE)
+
+  function goToPage(next: number) {
+    setPage(next)
+    const href = next <= 1 ? pathname : `${pathname}?page=${next}`
+    router.push(href)
+  }
+
+  function onFilter(next: Filter) {
+    setFilter(next)
+    goToPage(1)
+  }
 
   return (
     <>
@@ -44,13 +80,21 @@ export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
         src="/images/photo-garbh-rest.png"
         alt="Journal atmosphere"
       >
-        <Input className="max-w-md bg-white/95" placeholder="Search" value={q} onChange={(e) => setQ(e.target.value)} />
+        <Input
+          className="max-w-md bg-white/95"
+          placeholder="Search"
+          value={q}
+          onChange={(e) => {
+            setQ(e.target.value)
+            if (page !== 1) goToPage(1)
+          }}
+        />
       </PageHero>
       <Container className="py-12">
         <Tabs
           label="Article categories"
           value={filter}
-          onChange={setFilter}
+          onChange={onFilter}
           tabs={[{ id: 'all' as Filter, label: 'All' }, ...BLOG_CATEGORIES.map((id) => ({ id: id as Filter, label: id }))]}
         />
         {posts.length === 0 ? (
@@ -58,30 +102,57 @@ export function BlogIndexPage({ posts: postsProp }: { posts?: BlogPost[] }) {
             <EmptyState title="No articles in this filter" description="Try another category." />
           </div>
         ) : null}
-        {lead ? (
-          <div className="mt-12 grid gap-12 lg:grid-cols-12">
-            <article className="lg:col-span-7">
-              <Link to={`/blog/${lead.slug}`} className="group">
-                <HoverMedia src={lead.featuredImage} alt={lead.featuredImageAlt} className="aspect-[16/10] w-full rounded-2xl bg-canvas" />
-                <Badge className="mt-5">{lead.category}</Badge>
-                <h2 className="mt-3 font-serif text-4xl group-hover:text-teal-dark">{pick(lead.title, locale)}</h2>
-                <p className="mt-4 text-lg text-slate">{pick(lead.excerpt, locale)}</p>
-              </Link>
-            </article>
-            <div className="lg:col-span-5">
-              {rest.map((post) => (
-                <Reveal key={post.id}>
-                  <article className="border-t border-line py-6">
-                    <HoverMedia src={post.featuredImage} alt={post.featuredImageAlt} className="mb-4 aspect-[16/9] w-full rounded-xl" width={640} height={360} />
-                    <h2 className="font-serif text-2xl">
-                      <Link to={`/blog/${post.slug}`}>{pick(post.title, locale)}</Link>
-                    </h2>
-                  </article>
-                </Reveal>
-              ))}
+        {pagination.featured ? (
+          <div className="mt-12 grid grid-cols-12 gap-10">
+            <div className="col-span-12">
+              <PostCard post={pagination.featured} featured />
             </div>
+            {pagination.rest.map((post) => (
+              <div key={post.id} className="col-span-12 md:col-span-6">
+                <Reveal>
+                  <PostCard post={post} />
+                </Reveal>
+              </div>
+            ))}
           </div>
         ) : null}
+        {pagination.pageCount > 1 ? (
+          <nav className="mt-12 flex flex-wrap items-center justify-center gap-2" aria-label="Journal pages">
+            <button
+              type="button"
+              className="min-h-11 rounded-full border border-line px-4 text-sm disabled:opacity-40"
+              disabled={pagination.page <= 1}
+              onClick={() => goToPage(pagination.page - 1)}
+            >
+              Previous
+            </button>
+            {Array.from({ length: pagination.pageCount }, (_, index) => index + 1).map((item) => (
+              <button
+                key={item}
+                type="button"
+                aria-current={item === pagination.page ? 'page' : undefined}
+                className={cn(
+                  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-sm',
+                  item === pagination.page ? 'bg-navy text-white' : 'border border-line text-ink hover:bg-canvas',
+                )}
+                onClick={() => goToPage(item)}
+              >
+                {item}
+              </button>
+            ))}
+            <button
+              type="button"
+              className="min-h-11 rounded-full border border-line px-4 text-sm disabled:opacity-40"
+              disabled={pagination.page >= pagination.pageCount}
+              onClick={() => goToPage(pagination.page + 1)}
+            >
+              Next
+            </button>
+          </nav>
+        ) : null}
+        <p className="sr-only">
+          Showing page {pagination.page} of {pagination.pageCount} for {pagination.total} articles in {locale}
+        </p>
       </Container>
     </>
   )

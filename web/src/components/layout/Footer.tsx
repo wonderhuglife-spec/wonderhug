@@ -7,6 +7,7 @@ import { MEDICAL_DISCLAIMER } from '@/lib/constants'
 import { whatsappUrl } from '@/services/whatsapp'
 
 const explore = [
+  { to: '/journey', key: 'nav.journey' },
   { to: '/pregnancy', key: 'nav.pregnancy' },
   { to: '/garbh-sanskar', key: 'nav.garbh' },
   { to: '/programs', key: 'nav.programs' },
