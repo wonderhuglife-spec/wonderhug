@@ -13,18 +13,16 @@ export function ToolsSection() {
   const locale = currentLocale()
   const { t } = useTranslation()
   return (
-    <section className="py-20">
+    <section className="py-16 md:py-24">
       <Container>
         <SectionHeader kicker="Everyday helpers" title={t('nav.tools')} lede="Due date, kicks, contractions and weight — educational notebooks, not a diagnosis." />
-        <ul className="mt-10 grid gap-4 md:grid-cols-2">
+        <ul className="mt-10 flex snap-x gap-4 overflow-x-auto pb-4 md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-5">
           {TOOLS.map((tool) => (
-            <li key={tool.id}>
-              <Link to={tool.href} className="group flex overflow-hidden rounded-3xl border border-line bg-white transition duration-300 ease-editorial hover:-translate-y-0.5 hover:border-teal/40 hover:shadow-lift">
-                <HoverMedia src={tool.image} alt={tool.imageAlt} className="h-full w-36 shrink-0 sm:w-44" width={360} height={280} />
-                <span className="p-6">
-                  <span className="font-serif text-2xl text-ink group-hover:text-teal-dark">{pick(tool.name, locale)}</span>
-                  <p className="mt-3 text-slate">{pick(tool.description, locale)}</p>
-                </span>
+            <li key={tool.id} className="min-w-[16rem] snap-start md:min-w-0">
+              <Link to={tool.href} className="group block">
+                <HoverMedia src={tool.image} alt={tool.imageAlt} className="aspect-[4/3] w-full rounded-2xl bg-canvas" width={480} height={360} />
+                <span className="mt-4 block font-serif text-xl text-ink group-hover:text-teal-dark">{pick(tool.name, locale)}</span>
+                <p className="mt-2 text-sm text-slate">{pick(tool.description, locale)}</p>
               </Link>
             </li>
           ))}

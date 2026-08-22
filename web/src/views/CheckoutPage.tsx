@@ -13,6 +13,8 @@ import { placeOrder } from '@/services/checkout'
 import { formatInr } from '@/lib/constants'
 import { currentLocale } from '@/i18n'
 import { useToast } from '@/components/ui/Toast'
+import { TrustSignals } from '@/components/editorial/TrustSignals'
+import { conversionTrustSignals } from '@/data/trustSignals'
 
 export function CheckoutPage() {
   const { t } = useTranslation()
@@ -65,7 +67,10 @@ export function CheckoutPage() {
           <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91" />
         </div>
         {error ? <p className="mt-4 text-sm text-purple">{error}</p> : null}
-        <Button className="mt-8" disabled={busy || items.length === 0} onClick={() => void onPay()}>
+        <div className="mt-8">
+          <TrustSignals variant="bar" signals={conversionTrustSignals} flush />
+        </div>
+        <Button className="mt-6" disabled={busy || items.length === 0} onClick={() => void onPay()}>
           {busy ? t('common.loading') : t('cta.checkout')}
         </Button>
       </Container>

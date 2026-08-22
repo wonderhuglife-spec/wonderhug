@@ -40,7 +40,7 @@ export default function Page() {
               name: 'How do I join the WhatsApp community?',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Use the WhatsApp dock or Community pages. Rooms are run with AiSensy for 50,000+ mothers.',
+                text: 'Use the WhatsApp dock or Community pages. Rooms are run with AiSensy. We will not publish a member count until WonderHug confirms one.',
               },
             },
           ],

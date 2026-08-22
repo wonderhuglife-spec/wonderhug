@@ -8,4 +8,5 @@ Functional product is complete with labelled slots for these five owner-supplied
 4. **Razorpay, AiSensy, and Supabase production credentials** — `.env.example` lists names. Demo checkout and `wa.me` work without them.
 5. **App Store / Play listing assets** — `/download` explains native run; store badges wait on URLs and screenshots.
 
-Everything else (week notes, programmes, shop, i18n, tools, CMS schema, RLS, CI) is filled and editable.
+6. **Official family photography** — current PNGs are `placeholder-ai-` family stills (`web/src/data/mediaAssets.ts`). Brief: Indian / Telugu home, Garbh Sanskar or pregnancy-planning context (kitchen table, courtyard rest, couple packing a bag) — not generic yoga stock.
+7. **Trust-signal facts to confirm or keep excluded** — counsellor hours and training; a verified WhatsApp/community headcount; company registration / GST / counsel-final refund policy; named clinical reviewers (faculty seats stay labelled until then). Live homepage signals only state what the product already does.

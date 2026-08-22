@@ -32,7 +32,7 @@ export const TEAM: TeamMember[] = [
   {
     id: 'team-community',
     name: 'Community & AiSensy desk',
-    role: loc('WhatsApp community of 50,000+ mothers', '50,000+ తల్లుల WhatsApp సమూహం'),
+    role: loc('WhatsApp community desk (AiSensy)', 'WhatsApp సమూహ డెస్క్ (AiSensy)'),
     description: loc(
       'Moderation and daily prompts run through AiSensy. This is the living community; website rooms are the quieter archive.',
       'పర్యవేక్షణ AiSensy ద్వారా. సజీవ సమూహం ఇది; వెబ్ గదులు నిశ్శబ్ద ఆర్కైవ్.',

@@ -10,12 +10,14 @@ import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { cn } from '@/lib/cn'
 import { PageHero } from '@/components/editorial/PageHero'
+import { useCmsImage } from '@/hooks/useCmsImages'
 
 export function AboutPage() {
   const [activeId, setActiveId] = useState(TEAM[0]?.id ?? '')
   const active = TEAM.find((member) => member.id === activeId) ?? TEAM[0]
   const reduce = useReducedMotion()
   const locale = currentLocale()
+  const hero = useCmsImage('hero_home')
 
   return (
     <>
@@ -23,9 +25,9 @@ export function AboutPage() {
       <PageHero
         kicker="WonderHug.Life"
         title="A daily companion from planning to parenting"
-        lede="Primary home is Telugu-speaking families in Telangana and Andhra Pradesh. Secondary is pan-India English. WhatsApp (AiSensy) already holds a community of 50,000+ mothers. Official logo and photography replace the lockup when supplied."
-        src="/images/photo-hero-home.png"
-        alt="About atmosphere."
+        lede="Primary home is Telugu-speaking families in Telangana and Andhra Pradesh. Secondary is pan-India English. WhatsApp (AiSensy) is the daily community; we will not publish a member count until WonderHug confirms one. Official photography replaces placeholders when supplied."
+        src={hero.src}
+        alt={hero.alt}
       />
       {active ? (
         <div className="relative min-h-[28rem] bg-navy">

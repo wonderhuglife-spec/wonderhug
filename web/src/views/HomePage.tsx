@@ -1,6 +1,8 @@
 'use client'
 
 import { HeroSection } from '@/sections/home/HeroSection'
+import { TrustSignals } from '@/components/editorial/TrustSignals'
+import { trustSignals } from '@/data/trustSignals'
 import { StoryChapters } from '@/sections/home/StoryChapters'
 import { JourneySelector } from '@/sections/home/JourneySelector'
 import { PersonalizedExperience } from '@/sections/home/PersonalizedExperience'
@@ -19,6 +21,7 @@ export function HomePage() {
   return (
     <>
       <HeroSection />
+      <TrustSignals variant="section" signals={trustSignals} />
       <StoryChapters />
       <JourneySelector />
       <PersonalizedExperience />

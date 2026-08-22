@@ -3,14 +3,16 @@
 import { Container } from '@/components/ui/Container'
 import { HoverMedia } from '@/components/editorial/HoverMedia'
 import { SectionHeader } from '@/components/editorial/SectionHeader'
+import { useCmsImage } from '@/hooks/useCmsImages'
 
 export function EvidenceSection() {
+  const art = useCmsImage('journal_garbh')
   return (
-    <section className="py-20">
+    <section className="bg-white py-16 md:py-24">
       <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <HoverMedia
-          src="/images/photo-garbh-rest.png"
-          alt="Quiet rest for science-and-tradition storytelling."
+          src={art.src}
+          alt={art.alt}
           className="aspect-[4/5] w-full rounded-3xl"
           width={720}
           height={900}

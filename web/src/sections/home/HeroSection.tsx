@@ -45,7 +45,7 @@ export function HeroSection() {
           <dl className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-ink/10 pt-6">
             <div>
               <dt className="text-xs uppercase tracking-[0.16em] text-slate-muted">{t('hero.statMothersLabel')}</dt>
-              <dd className="mt-1 font-serif text-2xl text-purple">50,000+</dd>
+              <dd className="mt-1 font-serif text-2xl text-purple">{t('hero.statMothersValue')}</dd>
             </div>
             <div>
               <dt className="text-xs uppercase tracking-[0.16em] text-slate-muted">{t('hero.statLangLabel')}</dt>
