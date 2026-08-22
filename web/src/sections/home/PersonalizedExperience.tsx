@@ -5,7 +5,6 @@ import { ButtonLink } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { Heading, Text } from '@/components/ui/Typography'
 import { useTranslation } from 'react-i18next'
-import { HoverMedia } from '@/components/editorial/HoverMedia'
 
 export function PersonalizedExperience() {
   const { profile, recommendations } = useJourney()
@@ -13,30 +12,25 @@ export function PersonalizedExperience() {
   const { t } = useTranslation()
 
   return (
-    <section className="py-8">
-      <Container>
-        <div className="grid overflow-hidden rounded-[2rem] bg-navy text-white lg:grid-cols-2">
-          <HoverMedia src="/images/photo-hero-home.png" alt="An expecting couple at home." className="min-h-[16rem] w-full lg:min-h-full" width={960} height={720} />
-          <div className="px-6 py-14 sm:px-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">{t('home.companionKicker')}</p>
-            <Heading as="h2" className="mt-4 text-white">
-              {t('home.companionTitle')}
-            </Heading>
-            <Text className="mt-5 max-w-xl text-white/80">{t('home.companionBody')}</Text>
-            <div className="mt-8 rounded-3xl bg-white/10 p-6 backdrop-blur">
-              <p className="text-sm text-white/70">{t('home.showingFor')}</p>
-              <p className="mt-1 font-serif text-3xl capitalize">{profile.journeyStage.replace(/_/g, ' ')}</p>
-              {primary ? (
-                <p className="mt-4 text-sm text-white/80">
-                  {t('home.nextStep')} <span className="text-white">{primary.title}</span>
-                </p>
-              ) : null}
-              <ButtonLink to="/start" variant="secondary" className="mt-6">
-                {t('cta.start')}
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
+    <section className="py-16 md:py-24">
+      <Container narrow>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-dark">{t('home.companionKicker')}</p>
+        <Heading as="h2" className="mt-4">
+          {t('home.companionTitle')}
+        </Heading>
+        <Text muted className="mt-5 text-lg">
+          {t('home.companionBody')}
+        </Text>
+        <p className="mt-8 text-sm text-slate">{t('home.showingFor')}</p>
+        <p className="mt-1 font-serif text-3xl capitalize text-ink">{profile.journeyStage.replace(/_/g, ' ')}</p>
+        {primary ? (
+          <p className="mt-4 text-slate">
+            {t('home.nextStep')} <span className="text-ink">{primary.title}</span>
+          </p>
+        ) : null}
+        <ButtonLink to="/start" variant="secondary" className="mt-8">
+          {t('cta.start')}
+        </ButtonLink>
       </Container>
     </section>
   )

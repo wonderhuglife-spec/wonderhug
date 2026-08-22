@@ -16,7 +16,8 @@ import { HoverMedia } from '@/components/editorial/HoverMedia'
 import { Reveal } from '@/components/motion/Reveal'
 import { Tabs } from '@/components/ui/Tabs'
 import type { Product } from '@/types/domain'
-import { ShieldCheck, Sparkles, Truck, Wallet } from 'lucide-react'
+import { TrustSignals } from '@/components/editorial/TrustSignals'
+import { conversionTrustSignals } from '@/data/trustSignals'
 
 type ShopFilter = 'all' | 'garbh' | 'planning' | 'pregnancy' | 'parenting' | 'kitchen'
 
@@ -70,7 +71,7 @@ function ProductCard({
 }) {
   const locale = currentLocale()
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_8px_30px_rgba(47,66,117,0.06)] transition hover:-translate-y-0.5 hover:shadow-lift">
+    <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-lift">
       <Link to={`/shop/${product.slug}`} className="block">
         <HoverMedia src={product.image} alt={pick(product.name, locale)} className="aspect-[4/3] w-full" />
       </Link>
@@ -125,7 +126,7 @@ export function ShopPage() {
         }}
       />
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#F7E9F2] via-[#FBF7F2] to-[#E7F6F4]">
+      <section className="relative overflow-hidden bg-gradient-to-br from-canvas via-paper to-teal-soft">
         <Container className="grid items-center gap-10 py-14 lg:grid-cols-12 lg:py-20">
           <div className="lg:col-span-6">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-purple">Wellness kits · not medicines</p>
@@ -159,28 +160,11 @@ export function ShopPage() {
         </Container>
       </section>
 
+      <TrustSignals variant="bar" signals={conversionTrustSignals} />
+
       <Container className="py-8">
         <Tabs label="Shop categories" value={filter} onChange={setFilter} tabs={FILTERS} />
       </Container>
-
-      <section className="border-y border-line bg-white">
-        <Container className="grid gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { icon: ShieldCheck, title: 'Education, not diagnosis', body: 'Packs sit beside antenatal care. They do not replace it.' },
-            { icon: Sparkles, title: 'Garbh Sanskar as practice', body: 'Audio and journals — never a promise about the child.' },
-            { icon: Wallet, title: 'Priced in INR', body: 'Demo checkout here; Razorpay when keys are configured.' },
-            { icon: Truck, title: 'Instant digital delivery', body: 'Downloads after payment. No invented review counts.' },
-          ].map((item) => (
-            <div key={item.title} className="flex gap-3">
-              <item.icon className="mt-0.5 h-5 w-5 shrink-0 text-teal-dark" aria-hidden />
-              <div>
-                <p className="font-medium text-ink">{item.title}</p>
-                <p className="mt-1 text-sm text-slate">{item.body}</p>
-              </div>
-            </div>
-          ))}
-        </Container>
-      </section>
 
       <Container className="py-14">
         <div className="flex items-end justify-between gap-4">

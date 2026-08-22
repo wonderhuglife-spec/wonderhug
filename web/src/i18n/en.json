@@ -33,11 +33,12 @@
   },
   "hero": {
     "kicker": "Telugu homes · Telangana & Andhra Pradesh",
-    "title": "Prepare for pregnancy. Nurture every stage. Raise with confidence.",
-    "body": "WonderHug.Life brings Garbh Sanskar practice, modern wellness education and a WhatsApp community of 50,000+ mothers together — from planning a pregnancy to conscious parenting.",
+    "title": "Ten quiet minutes in a Telugu kitchen — from planning a baby to raising one.",
+    "body": "WonderHug hosts Garbh Sanskar as daily practice, week notes you can finish, and WhatsApp rooms for Telugu-speaking families in Telangana and Andhra Pradesh. Education, not a clinic. Tradition, not a laboratory claim.",
     "logoCaption": "Two arms. One hug. A heart at the centre.",
     "getStarted": "Get started — it’s free to begin",
-    "statMothersLabel": "Mothers on WhatsApp",
+    "statMothersLabel": "Wellness programmes",
+    "statMothersValue": "3",
     "statLangLabel": "Homes we serve",
     "statCareLabel": "This is",
     "statCareValue": "Education"
@@ -116,7 +117,7 @@
   },
   "community": {
     "whatsappTitle": "WhatsApp is our living community",
-    "whatsappBody": "Over 50,000 mothers are already in WonderHug rooms on WhatsApp (AiSensy). The website rooms are for quieter, moderated threads. The daily conversation lives on WhatsApp."
+    "whatsappBody": "The daily conversation lives on WhatsApp (AiSensy). Website rooms are for quieter, moderated threads. We will not publish a member count until WonderHug confirms one."
   },
   "admin": {
     "title": "WonderHug CMS",

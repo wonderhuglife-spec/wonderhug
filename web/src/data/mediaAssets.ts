@@ -16,6 +16,8 @@ export type MediaAssetKey =
   | 'community'
   | 'practice'
   | 'faculty_seat'
+  | 'chapter_learning'
+  | 'chapter_preparing'
 
 export interface MediaAsset {
   key: MediaAssetKey
@@ -24,7 +26,11 @@ export interface MediaAsset {
   alt: string
 }
 
-/** Photoreal family photographs — CMS can still swap any slot. */
+/**
+ * Photoreal family photographs — CMS can still swap any slot.
+ * Tagged placeholder-ai- in docs until an official shoot (Indian home, Garbh Sanskar
+ * or pregnancy-planning context — not generic yoga stock). Do not point components at Unsplash.
+ */
 export const DEFAULT_MEDIA_ASSETS: Record<MediaAssetKey, MediaAsset> = {
   hero_home: {
     key: 'hero_home',
@@ -127,6 +133,18 @@ export const DEFAULT_MEDIA_ASSETS: Record<MediaAssetKey, MediaAsset> = {
     label: 'Faculty seat atmosphere',
     src: '/images/faculty-seat.png',
     alt: 'An empty consultation chair by a window — a faculty seat, not a verified portrait.',
+  },
+  chapter_learning: {
+    key: 'chapter_learning',
+    label: 'Chapter — learning a programme together',
+    src: '/images/photo-chapter-learning.png',
+    alt: 'A couple watching a wellness lesson together at home.',
+  },
+  chapter_preparing: {
+    key: 'chapter_preparing',
+    label: 'Chapter — preparing for birth',
+    src: '/images/photo-first-birth.png',
+    alt: 'A couple packing a small hospital bag at home.',
   },
 }
 

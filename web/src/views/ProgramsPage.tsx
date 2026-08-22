@@ -14,6 +14,8 @@ import { formatInr } from '@/lib/constants'
 import { useCmsImage } from '@/hooks/useCmsImages'
 import type { MediaAssetKey } from '@/data/mediaAssets'
 import { PageHero } from '@/components/editorial/PageHero'
+import { TrustSignals } from '@/components/editorial/TrustSignals'
+import { conversionTrustSignals } from '@/data/trustSignals'
 
 const KEYS: Record<string, MediaAssetKey> = {
   'beej-sanskar': 'program_beej',
@@ -35,10 +37,12 @@ export function ProgramsPage() {
   const { t } = useTranslation()
   const { programs } = useCatalog()
   const locale = currentLocale()
+  const hero = useCmsImage('program_womb')
   return (
     <>
       <Seo title={t('programs.title')} description={t('programs.intro')} path="/programs" />
-      <PageHero kicker="Education · practice" title={t('programs.title')} lede={t('programs.intro')} src="/images/photo-garbh-rest.png" alt="Programmes atmosphere" />
+      <PageHero kicker="Education · practice" title={t('programs.title')} lede={t('programs.intro')} src={hero.src} alt={hero.alt} />
+      <TrustSignals variant="bar" signals={conversionTrustSignals} />
       <Container className="grid gap-8 py-12 md:grid-cols-3">
         {programs.filter((program) => program.isPublished).map((program, index) => (
           <Reveal key={program.id} delay={index * 0.05}>

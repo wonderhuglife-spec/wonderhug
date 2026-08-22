@@ -94,7 +94,7 @@ export function JourneyPage() {
           {[
             { value: '3', label: 'Wellness programmes' },
             { value: String(practiceList.length), label: 'Daily practices' },
-            { value: '50,000+', label: 'Mothers on WhatsApp' },
+            { value: 'Education', label: 'Not a clinic' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="font-serif text-4xl">{stat.value}</p>

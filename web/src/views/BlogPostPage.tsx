@@ -19,6 +19,7 @@ import { pick } from '@/lib/locale'
 import { currentLocale } from '@/i18n'
 import { env } from '@/lib/env'
 import { useToast } from '@/components/ui/Toast'
+import { ArticleTrustByline } from '@/components/editorial/TrustSignals'
 
 export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: BlogPost }) {
   const params = useParams()
@@ -75,9 +76,9 @@ export function BlogPostPage({ slug: slugProp, post }: { slug?: string; post?: B
             </Heading>
             <p className="mt-5 text-lg text-slate">{pick(data.excerpt, locale)}</p>
             <p className="mt-6 text-sm text-slate">
-              {data.authorName} · {data.reviewStatus} · {data.readingTime} min
-              {data.expertReviewerName ? ` · Reviewer: ${data.expertReviewerName}` : ''}
+              {data.readingTime} min read
             </p>
+            <ArticleTrustByline post={data} />
             <Button
               className="mt-6"
               variant="secondary"
